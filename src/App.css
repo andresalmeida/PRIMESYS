@@ -1,0 +1,465 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+}
+
+header {
+  background: linear-gradient(to right, #FF7F00, #FFA500);
+  color: white;
+  padding: 1vh;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Allow wrapping */
+}
+
+header .titulo{
+  padding-left: 2vh;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  padding-left: 4vh;
+  flex-wrap: wrap; /* Allow wrapping */
+}
+
+header .logo .logo-icon {
+  width: 13vh;
+  height: 13vh;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header .logo .logo-text {
+  margin-left: 1vh;
+}
+
+@media (max-width: 768px) {
+  header .logo {
+    justify-content: center;
+    padding-left: 0;
+  }
+
+  header .logo .logo-icon {
+    width: 10vh;
+    height: 10vh;
+  }
+
+  header .logo .logo-text {
+    margin-left: 0;
+    font-size: 20px;
+  }
+}
+
+nav {
+  position: relative;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  padding-right: 5vh;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 1.5rem; /* Aumenta el tamaño de la letra */
+  opacity: 0.9; /* Opacidad cuando no está seleccionada */
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+  opacity: 1; /* Más clara cuando el usuario la selecciona */
+  transform: scale(1.1); /* Aumenta un poco el tamaño */
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  padding-right: 10vh;
+}
+
+nav ul li {
+  margin-left: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 1.5rem; /* Aumenta el tamaño de la letra */
+  opacity: 0.9; /* Opacidad cuando no está seleccionada */
+}
+
+nav ul li a:hover,
+nav ul li a:focus {
+  opacity: 3; /* Más clara cuando el usuario la selecciona */
+  transform: scale(1.1); /* Aumenta un poco el tamaño */
+}
+
+
+.menu-icon {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+}
+
+.close-icon {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 70%;
+    background-color: #084a7d;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000; /* Asegúrate de que la sidebar esté sobre todos los elementos */
+
+  }
+  .nav-links.open {
+    transform: translateX(0);
+  }
+
+  .nav-links li {
+    margin: 20px 0;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .close-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 3rem;
+    cursor: pointer;
+    color: white;
+    display: none;
+  }
+
+  .nav-links.open .close-icon {
+    display: block; /* Mostrar cuando la sidebar esté abierta en modo responsive */
+  }
+}
+
+#hero {
+  background: url('./diego/diego.jpg') no-repeat center center/cover;
+  position: relative;
+  color: white;
+  padding: 80px 16px;
+  text-align: center;
+}
+
+#hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Fondo negro opaco */
+  z-index: 1;
+}
+
+#hero h1, #hero p, #hero .button {
+  position: relative;
+  z-index: 2;
+}
+
+#hero h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+#hero p {
+  font-size: 1.25rem;
+  margin-bottom: 32px;
+}
+
+#hero .button {
+  background-color: white;
+  color: #FF7F00;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#hero .button:hover {
+  background-color: #0a7bba;
+  color: white;
+}
+
+section {
+  padding: 60px 16px;
+  text-align: center;
+}
+
+section h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+section p {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+#services {
+  background-color: #f3f4f6;
+}
+
+/* Misión y Visión */
+.mision-vision-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mision, .vision {
+  background-color: #FFA500;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 768px) {
+  .mision-vision-container {
+    flex-direction: row;
+  }
+}
+
+.vision {
+  background-color: #0a7bba;
+}
+.clients-slider {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 150px; /* Ajusta según el tamaño deseado de las imágenes */
+  display: flex;
+  align-items: center;
+}
+
+.slider-track {
+  display: flex;
+  gap: 20px; /* Espaciado entre logos */
+  width: calc(200%); /* Duplica el ancho para hacer loop */
+  animation: scroll-right 30s linear infinite; /* Animación continua */
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translateX(0); /* Empieza en el inicio */
+  }
+  100% {
+    transform: translateX(-50%); /* Se desplaza a la mitad */
+  }
+}
+
+#clients {
+  background-color: white;
+  padding: 20px; /* Ajusta el padding según sea necesario */
+}
+
+.client-logo {
+  height: 100px; /* Ajusta según el tamaño deseado de las imágenes */
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease-in-out;
+}
+
+.client-logo:hover {
+  transform: scale(1.2); /* Efecto de zoom al pasar el mouse */
+}
+/* Services Background */
+#services .grid .card {
+  position: relative;
+  color: white;
+  padding: 40px 20px;
+  background-size: cover;
+  background-position: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px; /* Ajusta según el tamaño deseado */
+}
+
+#services .grid .card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Fondo negro transparente */
+  z-index: 1;
+}
+
+
+#services .grid .card h3 {
+  position: relative;
+  z-index: 2;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+}
+
+
+#services .grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  #services .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  #services .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+#services .card {
+  background-color: white;
+  padding: 24px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#services .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#services .card h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+/* Services Section */
+.service-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+
+#confidentiality {
+  background: linear-gradient(to right, #003366, #0356ac);
+  color: white;
+  padding: 60px 16px;
+  text-align: left;
+}
+
+#confidentiality p {
+  font-size: 1.2rem;
+  margin: 0 auto;
+}
+
+#confidentiality h2 {
+  text-align: center;
+}
+
+#confidentiality .icon {
+  width: 24px;
+  height: 24px;
+  color: #FF7F00;
+  margin-right: 8px;
+}
+
+#contact {
+  padding: 60px 16px;
+}
+
+#contact form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#contact input,
+#contact textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#contact input:focus,
+#contact textarea:focus {
+  outline: none;
+  border-color: #FF7F00;
+}
+
+#contact button {
+  background: linear-gradient(to right, #FF7F00, #FFA500);
+  color: white;
+  border: none;
+  padding: 16px 32px; /* Aumenta el padding para hacer el botón más grande */
+  font-size: 1rem; /* Aumenta el tamaño de la fuente */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#contact button:hover {
+  background: linear-gradient(to right, #0a7bba, #025581);
+}
+
+footer {
+  background: linear-gradient(to right, #0a7bba, #004080);
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+}
