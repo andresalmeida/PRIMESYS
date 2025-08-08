@@ -17,12 +17,12 @@ html {
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background-color: #f9f9f9;
+  background-color: #212840;
 }
 
 header {
-  background: linear-gradient(to right, #FF7F00, #FFA500);
-  color: white;
+  background: #212840;
+  color: #F0E7D5;
   padding: 1vh;
 }
 
@@ -49,7 +49,6 @@ header .logo {
 header .logo .logo-icon {
   width: 13vh;
   height: 13vh;
-  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,7 +86,7 @@ nav {
 }
 
 .nav-links a {
-  color: white;
+  color: #F0E7D5;
   text-decoration: none;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -99,6 +98,7 @@ nav {
 .nav-links a:focus {
   opacity: 1; /* Más clara cuando el usuario la selecciona */
   transform: scale(1.1); /* Aumenta un poco el tamaño */
+  color: #F0E7D5;
 }
 
 nav ul {
@@ -112,7 +112,7 @@ nav ul li {
 }
 
 nav ul li a {
-  color: white;
+  color: #F0E7D5;
   text-decoration: none;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -124,18 +124,19 @@ nav ul li a:hover,
 nav ul li a:focus {
   opacity: 3; /* Más clara cuando el usuario la selecciona */
   transform: scale(1.1); /* Aumenta un poco el tamaño */
+  color: #F0E7D5;
 }
-
 
 .menu-icon {
   display: none;
   font-size: 2rem;
   cursor: pointer;
-  color: white;
+  color: #F0E7D5;
 }
 
 .close-icon {
   display: none;
+  color: #F0E7D5;
 }
 
 @media (max-width: 768px) {
@@ -145,7 +146,7 @@ nav ul li a:focus {
     top: 0;
     height: 100%;
     width: 70%;
-    background-color: #084a7d;
+    background-color: #212840;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -172,7 +173,7 @@ nav ul li a:focus {
     right: 20px;
     font-size: 3rem;
     cursor: pointer;
-    color: white;
+    color: #F0E7D5;
     display: none;
   }
 
@@ -184,7 +185,7 @@ nav ul li a:focus {
 #hero {
   background: url('./diego/diego.jpg') no-repeat center center/cover;
   position: relative;
-  color: white;
+  color: #F0E7D5;
   padding: 80px 16px;
   text-align: center;
 }
@@ -196,7 +197,7 @@ nav ul li a:focus {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Fondo negro opaco */
+  background: rgba(33, 40, 64, 0.7); /* Midnight indigo opaco */
   z-index: 1;
 }
 
@@ -209,16 +210,18 @@ nav ul li a:focus {
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 16px;
+  color: #F0E7D5;
 }
 
 #hero p {
   font-size: 1.25rem;
   margin-bottom: 32px;
+  color: #F0E7D5;
 }
 
 #hero .button {
-  background-color: white;
-  color: #FF7F00;
+  background-color: #F0E7D5;
+  color: #212840;
   padding: 12px 24px;
   border: none;
   cursor: pointer;
@@ -226,29 +229,33 @@ nav ul li a:focus {
 }
 
 #hero .button:hover {
-  background-color: #0a7bba;
-  color: white;
+  background-color: #212840;
+  color: #F0E7D5;
 }
 
 section {
   padding: 60px 16px;
   text-align: center;
+  background-color: #212840;
+  color: #F0E7D5;
 }
 
 section h2 {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 24px;
+  color: #F0E7D5;
 }
 
 section p {
   max-width: 800px;
   margin: 0 auto;
   font-size: 1.1rem;
+  color: #F0E7D5;
 }
 
 #services {
-  background-color: #f3f4f6;
+  background-color: #212840;
 }
 
 /* Misión y Visión */
@@ -259,11 +266,11 @@ section p {
 }
 
 .mision, .vision {
-  background-color: #FFA500;
-  color: white;
+  background-color: #212840;
+  color: #F0E7D5;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(33, 40, 64, 0.2);
 }
 
 @media (min-width: 768px) {
@@ -273,7 +280,7 @@ section p {
 }
 
 .vision {
-  background-color: #0a7bba;
+  background-color: #212840;
 }
 .clients-slider {
   overflow: hidden;
@@ -301,7 +308,8 @@ section p {
 }
 
 #clients {
-  background-color: white;
+  background-color: #212840;
+  color: #F0E7D5;
   padding: 20px; /* Ajusta el padding según sea necesario */
 }
 
@@ -309,6 +317,8 @@ section p {
   height: 100px; /* Ajusta según el tamaño deseado de las imágenes */
   object-fit: contain;
   display: block;
+  border: 2px solid #F0E7D5;
+  background-color: #212840;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -318,15 +328,17 @@ section p {
 /* Services Background */
 #services .grid .card {
   position: relative;
-  color: white;
+  color: #F0E7D5;
   padding: 40px 20px;
   background-size: cover;
   background-position: center;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 4px rgba(33, 40, 64, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   height: 200px; /* Ajusta según el tamaño deseado */
+  background-color: #212840;
+  border: 2px solid #F0E7D5;
 }
 
 #services .grid .card::before {
@@ -336,10 +348,9 @@ section p {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Fondo negro transparente */
+  background: rgba(33, 40, 64, 0.5); /* Midnight indigo transparente */
   z-index: 1;
 }
-
 
 #services .grid .card h3 {
   position: relative;
@@ -348,8 +359,8 @@ section p {
   font-weight: bold;
   margin: 0;
   text-align: center;
+  color: #F0E7D5;
 }
-
 
 #services .grid {
   display: grid;
@@ -370,20 +381,23 @@ section p {
 }
 
 #services .card {
-  background-color: white;
+  background-color: #212840;
+  color: #F0E7D5;
+  border: 2px solid #F0E7D5;
   padding: 24px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #services .card:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(33, 40, 64, 0.2);
 }
 
 #services .card h3 {
   font-size: 1.25rem;
   font-weight: bold;
   margin-bottom: 12px;
+  color: #F0E7D5;
 }
 
 /* Services Section */
@@ -394,7 +408,6 @@ section p {
   border-radius: 8px;
   object-fit: cover;
 }
-
 
 #confidentiality {
   background: linear-gradient(to right, #003366, #0356ac);
@@ -421,6 +434,8 @@ section p {
 
 #contact {
   padding: 60px 16px;
+  background-color: #212840;
+  color: #F0E7D5;
 }
 
 #contact form {
@@ -433,19 +448,21 @@ section p {
   width: 100%;
   padding: 12px;
   margin-bottom: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #212840;
   border-radius: 4px;
+  background-color: #F0E7D5;
+  color: #212840;
 }
 
 #contact input:focus,
 #contact textarea:focus {
   outline: none;
-  border-color: #FF7F00;
+  border-color: #212840;
 }
 
 #contact button {
-  background: linear-gradient(to right, #FF7F00, #FFA500);
-  color: white;
+  background-color: #F0E7D5;
+  color: #212840;
   border: none;
   padding: 16px 32px; /* Aumenta el padding para hacer el botón más grande */
   font-size: 1rem; /* Aumenta el tamaño de la fuente */
@@ -454,12 +471,13 @@ section p {
 }
 
 #contact button:hover {
-  background: linear-gradient(to right, #0a7bba, #025581);
+  background-color: #212840;
+  color: #F0E7D5;
 }
 
 footer {
-  background: linear-gradient(to right, #0a7bba, #004080);
-  color: white;
+  background-color: #212840;
+  color: #F0E7D5;
   text-align: center;
   padding: 20px 0;
 }
