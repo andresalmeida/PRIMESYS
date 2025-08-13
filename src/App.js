@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./App.css";
 import { Button } from "@nextui-org/button";
 import emailjs from "emailjs-com";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 import logo from "./logo/logo.svg";
 import diegoImage from "./diego/diego.jpg"; 
 
@@ -39,6 +42,7 @@ const clientsImages = require.context("./clientes", false, /\.(png|jpe?g|JPG|PNG
 //     console.log("Form submitted:", formData);
 //     setFormData({ name: "", email: "", message: "" });
 //   };
+
 
 function App() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -109,14 +113,14 @@ function App() {
 
   return (
     <div className="App">
-      <header style={{ boxShadow: '0 4px 16px rgba(33,40,64,0.15)', background: '#212840', color: '#F0E7D5', padding: '1vh 0' }}>
+      <header style={{ boxShadow: '0 4px 16px rgba(33,40,64,0.15)', background: 'linear-gradient(to right,  #212840, #203a43,#2c5364 )', color: '#F0E7D5', padding: '1vh 0' }}>
         <div className="container" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
           <div className="logo" style={{ display: 'flex', alignItems: 'center', marginLeft: '2vw' }}>
-            <img src={logo} alt="Primesys Logo" className="logo-icon" style={{ width: '120px', height: 'auto', boxShadow: '0 2px 8px rgba(33,40,64,0.10)' }} />
+            <img src={logo} alt="Primesys Logo" className="logo-icon" style={{ width: '200px', height: 'auto', boxShadow: '0 2px 8px rgba(33,40,64,0.10)' }} />
           </div>
           <nav style={{ width: 'auto', marginRight: '2vw', position: 'relative' }}>
             {/* Menú hamburguesa para móvil */}
-            <div className="menu-icon" onClick={toggleSidebar} style={{ display: 'none', fontSize: '2.2rem', cursor: 'pointer', color: '#F0E7D5' }}>
+            <div className="menu-icon" onClick={toggleSidebar} style={{ display: 'none', fontSize: '2.2rem', cursor: 'pointer', color: '#ffffffff' }}>
               &#9776;
             </div>
             <ul className={`nav-links ${sidebarOpen ? 'open' : ''}`} style={{
@@ -126,7 +130,7 @@ function App() {
               alignItems: sidebarOpen ? 'center' : 'center',
               gap: sidebarOpen ? '2em' : '1vw',
               fontWeight: '500',
-              fontSize: '1.1rem',
+              fontSize: '0.8rem',
               margin: 0,
               position: sidebarOpen ? 'fixed' : 'static',
               top: sidebarOpen ? 0 : 'auto',
@@ -161,7 +165,24 @@ function App() {
 
       <main>
         {/* Hero Section - fondo indigo, texto cream */}
-        <section id="hero" style={{ backgroundImage: `url(${diegoImage})`, backgroundColor: '#212840', color: '#F0E7D5' }}>
+          <section
+            id="hero"
+            style={{
+              backgroundImage: `url(${diegoImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: '#111', 
+              minHeight: '80vh', 
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              textAlign: 'center',
+              color: '#F0E7D5',
+              position: 'relative'
+            }}
+          >
           <h1 style={{ color: '#F0E7D5' }}>Soluciones Innovadoras para su Negocio</h1>
           <p style={{ color: '#F0E7D5' }}>
             Más de 25 años de experiencia mejorando la operatividad y
@@ -173,9 +194,9 @@ function App() {
         </section>
 
         {/* Misión y Visión - fondo cream, texto indigo */}
-        <section id="mision" style={{ backgroundColor: '#F0E7D5', color: '#212840' }}>
+        <section id="mision" style={{ backgroundColor: '#e9e9e9ff', color: '#212840' }}>
           <div className="mision-vision-container">
-            <div className="mision" style={{ backgroundColor: '#F0E7D5', color: '#212840', boxShadow: '0 4px 12px rgba(33,40,64,0.10)' }}>
+            <div className="mision" style={{ backgroundColor: '#ffffffff', color: '#212840', boxShadow: '0 4px 12px rgba(33,40,64,0.10)' }}>
               <h2 style={{ color: '#212840' }}>Misión</h2>
               <p style={{ color: '#212840' }}>
                 Ofrecer soluciones tecnológicas innovadoras y personalizadas
@@ -184,7 +205,7 @@ function App() {
               </p>
               <Button className="button" style={{ backgroundColor: '#212840', color: '#F0E7D5', border: 'none', marginTop: '1em' }}>Ver más</Button>
             </div>
-            <div className="vision" style={{ backgroundColor: '#F0E7D5', color: '#212840', boxShadow: '0 4px 12px rgba(33,40,64,0.10)' }}>
+            <div className="vision" style={{ backgroundColor: '#ffffffff', color: '#212840', boxShadow: '0 4px 12px rgba(33,40,64,0.10)' }}>
               <h2 style={{ color: '#212840' }}>Visión</h2>
               <p style={{ color: '#212840' }}>
                 Ser líderes en el mercado de servicios computacionales, reconocidos
@@ -198,7 +219,15 @@ function App() {
         </section>
 
         {/* Servicios - fondo indigo, texto cream */}
-        <section id="services" style={{ backgroundColor: '#212840', color: '#F0E7D5' }}>
+        <section
+          id="services"
+          style={{
+            background: 'linear-gradient(135deg, #212840, #203a43, #2c5364)',
+            color: '#F0E7D5',
+            padding: '4em 2em'
+          }}
+        >
+
           <h2 style={{ color: '#F0E7D5' }}>Nuestros Servicios</h2>
           <div className="grid">
             {[
@@ -219,8 +248,11 @@ function App() {
                   backgroundImage: `url(${findImage(servicesImages, index + 1)})`,
                   backgroundColor: 'rgba(240,231,213,0.10)',
                   color: '#F0E7D5',
-                  border: '2px solid #F0E7D5'
+                  border: '2px solid #F0E7D5',
+                  borderRadius: '16px',
+                  overflow: 'hidden'
                 }}
+
               >
                 <h3 style={{ color: '#F0E7D5' }}>{service}</h3>
                 <Button className="button" style={{ backgroundColor: '#212840', color: '#F0E7D5', border: 'none', marginTop: '1em' }}>Más info</Button>
@@ -230,7 +262,7 @@ function App() {
         </section>
 
         {/* Clientes - fondo cream, texto indigo */}
-        <section id="clients" style={{ backgroundColor: '#F0E7D5', color: '#212840' }}>
+        <section id="clients" style={{ backgroundColor: '#e9e9e9ff', color: '#212840' }}>
             <h2 style={{ color: '#212840' }}>Clientes</h2>
             <div className="clients-slider">
               <div className="slider-track">
@@ -240,7 +272,6 @@ function App() {
                     alt={`Cliente ${index + 1}`}
                     key={index}
                     className="client-logo"
-                    style={{ border: '2px solid #212840', backgroundColor: '#F0E7D5' }}
                   />
                 ))}
                 {Array.from({ length: 9 }).map((_, index) => (
@@ -249,7 +280,6 @@ function App() {
                     alt={`Cliente ${index + 1}`}
                     key={index + 8}
                     className="client-logo"
-                    style={{ border: '2px solid #212840', backgroundColor: '#F0E7D5' }}
                   />
                 ))}
               </div>
@@ -258,7 +288,7 @@ function App() {
           </section>
 
         {/* Contacto - fondo indigo, texto cream */}
-         <section id="contact" style={{ backgroundColor: '#212840', color: '#F0E7D5' }}>
+         <section id="contact" style={{ background: 'linear-gradient(to right,  #212840, #203a43, #2c5364)', color: '#F0E7D5' }}>
            <h2 style={{ color: '#F0E7D5' }}>Contáctenos</h2>
            <form onSubmit={handleSubmit}>
              <div>
@@ -270,7 +300,7 @@ function App() {
              <div>
                <textarea name="message" placeholder="Mensaje" value={formData.message} onChange={handleInputChange} required style={{ backgroundColor: '#F0E7D5', color: '#212840', border: '1px solid #212840' }} />
              </div>
-             <Button type="submit" style={{ backgroundColor: '#212840', color: '#F0E7D5', border: 'none' }}>Enviar Mensaje</Button>
+             <Button type="submit" style={{ backgroundColor: '#212840', color: '#e9e9e9ff', border: 'none' }}>Enviar Mensaje</Button>
            </form>
            {formStatus && <p className="form-status" style={{ color: '#F0E7D5' }}>{formStatus}</p>}
          </section>
