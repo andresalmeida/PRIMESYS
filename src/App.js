@@ -194,42 +194,32 @@ function App() {
         </section>
 
         {/* Misión y Visión - fondo cream, texto indigo */}
-        <section id="mision" style={{ backgroundColor: '#e9e9e9ff', color: '#212840' }}>
+        <section id="mision-vision" className="mision-vision-section">
           <div className="mision-vision-container">
-            <div className="mision" style={{ backgroundColor: '#ffffffff', color: '#212840', boxShadow: '0 4px 12px rgba(33,40,64,0.10)' }}>
-              <h2 style={{ color: '#212840' }}>Misión</h2>
-              <p style={{ color: '#212840' }}>
-                Ofrecer soluciones tecnológicas innovadoras y personalizadas
-                para satisfacer las necesidades específicas de nuestros clientes,
-                con un enfoque en la calidad del servicio y la atención al cliente.
+            <div className="mision">
+              <h2>Misión</h2>
+              <p>
+                Ofrecer soluciones tecnológicas innovadoras y personalizadas para satisfacer las necesidades específicas de nuestros clientes, con un enfoque en la calidad del servicio y la atención al cliente.
               </p>
-              <Button className="button" style={{ backgroundColor: '#212840', color: '#F0E7D5', border: 'none', marginTop: '1em' }}>Ver más</Button>
             </div>
-            <div className="vision" style={{ backgroundColor: '#ffffffff', color: '#212840', boxShadow: '0 4px 12px rgba(33,40,64,0.10)' }}>
-              <h2 style={{ color: '#212840' }}>Visión</h2>
-              <p style={{ color: '#212840' }}>
-                Ser líderes en el mercado de servicios computacionales, reconocidos
-                por nuestra excelencia en la calidad del servicio, la innovación tecnológica
-                y la satisfacción del cliente. Queremos ser la empresa a la que acuden los
-                clientes para obtener soluciones tecnológicas confiables y eficientes.
+            <div className="vision">
+              <h2>Visión</h2>
+              <p>
+                Ser líderes en el mercado de servicios computacionales, reconocidos por nuestra excelencia en la calidad del servicio, la innovación tecnológica y la satisfacción del cliente. Queremos ser la empresa a la que acuden los clientes para obtener soluciones tecnológicas confiables y eficientes.
               </p>
-              <Button className="button" style={{ backgroundColor: '#212840', color: '#F0E7D5', border: 'none', marginTop: '1em' }}>Ver más</Button>
             </div>
           </div>
         </section>
 
         {/* Servicios - fondo indigo, texto cream */}
-        <section
-          id="services"
-          style={{
-            background: 'linear-gradient(135deg, #212840, #203a43, #2c5364)',
-            color: '#F0E7D5',
-            padding: '4em 2em'
-          }}
-        >
+        <section id="services" className="services">
+          <div className="services__head">
+            <h2>Nuestros Servicios</h2>
+            <div className="services__line"></div>
+            <p>Soluciones que combinan estrategia, diseño y tecnología para impulsar tu negocio.</p>
+          </div>
 
-          <h2 style={{ color: '#F0E7D5' }}>Nuestros Servicios</h2>
-          <div className="grid">
+          <div className="services__grid">
             {[
               "Diseño de portales web",
               "Desarrollo de Software a la Medida",
@@ -239,24 +229,26 @@ function App() {
               "Arquitectura Empresarial",
               "Desarrollo de Aplicaciones Móviles",
               "Cloud Services",
-              "Gestión de Procesos Empresariales"
-            ].map((service, index) => (
-              <div
-                key={index}
+              "Gestión de Procesos Empresariales",
+            ].map((title, i) => (
+              <article
+                key={i}
                 className="card"
                 style={{
-                  backgroundImage: `url(${findImage(servicesImages, index + 1)})`,
-                  backgroundColor: 'rgba(240,231,213,0.10)',
-                  color: '#F0E7D5',
-                  border: '2px solid #F0E7D5',
-                  borderRadius: '16px',
-                  overflow: 'hidden'
+                  "--card-bg": `url(${findImage(servicesImages, i + 1)})`,
+                  "--accent": ["#A78BFA", "#60A5FA", "#34D399", "#F59E0B"][i % 4],
                 }}
-
               >
-                <h3 style={{ color: '#F0E7D5' }}>{service}</h3>
-                <Button className="button" style={{ backgroundColor: '#212840', color: '#F0E7D5', border: 'none', marginTop: '1em' }}>Más info</Button>
-              </div>
+                <div className="card__badge" aria-hidden>
+                  <span>{String(i + 1).padStart(2, "0")}</span>
+                </div>
+                <div className="card__content">
+                  <h3 className="card__title">{title}</h3>
+                  <div className="card__actions">
+                    <button className="btn btn--ghost" type="button">Más información</button>
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
         </section>

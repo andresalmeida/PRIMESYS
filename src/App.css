@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+
+:root{
+  --indigo-900:#212840;
+  --indigo-800:#203a43;
+  --teal-700:#2c5364;
+  --cream:#F0E7D5;
+}
+
 /* Scroll suave */
 html {
   scroll-behavior: smooth;
@@ -260,34 +268,66 @@ section p {
   color: #F0E7D5;
 }
 
-#services {
-  background-color: #212840;
+/* Misión y Visión */
+.mision-vision-section{
+  background-color: #e9e9e9ff;
+  padding: 3rem 1rem;
+  color: #212840;
 }
 
-/* Misión y Visión */
-.mision-vision-container {
+.mision-vision-container{
   display: flex;
   flex-direction: column;
   gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-.mision, .vision {
+.mision, .vision{
+  background-color: #ffffff;
+  color: #212840;
+  padding: 2rem;
+  border-radius: 30px;
+  border: 1px solid rgba(33,40,64,0.15);
+  box-shadow: 0 4px 12px rgba(33,40,64,0.10);
+  text-align: center;
+}
+
+.mision h2, .vision h2{
+  margin-top: 0;
+  font-size: 1.5rem;
+  position: relative;
+  color: #212840;
+}
+
+.mision h2::after, .vision h2::after{
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
   background-color: #212840;
-  color: #F0E7D5;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(33, 40, 64, 0.2);
+  margin: 0.5rem auto 1rem;
+  border-radius: 2px;
+
 }
 
-@media (min-width: 768px) {
-  .mision-vision-container {
+.mision p, .vision p{
+  margin: 0;
+  line-height: 1.5;
+  color: #212840;
+}
+
+@media (min-width: 768px){
+  .mision-vision-container{
     flex-direction: row;
+  }
+  .mision, .vision{
+    flex: 1;
   }
 }
 
-.vision {
-  background-color: #212840;
-}
+
+
 .clients-slider {
   overflow: hidden;
   position: relative;
@@ -331,89 +371,180 @@ section p {
 .client-logo:hover {
   transform: scale(1.2); /* Efecto de zoom al pasar el mouse */
 }
-/* Services Background */
-#services .grid .card {
-  position: relative;
-  color: #F0E7D5;
-  padding: 40px 20px;
-  background-size: cover;
-  background-position: center;
-  text-shadow: 0 2px 4px rgba(33, 40, 64, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 200px; /* Ajusta según el tamaño deseado */
-  background-color: #212840;
-  border: 2px solid #F0E7D5;
+
+/* ***********************SERVICES *******************/
+
+
+
+/* Sección */
+.services{
+  --pad-x: clamp(1rem, 3vw, 2rem);
+  --pad-y: clamp(2.5rem, 6vw, 4rem);
+  background: linear-gradient(135deg, var(--indigo-900), var(--indigo-800), var(--teal-700));
+  color: var(--cream);
+  padding: var(--pad-y) var(--pad-x);
 }
 
-#services .grid .card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(33, 40, 64, 0.5); /* Midnight indigo transparente */
+.services__head{
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+.services__head h2{
+  font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+  margin: 0;
+  position: relative;
+}
+.services__line{
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent, #A78BFA), var(--cream));
+  margin: 0.5rem auto 1rem;
+  border-radius: 2px;
+  animation: expandLine 1.2s ease-out forwards;
+}
+@keyframes expandLine{
+  from{width:0; opacity:0;}
+  to{width:80px; opacity:1;}
+}
+.services__head p{
+  opacity: .9;
+  margin:0;
+}
+
+/* Grid responsivo */
+.services__grid{
+  display:grid;
+  grid-template-columns: repeat(1,minmax(0,1fr));
+  gap: clamp(16px,2.5vw,24px);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+@media (min-width: 680px){
+  .services__grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (min-width: 1024px){
+  .services__grid{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+
+/* Tarjeta */
+.card{
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #0f172a; /* fallback bajo la imagen */
+  border: 1px solid rgba(240,231,213,.28);
+  height: clamp(230px, 30vw, 300px);
+  display: grid;
+  place-items: end; /* contenido al fondo de la tarjeta */
+  isolation: isolate; /* para apilar pseudo-elementos */
+  box-shadow: 0 8px 24px rgba(0,0,0,.26);
+  transform: translateZ(0);
+}
+
+/* Fondo con imagen */
+.card::before{
+  content:"";
+  position:absolute; inset:0;
+  background-image: var(--card-bg);
+  background-size: cover; background-position: center;
+  filter: saturate(1.05) contrast(1.02);
+  z-index: 0;
+}
+
+/* Overlay degradado para legibilidad */
+.card::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.726) 12%, rgba(0,0,0,.25) 45%, rgba(0,0,0,0) 65%);
   z-index: 1;
 }
 
-#services .grid .card h3 {
+/* Borde/acento animado sutil */
+.card{
+  --glow: radial-gradient(60% 60% at 30% 10%, color-mix(in oklab, var(--accent) 50%, transparent), transparent 60%);
+  background-blend-mode: overlay;
+}
+.card:hover{
+  box-shadow: 0 14px 34px rgba(0,0,0,.35);
+  transform: translateY(-4px);
+}
+
+/* Badge superior */
+.card__badge{
+  position: absolute; inset: 12px auto auto 12px;
+  z-index: 2;
+  background: color-mix(in oklab, var(--accent) 30%, black 15%);
+  color: white;
+  border: 1px solid color-mix(in oklab, var(--accent) 65%, white 10%);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-weight: 700;
+  box-shadow: 0 6px 14px rgba(0,0,0,.30);
+}
+.card__badge span{ font-variant-numeric: tabular-nums; letter-spacing:.5px; }
+
+/* Contenido inferior tipo "glass" */
+.card__content{
   position: relative;
   z-index: 2;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 0;
-  text-align: center;
-  color: #F0E7D5;
-}
-
-#services .grid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 24px;
-}
-
-@media (min-width: 768px) {
-  #services .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  #services .grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-#services .card {
-  background-color: #212840;
-  color: #F0E7D5;
-  border: 2px solid #F0E7D5;
-  padding: 24px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-#services .card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(33, 40, 64, 0.2);
-}
-
-#services .card h3 {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 12px;
-  color: #F0E7D5;
-}
-
-/* Services Section */
-.service-image {
   width: 100%;
-  height: auto;
-  margin-bottom: 12px;
-  border-radius: 8px;
-  object-fit: cover;
+  padding: 18px 18px 16px;
+  background: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--indigo-900) 72%, transparent) 0%,
+    color-mix(in oklab, var(--indigo-900) 28%, transparent) 60%,
+    transparent 100%
+  );
+  backdrop-filter: blur(2px);
 }
+
+.card__title{
+  margin: 0 0 8px 0;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  line-height: 1.2;
+  color: var(--cream);
+  text-shadow: 0 2px 4px rgba(0,0,0,.35);
+}
+
+.card__desc{
+  margin: 0 0 14px 0;
+  opacity: .92;
+  font-size: .95rem;
+}
+
+.card__actions{ display:flex; gap:10px; align-items:center; }
+
+/* Botón ghost estilizado */
+.btn{
+  appearance: none; border:0; cursor:pointer;
+  font-weight: 700; letter-spacing:.2px;
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+.btn--ghost{
+  color: var(--cream);
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--accent) 30%, transparent),
+    transparent
+  );
+  border: 1px solid color-mix(in oklab, var(--accent) 60%, white 10%);
+  border-radius: 14px;
+  padding: 10px 14px;
+  box-shadow: 0 6px 12px rgba(0,0,0,.22);
+}
+.btn--ghost:hover{
+  transform: translateY(-2px);
+  background: color-mix(in oklab, var(--accent) 20%, rgba(255,255,255,.04));
+}
+.btn--ghost:active{ transform: translateY(0); }
+
+/* Accesibilidad: reduce animaciones si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce){
+  .card, .btn{ transition: none; }
+  .card:hover{ transform: none; }
+}
+
 
 #confidentiality {
   background: linear-gradient(to right, #003366, #0356ac);
