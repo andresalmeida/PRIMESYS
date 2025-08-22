@@ -1,0 +1,120 @@
+body {
+  background: linear-gradient(135deg, #212840, #203a43, #2c5364);
+  color: #F0E7D5;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1000px;         
+  margin: 40px auto;
+  background: #232840ee;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(33,40,64,0.18);
+  padding: 2em 2.5em;
+}
+
+h1 { margin-bottom: 0.75em; }
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;   
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.service-image {
+  width: 100%;
+  height: 100%;
+  max-height: none;                   
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(33,40,64,0.12);
+  display: block;                     
+}
+
+.description {
+  font-size: 1.05em;
+  line-height: 1.7;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(33,40,64,0.10);
+  padding: 1.5em;
+  margin: 0;
+  position: relative;   
+}
+
+.seccion-intro {
+  display: flex;
+  align-items: center;   
+  background: linear-gradient(90deg, #203a43 60%, #2c5364 100%);
+  color: #F0E7D5;
+  position: relative;
+}   
+
+.seccion-intro::before {
+  content:"";
+  position:absolute;
+  left:0; top:0; bottom:0;
+  width:4px;
+  border-radius:12px 0 0 12px;
+  background: linear-gradient(180deg, #69e6ff, #9ff2ff); 
+}
+
+.seccion-servicios {
+  background: linear-gradient(90deg, #ffffff 60%, #e8dcc6 100%);
+  color: #203a43;
+  position: relative;
+  margin-top: 1.25rem;
+  text-align: left;  
+}   
+
+.seccion-servicios h2,
+.seccion-servicios p,
+.seccion-servicios ul {
+  text-align: left;
+  color: #203a43;
+}
+
+.seccion-servicios ul {
+  margin: 1em 0;
+  padding-left: 1.5em;  
+}
+
+.seccion-servicios li {
+  text-align: left;
+  margin-bottom: 0.5em;
+}
+
+
+.description h2 {
+  margin: 0 0 0.5em 0;
+  color: inherit;
+}
+
+.back-link{
+  display:inline-block;
+  margin-top:1rem;
+  background: #F0E7D5;
+  color:#212840;
+  padding:.75em 1.25em;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:700;
+  border:1px solid rgba(0,0,0,.08);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.back-link:hover{ transform: translateY(-1px); box-shadow:0 10px 24px rgba(0,0,0,.18); }
+
+@media (max-width: 900px) {
+  .intro-grid {
+    grid-template-columns: 1fr;       
+  }
+  .service-image {
+    height: 240px;                    
+  }
+}
+
+@media (max-width: 600px) {
+  .container { padding: 1em 0.75em; }
+}
