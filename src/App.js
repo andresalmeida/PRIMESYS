@@ -1,10 +1,12 @@
+import Footer from "./components/Footer";
 import React, { useState } from "react";
 import "./App.css";
 import { Button } from "@nextui-org/button";
 import emailjs from "emailjs-com";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import logo from "./logo/logo.svg";
+// import logo from "./logo/logo.svg";
+import Header from "./components/Header";
 import diegoImage from "./diego/diego.jpg";
 
 // 🚦 Router (usa HashRouter para que funcione en cualquier subruta)
@@ -76,11 +78,7 @@ const services = [
 // ---------- HOME (tu página actual) ----------
 function Home() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [formStatus, setFormStatus] = useState("");
-
-  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
-  const closeSidebar = () => setSidebarOpen(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -130,120 +128,11 @@ function Home() {
     return null;
   };
 
-  const linkStyle = {
-    padding: '0.4em 0.8em',
-    borderRadius: '6px',
-    color: '#F0E7D5',
-    background: '#212840',
-    textDecoration: 'none',
-  };
+  // ...
 
   return (
     <div className="App">
-      <header style={{
-        boxShadow: '0 4px 16px rgba(33,40,64,0.15)',
-        background: 'linear-gradient(to right, #212840, #203a43, #2c5364)',
-        color: '#F0E7D5',
-        padding: '1vh 0',
-        width: '100vw',           
-        position: 'relative',
-        left: '50%',
-        right: '50%',
-        marginLeft: '-50vw',
-        marginRight: '-50vw'
-      }}>
-        <div style={{  
-          display: 'flex',
-          alignItems: 'center',
-          width: '100%',
-          maxWidth: '1200px',     
-          margin: '0 auto',
-          padding: '0 24px',
-          gap: 24,
-          justifyContent: 'space-between'
-        }}>
-          {/* Logo izquierda */}
-          <div className="logo" style={{ 
-            display: 'flex', 
-            alignItems: 'center',
-            flexShrink: 0  
-          }}>
-            <img src={logo} alt="Primesys Logo"
-                style={{ 
-                  width: 200, 
-                  height: 'auto', 
-                  boxShadow: '0 2px 8px rgba(33,40,64,0.10)' 
-                }} />
-          </div>
-
-          {/* Nav derecha */}
-          <nav style={{ 
-            position: 'relative', 
-            display: 'flex',
-            justifyContent: 'flex-end',  
-            flex: 1  
-          }}>
-            <div className="menu-icon" onClick={toggleSidebar}
-                style={{ 
-                  display: 'none', 
-                  fontSize: '2.2rem', 
-                  cursor: 'pointer', 
-                  color: '#fff' 
-                }}>
-              &#9776;
-            </div>
-
-            <ul className={`nav-links ${sidebarOpen ? 'open' : ''}`} style={{
-              listStyle: 'none',
-              padding: 0,
-              margin: 0,
-              display: 'flex',
-              alignItems: 'center',
-              gap: '2rem'  
-            }}>
-              <li><a href="#hero" onClick={closeSidebar} style={linkStyle}>Inicio</a></li>
-              <li><a href="#mision" onClick={closeSidebar} style={linkStyle}>Sobre Nosotros</a></li>
-              <li><a href="#services" onClick={closeSidebar} style={linkStyle}>Servicios</a></li>
-              <li><a href="#clients" onClick={closeSidebar} style={linkStyle}>Clientes</a></li>
-              <li><a href="#contact" onClick={closeSidebar} style={linkStyle}>Contacto</a></li>
-              {sidebarOpen && (
-                <li className="close-icon" onClick={closeSidebar}
-                    style={{ 
-                      color:'#F0E7D5', 
-                      fontSize:'2.5rem', 
-                      position:'absolute', 
-                      top:20, 
-                      right:20, 
-                      cursor:'pointer' 
-                    }}>
-                  &times;
-                </li>
-              )}
-            </ul>
-          </nav>
-        </div>
-
-        <style>{`
-          @media (max-width: 768px) {
-            .menu-icon { display: block !important; }
-            .nav-links { display: none !important; }
-            .nav-links.open {
-              display: flex !important;
-              flex-direction: column;
-              position: fixed;
-              top: 0; right: 0;
-              width: 70%;
-              height: 100%;
-              background: #212840;
-              padding-top: 4rem;
-              gap: 2rem;
-              justify-content: flex-start;
-              align-items: center;
-              z-index: 1000;
-            }
-          }
-        `}</style>
-      </header>
+      <Header />
 
         <main>
           {/* Hero */}
@@ -416,30 +305,7 @@ function Home() {
         </section>
        </main>
 
-      <footer style={{
-        background: 'linear-gradient(90deg, #212840 60%, #203a43 100%)',
-        color: '#F0E7D5',
-        textAlign: 'center',
-        padding: '1em 0 1.2em 0', // más alto
-        marginTop: '2em',
-        borderTop: '2px solid #F0E7D5',
-        fontSize: '1.18em', // ligeramente más grande
-        letterSpacing: '0.5px',
-        position: 'relative',
-      }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.7em' }}>
-          <div style={{ fontWeight: 600, fontSize: '1.2em', letterSpacing: '1px' }}>PRIMESYS</div>
-          <div style={{ opacity: 0.8 }}>Soluciones tecnológicas para tu negocio</div>
-          <div style={{ opacity: 0.7, fontSize: '0.95em' }}>
-            &copy; 2025 PRIMESYS. Todos los derechos reservados.
-          </div>
-          <div style={{ marginTop: '0.5em', display: 'flex', gap: '1.5em', justifyContent: 'center' }}>
-            <a href="mailto:info@primesys.com" style={{ color: '#F0E7D5', textDecoration: 'none', opacity: 0.8, fontSize: '1.2em' }}>info@primesys.com</a>
-            <span style={{ color: '#F0E7D5', opacity: 0.5 }}>|</span>
-            <a href="https://www.linkedin.com/company/primesys" target="_blank" rel="noopener noreferrer" style={{ color: '#F0E7D5', textDecoration: 'none', opacity: 0.8, fontSize: '1.2em' }}>LinkedIn</a>
-          </div>
-        </div>
-      </footer>
+  <Footer />
       </div>
     );
 }

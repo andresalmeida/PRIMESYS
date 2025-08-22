@@ -1,12 +1,17 @@
+import Header from "./Header";
 import "../Styles/servicios.css"; 
 import imagen1 from '../servicios/1.jpg';
-
+import Footer from "./Footer";
 export default function Portales() {
   return (
+    <div>
+      <Header />
+   
     <div className="container">
       <h1>Diseño de Portales Web</h1>
 
       <div className="intro-grid">
+        
         <img
           src={imagen1} 
           alt="Imagen del servicio"
@@ -38,5 +43,7 @@ export default function Portales() {
         ← Volver a Servicios
       </a>
     </div>
+    <Footer />
+     </div>
   );
 }

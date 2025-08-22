@@ -1,9 +1,14 @@
+import Header from "./Header";
 import "../Styles/servicios.css"; 
 import imagen4 from '../servicios/4.jpg';
-
+import Footer from "./Footer";
 export default function Planificacion() {
   return (
+    <div>
+<Header />
+   
     <div className="container">
+      
       <h1>Planificación Estratégica</h1>
 
       <div className="intro-grid">
@@ -38,5 +43,7 @@ export default function Planificacion() {
         ← Volver a Servicios
       </a>
     </div>
+    <Footer />
+     </div>
   );
 }

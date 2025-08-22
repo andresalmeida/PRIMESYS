@@ -1,9 +1,15 @@
 import "../Styles/servicios.css"; 
 import imagen7 from '../servicios/7.jpg';
-
+import Footer from "./Footer";
+import Header from "./Header";
 export default function aplicacionesMoviles() {
   return (
+    <div>
+      <Header />
+    
+    
     <div className="container">
+      
       <h1>Desarrollo de Aplicaciones Móviles</h1>
 
       <div className="intro-grid">
@@ -38,6 +44,8 @@ export default function aplicacionesMoviles() {
       <a href="/#services" className="back-link">
         ← Volver a Servicios
       </a>
+    </div>
+    <Footer />
     </div>
   );
 }

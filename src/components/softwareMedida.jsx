@@ -1,9 +1,14 @@
 import "../Styles/servicios.css"; 
 import imagen2 from '../servicios/2.jpg';
-
+import Header from "./Header";
+import Footer from "./Footer";
 export default function Software() {
   return (
+    <div>
+<Header />
+   
     <div className="container">
+      
       <h1>Desarrollo de Software a la Medida</h1>
 
       <div className="intro-grid">
@@ -40,5 +45,7 @@ export default function Software() {
         ← Volver a Servicios
       </a>
     </div>
+    <Footer />
+     </div>
   );
 }

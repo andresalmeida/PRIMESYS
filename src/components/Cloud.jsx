@@ -1,8 +1,12 @@
 import "../Styles/servicios.css"; 
 import imagen8 from '../servicios/8.jpg';
-
+import Header from "./Header";
+import Footer from "./Footer";
 export default function Cloud() {
   return (
+        <div>
+          <Header />
+
     <div className="container">
       <h1>Cloud Services</h1>
 
@@ -39,6 +43,8 @@ export default function Cloud() {
       <a href="/#services" className="back-link">
         ← Volver a Servicios
       </a>
+    </div>
+    <Footer />
     </div>
   );
 }

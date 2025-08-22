@@ -1,10 +1,14 @@
 import "../Styles/servicios.css"; 
 import imagen6 from '../servicios/6.jpg';
-
+import Header from "./Header";
+import Footer from "./Footer";
 export default function ArquitecturaEmpresarial() {
   return (
-    <div className="container">
-      <h1>Arquitectura Empresarial</h1>
+    <div>
+  <Header />
+
+      <div className="container">
+        <h1>Arquitectura Empresarial</h1>
 
       <div className="intro-grid">
         <img
@@ -41,5 +45,7 @@ export default function ArquitecturaEmpresarial() {
         ← Volver a Servicios
       </a>
     </div>
+    <Footer />
+       </div>
   );
 }

@@ -1,9 +1,14 @@
+import Header from "./Header";
 import "../Styles/servicios.css"; 
 import imagen5 from '../servicios/5.jpg';
-
+import Footer from "./Footer";
 export default function Ciberseguridad() {
   return (
+    <div>
+      <Header />
+   
     <div className="container">
+  
       <h1>Servicios Integrales de Ciberseguridad</h1>
 
       <div className="intro-grid">
@@ -38,5 +43,7 @@ export default function Ciberseguridad() {
         ← Volver a Servicios
       </a>
     </div>
+    <Footer />
+     </div>
   );
 }

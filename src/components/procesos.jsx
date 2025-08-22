@@ -1,9 +1,14 @@
+import Header from "./Header";
 import "../Styles/servicios.css"; 
 import imagen9 from '../servicios/9.jpg';
-
+import Footer from "./Footer";
 export default function Procesos() {
   return (
+    <div>
+      <Header />
+    
     <div className="container">
+  
       <h1>Gestión de Procesos Empresariales</h1>
 
       <div className="intro-grid">
@@ -37,6 +42,8 @@ export default function Procesos() {
       <a href="/#services" className="back-link">
         ← Volver a Servicios
       </a>
+    </div>
+    <Footer />
     </div>
   );
 }
