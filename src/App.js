@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./App.css";
 import { Button } from "@nextui-org/button";
 import emailjs from "emailjs-com";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import logo from "./logo/logo.svg";
@@ -352,60 +351,95 @@ function Home() {
             </Button>
           </section>
 
-          {/* Contacto */}
-          <section
-            id="contact"
-            style={{
-              background: 'linear-gradient(to right, #212840, #203a43, #2c5364)',
-              color: '#F0E7D5'
-            }}
-          >
-            <h2 style={{ color: '#F0E7D5' }}>Contáctenos</h2>
-            <form onSubmit={handleSubmit}>
-              <div>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Nombre"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  style={{ backgroundColor: '#F0E7D5', color: '#212840', border: '1px solid #212840' }}
-                />
-              </div>
-              <div>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Correo electrónico"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  style={{ backgroundColor: '#F0E7D5', color: '#212840', border: '1px solid #212840' }}
-                />
-              </div>
-              <div>
-                <textarea
-                  name="message"
-                  placeholder="Mensaje"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                  style={{ backgroundColor: '#F0E7D5', color: '#212840', border: '1px solid #212840' }}
-                />
-              </div>
-              <Button type="submit" style={{ backgroundColor: '#212840', color: '#e9e9e9ff', border: 'none' }}>
-                Enviar Mensaje
-              </Button>
-            </form>
-            {formStatus && <p className="form-status" style={{ color: '#F0E7D5' }}>{formStatus}</p>}
-          </section>
+        {/* Contacto - compacto y visualmente limpio */}
+        <section id="contact" style={{ background: 'linear-gradient(135deg, #212840, #203a43, #2c5364)', color: '#F0E7D5', padding: '2em 0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <h2 style={{ color: '#F0E7D5', fontSize: '2rem', marginBottom: '0.2em', letterSpacing: '0.5px' }}>Contáctenos</h2>
+          <form onSubmit={handleSubmit} style={{
+            background: 'rgba(240,231,213,0.10)',
+            borderRadius: '12px',
+            boxShadow: '0 4px 16px rgba(33,40,64,0.10)',
+            padding: '1.2em 1em',
+            maxWidth: 600,
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.7em',
+            alignItems: 'center',
+          }}>
+            <input type="text" name="name" placeholder="Nombre" value={formData.name} onChange={handleInputChange} required style={{
+              width: '100%',
+              padding: '0.5em 0.8em',
+              borderRadius: '6px',
+              border: '1px solid #F0E7D5',
+              background: '#fff',
+              color: '#212840',
+              fontSize: '1em',
+              outline: 'none',
+              boxShadow: '0 1px 4px rgba(33,40,64,0.03)'
+            }} />
+            <input type="email" name="email" placeholder="Correo electrónico" value={formData.email} onChange={handleInputChange} required style={{
+              width: '100%',
+              padding: '0.5em 0.8em',
+              borderRadius: '6px',
+              border: '1px solid #F0E7D5',
+              background: '#fff',
+              color: '#212840',
+              fontSize: '1em',
+              outline: 'none',
+              boxShadow: '0 1px 4px rgba(33,40,64,0.03)'
+            }} />
+            <textarea name="message" placeholder="Mensaje" value={formData.message} onChange={handleInputChange} required rows={3} style={{
+              width: '100%',
+              padding: '0.5em 0.8em',
+              borderRadius: '6px',
+              border: '1px solid #F0E7D5',
+              background: '#fff',
+              color: '#212840',
+              fontSize: '1em',
+              outline: 'none',
+              resize: 'vertical',
+              boxShadow: '0 1px 4px rgba(33,40,64,0.03)'
+            }} />
+            <Button type="submit" style={{
+              background: 'linear-gradient(90deg, #212840 60%, #203a43 100%)',
+              color: '#F0E7D5',
+              border: 'none',
+              borderRadius: '6px',
+              padding: '0.5em 1.5em',
+              fontWeight: 600,
+              fontSize: '1em',
+              boxShadow: '0 1px 4px rgba(33,40,64,0.07)',
+              transition: 'background 0.2s, color 0.2s',
+            }}>Enviar</Button>
+            {formStatus && <p className="form-status" style={{ color: formStatus.includes('correctamente') ? '#2ecc71' : '#e74c3c', marginTop: '0.3em', fontWeight: 500, fontSize: '0.98em' }}>{formStatus}</p>}
+          </form>
+        </section>
+       </main>
 
-        </main>
-
-        <footer>
-          <p>&copy; 2025 PRIMESYS. Todos los derechos reservados.</p>
-        </footer>
+      <footer style={{
+        background: 'linear-gradient(90deg, #212840 60%, #203a43 100%)',
+        color: '#F0E7D5',
+        textAlign: 'center',
+        padding: '1em 0 1.2em 0', // más alto
+        marginTop: '2em',
+        borderTop: '2px solid #F0E7D5',
+        fontSize: '1.18em', // ligeramente más grande
+        letterSpacing: '0.5px',
+        position: 'relative',
+      }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.7em' }}>
+          <div style={{ fontWeight: 600, fontSize: '1.2em', letterSpacing: '1px' }}>PRIMESYS</div>
+          <div style={{ opacity: 0.8 }}>Soluciones tecnológicas para tu negocio</div>
+          <div style={{ opacity: 0.7, fontSize: '0.95em' }}>
+            &copy; 2025 PRIMESYS. Todos los derechos reservados.
+          </div>
+          <div style={{ marginTop: '0.5em', display: 'flex', gap: '1.5em', justifyContent: 'center' }}>
+            <a href="mailto:info@primesys.com" style={{ color: '#F0E7D5', textDecoration: 'none', opacity: 0.8, fontSize: '1.2em' }}>info@primesys.com</a>
+            <span style={{ color: '#F0E7D5', opacity: 0.5 }}>|</span>
+            <a href="https://www.linkedin.com/company/primesys" target="_blank" rel="noopener noreferrer" style={{ color: '#F0E7D5', textDecoration: 'none', opacity: 0.8, fontSize: '1.2em' }}>LinkedIn</a>
+          </div>
+        </div>
+      </footer>
       </div>
     );
 }
