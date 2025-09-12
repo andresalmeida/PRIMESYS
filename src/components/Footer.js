@@ -20,9 +20,11 @@ export default function Footer() {
           &copy; 2025 PRIMESYS. Todos los derechos reservados.
         </div>
         <div style={{ marginTop: '0.5em', display: 'flex', gap: '1.5em', justifyContent: 'center' }}>
-          <a href="mailto:info@primesys.com" style={{ color: '#F0E7D5', textDecoration: 'none', opacity: 0.8, fontSize: '1.2em' }}>info@primesys.com</a>
-          <span style={{ color: '#F0E7D5', opacity: 0.5 }}>|</span>
-          <a href="https://www.linkedin.com/company/primesys" target="_blank" rel="noopener noreferrer" style={{ color: '#F0E7D5', textDecoration: 'none', opacity: 0.8, fontSize: '1.2em' }}>LinkedIn</a>
+          {/* Correo comentado temporalmente hasta tener la dirección correcta */}
+          {/* <a href="mailto:info@primesys.com" style={{ color: '#F0E7D5', textDecoration: 'none', opacity: 0.8, fontSize: '1.2em' }}>info@primesys.com</a> */}
+          {/* <span style={{ color: '#F0E7D5', opacity: 0.5 }}>|</span> */}
+          {/* LinkedIn comentado temporalmente hasta tener el perfil correcto */}
+          {/* <a href="https://www.linkedin.com/company/primesys" target="_blank" rel="noopener noreferrer" style={{ color: '#F0E7D5', textDecoration: 'none', opacity: 0.8, fontSize: '1.2em' }}>LinkedIn</a> */}
         </div>
       </div>
     </footer>

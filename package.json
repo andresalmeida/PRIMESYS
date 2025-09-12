@@ -2,7 +2,6 @@
   "name": "primesys",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://andresalmeida.github.io/PRIMESYS",
   "dependencies": {
     "@nextui-org/button": "^2.0.38",
     "@nextui-org/react": "^2.4.8",

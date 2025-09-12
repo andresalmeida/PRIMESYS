@@ -1,5 +1,5 @@
 import Footer from "./components/Footer";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Button } from "@nextui-org/button";
 import emailjs from "emailjs-com";
@@ -8,10 +8,8 @@ import "slick-carousel/slick/slick-theme.css";
 // import logo from "./logo/logo.svg";
 import Header from "./components/Header";
 import diegoImage from "./diego/diego.jpg";
-
-// 🚦 Router (usa HashRouter para que funcione en cualquier subruta)
-import { HashRouter, Routes, Route, Link } from "react-router-dom";
-
+// 🚦 Router (BrowserRouter para CPanel)
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 // ✅ subpágina
 import ArquitecturaEmpresarial from "./components/arquitecturaEmpresarial";
 import AplicacionesMoviles from "./components/aplicacionesMoviles";
@@ -22,6 +20,28 @@ import Software from "./components/softwareMedida";
 import Portales from "./components/portales";
 import Procesos from "./components/procesos";
 import Planificacion from "./components/planificacion";
+import NuestroTrabajo from "./components/nuestroTrabajo";
+import SobreNosotros from "./components/sobreNosotros";
+
+// Estilos para mejorar la visibilidad de los placeholders
+const placeholderStyles = `
+  .form-input::placeholder {
+    color: rgba(255, 255, 255, 0.8) !important;
+    opacity: 1 !important;
+  }
+  .form-input::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.8) !important;
+    opacity: 1 !important;
+  }
+  .form-input::-moz-placeholder {
+    color: rgba(255, 255, 255, 0.8) !important;
+    opacity: 1 !important;
+  }
+  .form-input:-ms-input-placeholder {
+    color: rgba(255, 255, 255, 0.8) !important;
+    opacity: 1 !important;
+  }
+`;
 
 
 
@@ -79,6 +99,19 @@ const services = [
 function Home() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [formStatus, setFormStatus] = useState("");
+  
+  // Añadir estilos de placeholders cuando se monte el componente
+  useEffect(() => {
+    // Crear elemento de estilo
+    const styleElement = document.createElement('style');
+    styleElement.innerHTML = placeholderStyles;
+    document.head.appendChild(styleElement);
+    
+    // Limpiar cuando se desmonte
+    return () => {
+      document.head.removeChild(styleElement);
+    };
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -158,7 +191,33 @@ function Home() {
             <p style={{ color: '#F0E7D5' }}>
               Más de 25 años de experiencia mejorando la operatividad y competitividad de nuestros clientes
             </p>
-            <Button className="button" style={{ backgroundColor: '#212840', color: '#F0E7D5', border: 'none' }} onClick={() => document.getElementById("contact").scrollIntoView({ behavior: "smooth" })}>
+            <Button 
+              className="button" 
+              style={{ 
+                background: 'linear-gradient(135deg, #3e80fe, #6f42c1)',
+                color: '#FFFFFF',
+                border: 'none',
+                padding: '12px 28px',
+                fontSize: '1.1rem',
+                fontWeight: '600',
+                borderRadius: '12px',
+                boxShadow: '0 10px 25px rgba(62, 128, 254, 0.35)',
+                transition: 'all 0.3s ease',
+                position: 'relative',
+                overflow: 'hidden',
+                marginTop: '15px',
+                letterSpacing: '0.5px'
+              }} 
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-3px)';
+                e.currentTarget.style.boxShadow = '0 15px 30px rgba(62, 128, 254, 0.45)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 10px 25px rgba(62, 128, 254, 0.35)';
+              }}
+              onClick={() => document.getElementById("contact").scrollIntoView({ behavior: "smooth" })}
+            >
               Contáctenos
             </Button>
           </section>
@@ -220,7 +279,7 @@ function Home() {
                 {Array.from({ length: 8 }).map((_, index) => (
                   <img
                     src={findImage(clientsImages, index + 1)}
-                    alt={`Cliente ${index + 1}`}
+                    alt={`Logo cliente ${index + 1} - Empresa colaboradora de Primesys`}
                     key={index}
                     className="client-logo"
                   />
@@ -228,80 +287,191 @@ function Home() {
                 {Array.from({ length: 9 }).map((_, index) => (
                   <img
                     src={findImage(clientsImages, index + 1)}
-                    alt={`Cliente ${index + 1}`}
+                    alt={`Logo cliente ${index + 1} - Empresa colaboradora de Primesys`}
                     key={index + 8}
                     className="client-logo"
                   />
                 ))}
               </div>
             </div>
-            <Button className="button" style={{ backgroundColor: '#212840', color: '#F0E7D5', border: 'none', marginTop: '2em' }}>
-              Ver todos
-            </Button>
           </section>
 
-        {/* Contacto - compacto y visualmente limpio */}
-        <section id="contact" style={{ background: 'linear-gradient(135deg, #212840, #203a43, #2c5364)', color: '#F0E7D5', padding: '2em 0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <h2 style={{ color: '#F0E7D5', fontSize: '2rem', marginBottom: '0.2em', letterSpacing: '0.5px' }}>Contáctenos</h2>
+        {/* Contacto - diseño mejorado y armónico */}
+        <section id="contact" style={{ 
+          background: 'linear-gradient(135deg, #212840, #203a43, #2c5364)', 
+          color: '#F0E7D5', 
+          padding: '4em 0', 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center',
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          {/* Elementos decorativos */}
+          <div style={{
+            position: 'absolute',
+            top: '-150px',
+            right: '-100px',
+            width: '400px',
+            height: '400px',
+            background: 'radial-gradient(circle, rgba(62, 128, 254, 0.1) 0%, rgba(39, 103, 213, 0) 70%)',
+            borderRadius: '50%',
+            zIndex: 0
+          }}></div>
+          
+          <div style={{
+            position: 'absolute',
+            bottom: '-80px',
+            left: '-50px',
+            width: '300px',
+            height: '300px',
+            background: 'radial-gradient(circle, rgba(111, 66, 193, 0.1) 0%, rgba(111, 66, 193, 0) 70%)',
+            borderRadius: '50%',
+            zIndex: 0
+          }}></div>
+          
+          <h2 style={{ 
+            color: '#FFFFFF', 
+            fontSize: '3rem', 
+            marginBottom: '1.5em', 
+            letterSpacing: '1px', 
+            textAlign: 'center',
+            fontWeight: '700',
+            textShadow: '0 2px 10px rgba(0,0,0,0.2)',
+            position: 'relative',
+            zIndex: 2
+          }}>
+            Contáctenos
+          </h2>
+            
           <form onSubmit={handleSubmit} style={{
-            background: 'rgba(240,231,213,0.10)',
-            borderRadius: '12px',
-            boxShadow: '0 4px 16px rgba(33,40,64,0.10)',
-            padding: '1.2em 1em',
-            maxWidth: 600,
+            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            borderRadius: '24px',
+            boxShadow: '0 25px 50px rgba(0, 0, 0, 0.2)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            padding: '40px',
+            maxWidth: '650px',
             width: '100%',
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.7em',
+            gap: '1.5em',
             alignItems: 'center',
+            position: 'relative',
+            overflow: 'hidden',
+            margin: '0 auto',
+            zIndex: 2
           }}>
-            <input type="text" name="name" placeholder="Nombre" value={formData.name} onChange={handleInputChange} required style={{
+            {/* Borde decorativo */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
               width: '100%',
-              padding: '0.5em 0.8em',
-              borderRadius: '6px',
-              border: '1px solid #F0E7D5',
-              background: '#fff',
-              color: '#212840',
-              fontSize: '1em',
-              outline: 'none',
-              boxShadow: '0 1px 4px rgba(33,40,64,0.03)'
-            }} />
-            <input type="email" name="email" placeholder="Correo electrónico" value={formData.email} onChange={handleInputChange} required style={{
-              width: '100%',
-              padding: '0.5em 0.8em',
-              borderRadius: '6px',
-              border: '1px solid #F0E7D5',
-              background: '#fff',
-              color: '#212840',
-              fontSize: '1em',
-              outline: 'none',
-              boxShadow: '0 1px 4px rgba(33,40,64,0.03)'
-            }} />
-            <textarea name="message" placeholder="Mensaje" value={formData.message} onChange={handleInputChange} required rows={3} style={{
-              width: '100%',
-              padding: '0.5em 0.8em',
-              borderRadius: '6px',
-              border: '1px solid #F0E7D5',
-              background: '#fff',
-              color: '#212840',
-              fontSize: '1em',
-              outline: 'none',
-              resize: 'vertical',
-              boxShadow: '0 1px 4px rgba(33,40,64,0.03)'
-            }} />
-            <Button type="submit" style={{
-              background: 'linear-gradient(90deg, #212840 60%, #203a43 100%)',
-              color: '#F0E7D5',
-              border: 'none',
-              borderRadius: '6px',
-              padding: '0.5em 1.5em',
-              fontWeight: 600,
-              fontSize: '1em',
-              boxShadow: '0 1px 4px rgba(33,40,64,0.07)',
-              transition: 'background 0.2s, color 0.2s',
-            }}>Enviar</Button>
-            {formStatus && <p className="form-status" style={{ color: formStatus.includes('correctamente') ? '#2ecc71' : '#e74c3c', marginTop: '0.3em', fontWeight: 500, fontSize: '0.98em' }}>{formStatus}</p>}
-          </form>
+              height: '5px',
+              background: 'linear-gradient(to right, #3e80fe, #6f42c1)'
+            }}></div>
+              
+              <input 
+                type="text" 
+                name="name" 
+                placeholder="Nombre" 
+                value={formData.name} 
+                onChange={handleInputChange} 
+                required 
+                style={{
+                  width: '100%',
+                  padding: '15px 20px',
+                  borderRadius: '12px',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  color: '#FFFFFF',
+                  fontSize: '1.1em',
+                  fontWeight: '400',
+                  outline: 'none',
+                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                  transition: 'all 0.3s ease',
+                  backdropFilter: 'blur(5px)',
+                  WebkitBackdropFilter: 'blur(5px)',
+                }}
+                className="form-input"
+              />
+            <input 
+                type="email" 
+                name="email" 
+                placeholder="Correo electrónico" 
+                value={formData.email} 
+                onChange={handleInputChange} 
+                required 
+                style={{
+                  width: '100%',
+                  padding: '15px 20px',
+                  borderRadius: '12px',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  color: '#FFFFFF',
+                  fontSize: '1.1em',
+                  fontWeight: '400',
+                  outline: 'none',
+                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                  transition: 'all 0.3s ease',
+                  backdropFilter: 'blur(5px)',
+                  WebkitBackdropFilter: 'blur(5px)',
+                }}
+                className="form-input"
+              />
+              
+              <textarea 
+                name="message" 
+                placeholder="Mensaje" 
+                value={formData.message} 
+                onChange={handleInputChange} 
+                required 
+                rows={4} 
+                style={{
+                  width: '100%',
+                  padding: '15px 20px',
+                  borderRadius: '12px',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  color: '#FFFFFF',
+                  fontSize: '1.1em',
+                  fontWeight: '400',
+                  outline: 'none',
+                  resize: 'vertical',
+                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                  transition: 'all 0.3s ease',
+                  backdropFilter: 'blur(5px)',
+                  WebkitBackdropFilter: 'blur(5px)',
+                  minHeight: '120px'
+                }}
+                className="form-input"
+              />
+              
+              <Button type="submit" style={{
+                background: 'linear-gradient(135deg, #3e80fe, #6f42c1)',
+                color: '#FFFFFF',
+                border: 'none',
+                borderRadius: '12px',
+                padding: '15px 40px',
+                fontWeight: '600',
+                fontSize: '1.1em',
+                boxShadow: '0 8px 20px rgba(62, 128, 254, 0.25)',
+                transition: 'all 0.3s ease',
+                cursor: 'pointer',
+                marginTop: '15px',
+                letterSpacing: '0.5px'
+              }}>Enviar</Button>
+              
+              {formStatus && <p className="form-status" style={{ 
+                color: formStatus.includes('correctamente') ? '#8cffbe' : '#ff9c9c', 
+                marginTop: '1em', 
+                fontWeight: 500, 
+                fontSize: '1.1em',
+                textShadow: '0 1px 3px rgba(0, 0, 0, 0.2)'
+              }}>{formStatus}</p>}
+            </form>
         </section>
        </main>
 
@@ -313,7 +483,7 @@ function Home() {
 // ---------- APP (Router + Rutas) ----------
 export default function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/arquitectura-empresarial" element={<ArquitecturaEmpresarial />} />
@@ -321,145 +491,14 @@ export default function App() {
         <Route path="/capacitaciones" element={<Capacitacion />} />
         <Route path="/ciberseguridad" element={<Ciberseguridad />} />
         <Route path="/cloud" element={<Cloud />} />
-        <Route path="software-medida" element={<Software />} />
-        <Route path="portales" element={<Portales />} />
-        <Route path="procesos" element={<Procesos />} />
-        <Route path="planificacion" element={<Planificacion />} />
+        <Route path="/software-medida" element={<Software />} />
+        <Route path="/portales" element={<Portales />} />
+        <Route path="/procesos" element={<Procesos />} />
+        <Route path="/planificacion" element={<Planificacion />} />
+        <Route path="/nuestro-trabajo" element={<NuestroTrabajo />} />
+        <Route path="/sobre-nosotros" element={<SobreNosotros />} />
         <Route path="*" element={<Home />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
-
-// SEGUNDA VERSION SOLO FORMULARIO
-
-// import React, { useState } from "react";
-// import "./App.css";
-// import { Button } from "@nextui-org/button";
-// import emailjs from "emailjs-com";
-// import logo from "./logo/primesys_logo.png";
-// import letras from "./logo/primesys_letras.svg";
-// import diegoImage from "./diego/diego.jpg";
-
-// // Cargar imágenes dinámicamente desde servicios y clientes
-// const servicesImages = require.context("./servicios", false, /\.(png|jpe?g|JPG|PNG)$/);
-// const clientsImages = require.context("./clientes", false, /\.(png|jpe?g|JPG|PNG)$/);
-
-// function App() {
-//   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-//   const [sidebarOpen, setSidebarOpen] = useState(false);
-//   const [formStatus, setFormStatus] = useState("");
-
-//   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
-//   const closeSidebar = () => setSidebarOpen(false);
-
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({ ...formData, [name]: value });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     // Validación básica del correo electrónico
-//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//     if (!emailRegex.test(formData.email)) {
-//       setFormStatus("Correo electrónico inválido");
-//       return;
-//     }
-
-//     // Enviar correo con EmailJS
-//     emailjs
-//       .send(
-//         "service_xxx", // Reemplaza con tu Service ID
-//         "template_xxx", // Reemplaza con tu Template ID
-//         {
-//           from_name: formData.name,
-//           from_email: formData.email,
-//           message: formData.message,
-//           to_email: "almeidaandres@proton.me",
-//         },
-//         "user_xxx" // Reemplaza con tu Public Key de EmailJS
-//       )
-//       .then(
-//         () => {
-//           setFormStatus("Mensaje enviado correctamente");
-//           setFormData({ name: "", email: "", message: "" });
-//         },
-//         (error) => {
-//           console.error("Error al enviar el mensaje", error);
-//           setFormStatus("Error al enviar el mensaje");
-//         }
-//       );
-//   };
-
-//   // Función para encontrar imágenes dinámicamente
-//   const findImage = (imagesContext, index) => {
-//     const keys = imagesContext.keys();
-//     const image = keys.find((key) => key.includes(`${index}`));
-//     return image ? imagesContext(image) : null;
-//   };
-
-//   return (
-//     <div className="App">
-//       <header>
-//         <div className="container">
-//           <div className="logo">
-//             <img src={logo} alt="Primesys Logo" className="logo-icon" />
-//             <img src={letras} alt="Primesys Letras" className="logo-text" />
-//           </div>
-//           <nav>
-//             <ul className={`nav-links ${sidebarOpen ? "open" : ""}`}>
-//               <li><a href="#hero" onClick={closeSidebar}>Inicio</a></li>
-//               <li><a href="#mision" onClick={closeSidebar}>Sobre Nosotros</a></li>
-//               <li><a href="#services" onClick={closeSidebar}>Servicios</a></li>
-//               <li><a href="#clients" onClick={closeSidebar}>Clientes</a></li>
-//               <li><a href="#contact" onClick={closeSidebar}>Contacto</a></li>
-//               <li className="close-icon" onClick={closeSidebar}>&times;</li>
-//             </ul>
-//             <div className="menu-icon" onClick={toggleSidebar}>
-//               &#9776;
-//             </div>
-//           </nav>
-//         </div>
-//       </header>
-
-//       <main>
-//         {/* Hero Section */}
-//         <section id="hero" style={{ backgroundImage: `url(${diegoImage})` }}>
-//           <h1>Soluciones Innovadoras para su Negocio</h1>
-//           <p>Más de 25 años de experiencia mejorando la operatividad y competitividad de nuestros clientes</p>
-//           <Button className="button" onClick={() => document.getElementById("contact").scrollIntoView({ behavior: "smooth" })}>
-//             Contáctenos
-//           </Button>
-//         </section>
-
-//         {/* Contact Section */}
-//         <section id="contact">
-//           <h2>Contáctenos</h2>
-//           <form onSubmit={handleSubmit}>
-//             <div>
-//               <input type="text" name="name" placeholder="Nombre" value={formData.name} onChange={handleInputChange} required />
-//             </div>
-//             <div>
-//               <input type="email" name="email" placeholder="Correo electrónico" value={formData.email} onChange={handleInputChange} required />
-//             </div>
-//             <div>
-//               <textarea name="message" placeholder="Mensaje" value={formData.message} onChange={handleInputChange} required />
-//             </div>
-//             <Button type="submit">Enviar Mensaje</Button>
-//           </form>
-//           {formStatus && <p className="form-status">{formStatus}</p>}
-//         </section>
-//       </main>
-
-//       <footer>
-//         <p>&copy; 2024 Primesys. Todos los derechos reservados.</p>
-//       </footer>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
