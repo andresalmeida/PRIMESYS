@@ -20,7 +20,7 @@ export default function Planificacion() {
 
         <section className="description seccion-intro">
             <p>
-                La planificación estratégica es un proceso realizado por los altos dirigentes de una empresa para el crecimiento y mejora continua de la misma, y ayuda especificar las acciones que debe realizar la organización para lograr cumplir con la misión y visión de la empresa.
+              Te ayudamos a llevar a cabo un proceso de planificación estratégica orientado al crecimiento y la mejora continua de tu empresa. Juntos definimos las acciones necesarias para que tu organización cumpla con su misión, visión y objetivos institucionales.            
             </p>
         </section>
       </div>

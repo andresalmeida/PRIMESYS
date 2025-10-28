@@ -20,8 +20,7 @@ export default function Ciberseguridad() {
 
         <section className="description seccion-intro">
             <p>
-                La ciberseguridad es el conjunto de prácticas, tecnologías y procesos diseñados para proteger
-                sistemas, redes, dispositivos y datos contra ataques digitales, accesos no autorizados, robos de información o daños.
+              Te ofrecemos soluciones integrales de ciberseguridad basadas en prácticas, tecnologías y procesos que protegen tus sistemas, redes, dispositivos y datos contra ataques digitales, accesos no autorizados, robos de información y posibles daños.
             </p>
         </section>
       </div>

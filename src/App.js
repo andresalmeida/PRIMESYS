@@ -222,20 +222,6 @@ function Home() {
             </Button>
           </section>
 
-          {/* Misión y Visión */}
-          <section id="mision-vision" className="mision-vision-section">
-            <div className="mision-vision-container">
-              <div className="mision">
-                <h2>Misión</h2>
-                <p>Ofrecer soluciones tecnológicas innovadoras y personalizadas para satisfacer las necesidades específicas de nuestros clientes, con un enfoque en la calidad del servicio y la atención al cliente.</p>
-              </div>
-              <div className="vision">
-                <h2>Visión</h2>
-                <p>Ser líderes en el mercado de servicios computacionales, reconocidos por nuestra excelencia en la calidad del servicio, la innovación tecnológica y la satisfacción del cliente. Queremos ser la empresa a la que acuden los clientes para obtener soluciones tecnológicas confiables y eficientes.</p>
-              </div>
-            </div>
-          </section>
-
           {/* Servicios */}
           <section id="services" className="services">
             <div className="services__head">
@@ -296,183 +282,202 @@ function Home() {
             </div>
           </section>
 
-        {/* Contacto - diseño mejorado y armónico */}
-        <section id="contact" style={{ 
-          background: 'linear-gradient(135deg, #212840, #203a43, #2c5364)', 
-          color: '#F0E7D5', 
-          padding: '4em 0', 
-          display: 'flex', 
-          flexDirection: 'column', 
-          alignItems: 'center',
-          position: 'relative',
-          overflow: 'hidden'
-        }}>
-          {/* Elementos decorativos */}
-          <div style={{
-            position: 'absolute',
-            top: '-150px',
-            right: '-100px',
-            width: '400px',
-            height: '400px',
-            background: 'radial-gradient(circle, rgba(62, 128, 254, 0.1) 0%, rgba(39, 103, 213, 0) 70%)',
-            borderRadius: '50%',
-            zIndex: 0
-          }}></div>
-          
-          <div style={{
-            position: 'absolute',
-            bottom: '-80px',
-            left: '-50px',
-            width: '300px',
-            height: '300px',
-            background: 'radial-gradient(circle, rgba(111, 66, 193, 0.1) 0%, rgba(111, 66, 193, 0) 70%)',
-            borderRadius: '50%',
-            zIndex: 0
-          }}></div>
-          
-          <h2 style={{ 
-            color: '#FFFFFF', 
-            fontSize: '3rem', 
-            marginBottom: '1.5em', 
-            letterSpacing: '1px', 
-            textAlign: 'center',
-            fontWeight: '700',
-            textShadow: '0 2px 10px rgba(0,0,0,0.2)',
-            position: 'relative',
-            zIndex: 2
-          }}>
-            Contáctenos
-          </h2>
-            
-          <form onSubmit={handleSubmit} style={{
-            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            borderRadius: '24px',
-            boxShadow: '0 25px 50px rgba(0, 0, 0, 0.2)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            padding: '40px',
-            maxWidth: '650px',
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1.5em',
-            alignItems: 'center',
-            position: 'relative',
-            overflow: 'hidden',
-            margin: '0 auto',
-            zIndex: 2
-          }}>
-            {/* Borde decorativo */}
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '5px',
-              background: 'linear-gradient(to right, #3e80fe, #6f42c1)'
-            }}></div>
-              
-              <input 
-                type="text" 
-                name="name" 
-                placeholder="Nombre" 
-                value={formData.name} 
-                onChange={handleInputChange} 
-                required 
+          {/* Contacto – igual al mockup (texto izq + tarjeta con inputs claros a la der) */}
+          <section
+            id="contact"
+            style={{
+              background:
+                "linear-gradient(90deg, #0b1a2d 0%, #10263a 45%, #2a4b60 100%)",
+              color: "#EAF2FF",
+              padding: "72px 0",
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            {/* halos decorativos */}
+            <div
+              style={{
+                position: "absolute",
+                inset: "-120px auto auto -120px",
+                width: 320,
+                height: 320,
+                background:
+                  "radial-gradient(circle at 40% 40%, rgba(26,166,214,.28), transparent 65%)",
+                borderRadius: "50%",
+                filter: "blur(2px)",
+                zIndex: 0,
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                inset: "auto -140px -140px auto",
+                width: 360,
+                height: 360,
+                background:
+                  "radial-gradient(circle at 60% 40%, rgba(111,66,193,.28), transparent 65%)",
+                borderRadius: "50%",
+                filter: "blur(2px)",
+                zIndex: 0,
+              }}
+            />
+
+            {/* contenedor 2 columnas */}
+            <div
+              style={{
+                maxWidth: 1080,
+                margin: "0 auto",
+                padding: "0 24px",
+                display: "grid",
+                gridTemplateColumns: "1.05fr .95fr",
+                gap: 36,
+                alignItems: "center",
+                position: "relative",
+                zIndex: 2,
+              }}
+            >
+              {/* texto lateral */}
+              <div style={{ lineHeight: 1.75 }}>
+                <h2
+                  style={{
+                    margin: 0,
+                    fontWeight: 800,
+                    fontSize: "28px",
+                    color: "#8fd3ff",
+                  }}
+                >
+                  Contáctenos
+                </h2>
+                <p style={{ marginTop: 14, maxWidth: 560, color: "#e6eefb" }}>
+                  Si desea obtener más información sobre nuestros servicios, realizar una
+                  consulta o solicitar una cotización, no dude en escribirnos. Estaremos
+                  encantados de ayudarle y brindarle asesoramiento personalizado.
+                  <br />
+                  <br />
+                  También puede contactarnos directamente por correo.
+                </p>
+              </div>
+
+              {/* tarjeta de formulario (glass oscuro) */}
+              <form
+                onSubmit={handleSubmit}
                 style={{
-                  width: '100%',
-                  padding: '15px 20px',
-                  borderRadius: '12px',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  color: '#FFFFFF',
-                  fontSize: '1.1em',
-                  fontWeight: '400',
-                  outline: 'none',
-                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                  transition: 'all 0.3s ease',
-                  backdropFilter: 'blur(5px)',
-                  WebkitBackdropFilter: 'blur(5px)',
+                  background:
+                    "linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.04))",
+                  border: "1px solid rgba(255,255,255,.16)",
+                  boxShadow: "0 18px 48px rgba(0,0,0,.35)",
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
+                  borderRadius: 14,
+                  padding: 28,
+                  width: "420px", // <-- más ancho (antes ~350px)
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 14,
                 }}
-                className="form-input"
-              />
-            <input 
-                type="email" 
-                name="email" 
-                placeholder="Correo electrónico" 
-                value={formData.email} 
-                onChange={handleInputChange} 
-                required 
-                style={{
-                  width: '100%',
-                  padding: '15px 20px',
-                  borderRadius: '12px',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  color: '#FFFFFF',
-                  fontSize: '1.1em',
-                  fontWeight: '400',
-                  outline: 'none',
-                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                  transition: 'all 0.3s ease',
-                  backdropFilter: 'blur(5px)',
-                  WebkitBackdropFilter: 'blur(5px)',
-                }}
-                className="form-input"
-              />
-              
-              <textarea 
-                name="message" 
-                placeholder="Mensaje" 
-                value={formData.message} 
-                onChange={handleInputChange} 
-                required 
-                rows={4} 
-                style={{
-                  width: '100%',
-                  padding: '15px 20px',
-                  borderRadius: '12px',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  color: '#FFFFFF',
-                  fontSize: '1.1em',
-                  fontWeight: '400',
-                  outline: 'none',
-                  resize: 'vertical',
-                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                  transition: 'all 0.3s ease',
-                  backdropFilter: 'blur(5px)',
-                  WebkitBackdropFilter: 'blur(5px)',
-                  minHeight: '120px'
-                }}
-                className="form-input"
-              />
-              
-              <Button type="submit" style={{
-                background: 'linear-gradient(135deg, #3e80fe, #6f42c1)',
-                color: '#FFFFFF',
-                border: 'none',
-                borderRadius: '12px',
-                padding: '15px 40px',
-                fontWeight: '600',
-                fontSize: '1.1em',
-                boxShadow: '0 8px 20px rgba(62, 128, 254, 0.25)',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer',
-                marginTop: '15px',
-                letterSpacing: '0.5px'
-              }}>Enviar</Button>
-              
-              {formStatus && <p className="form-status" style={{ 
-                color: formStatus.includes('correctamente') ? '#8cffbe' : '#ff9c9c', 
-                marginTop: '1em', 
-                fontWeight: 500, 
-                fontSize: '1.1em',
-                textShadow: '0 1px 3px rgba(0, 0, 0, 0.2)'
-              }}>{formStatus}</p>}
-            </form>
-        </section>
+              >
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Nombre"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                  style={{
+                    height: 46,
+                    borderRadius: 10,
+                    border: "1px solid rgba(9,26,47,.12)",
+                    background: "rgba(210,236,232,.88)",
+                    color: "#0a223a",
+                    padding: "12px 16px",
+                    fontSize: "1em",
+                    outline: "none",
+                  }}
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Correo Electrónico"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  style={{
+                    height: 46,
+                    borderRadius: 10,
+                    border: "1px solid rgba(9,26,47,.12)",
+                    background: "rgba(210,236,232,.88)",
+                    color: "#0a223a",
+                    padding: "12px 16px",
+                    fontSize: "1em",
+                    outline: "none",
+                  }}
+                />
+                <textarea
+                  name="message"
+                  placeholder="Mensaje"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  required
+                  rows={5}
+                  style={{
+                    borderRadius: 10,
+                    border: "1px solid rgba(9,26,47,.12)",
+                    background: "rgba(210,236,232,.88)",
+                    color: "#0a223a",
+                    padding: "12px 16px",
+                    fontSize: "1em",
+                    resize: "vertical",
+                    minHeight: 120,
+                    outline: "none",
+                  }}
+                />
+                <Button
+                  type="submit"
+                  style={{
+                    background: "linear-gradient(135deg, #3e80fe, #6f42c1)",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: 10,
+                    padding: "14px 0",
+                    fontWeight: 700,
+                    fontSize: "1em",
+                    cursor: "pointer",
+                    boxShadow: "0 10px 22px rgba(62,128,254,.35)",
+                    transition: "transform .2s ease, filter .2s ease",
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.filter = "brightness(1.08)")}
+                  onMouseOut={(e) => (e.currentTarget.style.filter = "none")}
+                >
+                  Enviar
+                </Button>
+
+                {formStatus && (
+                  <p
+                    style={{
+                      margin: "8px 2px 0",
+                      fontSize: "14px",
+                      color: formStatus.includes("correctamente") ? "#8cffbe" : "#ff9c9c",
+                    }}
+                  >
+                    {formStatus}
+                  </p>
+                )}
+              </form>
+
+            </div>
+
+            {/* estilos para placeholder (no se pueden poner inline) */}
+            <style>{`
+              #contact input::placeholder,
+              #contact textarea::placeholder{
+                color: rgba(10,34,58,.55);
+              }
+              @media (max-width: 980px){
+                #contact > div{ grid-template-columns: 1fr; gap: 28px; }
+              }
+            `}</style>
+          </section>
+
        </main>
 
   <Footer />

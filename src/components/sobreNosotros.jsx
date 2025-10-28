@@ -1,355 +1,319 @@
-import React from 'react';
-import Header from './Header';
-import Footer from './Footer';
+import React from "react";
+import Header from "./Header";
+import Footer from "./Footer";
 
 export default function SobreNosotros() {
   return (
-    <div style={{ background: 'linear-gradient(135deg, #212840, #203a43, #2c5364)', minHeight: '100vh' }}>
+    <div className="sobre">
       <Header />
-      
-      {/* Hero Section */}
-      <div style={{ 
-        position: 'relative', 
-        padding: '120px 0 80px',
-        overflow: 'hidden',
-        textAlign: 'center'
-      }}>
-        {/* Decorative shapes */}
-        <div style={{
-          position: 'absolute',
-          top: '10%',
-          right: '5%',
-          width: '300px',
-          height: '300px',
-          background: 'radial-gradient(circle, rgba(62, 128, 254, 0.2) 0%, rgba(39, 103, 213, 0) 70%)',
-          borderRadius: '50%',
-          zIndex: 0
-        }}></div>
-        
-        <div style={{
-          position: 'absolute',
-          bottom: '15%',
-          left: '10%',
-          width: '200px',
-          height: '200px',
-          background: 'radial-gradient(circle, rgba(111, 66, 193, 0.2) 0%, rgba(111, 66, 193, 0) 70%)',
-          borderRadius: '50%',
-          zIndex: 0
-        }}></div>
-        
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-          <h1 style={{ 
-            fontSize: '4rem',
-            fontWeight: 800,
-            color: 'white',
-            marginBottom: '20px',
-            textShadow: '0 5px 15px rgba(0,0,0,0.3)',
-            background: 'linear-gradient(to right, #fff, #d4e8ff)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}>
-            Sobre Nosotros
-          </h1>
-          
-          <div style={{
-            width: '120px',
-            height: '4px',
-            background: 'linear-gradient(to right, #3e80fe, #6f42c1)',
-            margin: '0 auto',
-            borderRadius: '10px',
-            boxShadow: '0 4px 10px rgba(62, 128, 254, 0.3)'
-          }}></div>
+
+      {/* ===== ENCABEZADO ===== */}
+      <section className="encabezado">
+        <div className="encabezado-contenido">
+          <h1>SOBRE NOSOTROS</h1>
+          <p>Innovación y excelencia tecnológica desde hace más de 25 años</p>
+          <div className="linea"></div>
         </div>
-      </div>
+      </section>
 
-      {/* Main Content */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px 80px' }}>
-        
-        {/* Company Story Section */}
-        <div style={{ 
-          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
-          borderRadius: '24px',
-          padding: '50px 40px',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-          boxShadow: '0 25px 50px rgba(0, 0, 0, 0.2)',
-          marginBottom: '60px',
-          position: 'relative',
-          overflow: 'hidden'
-        }}>
-          {/* Decorative element */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '5px',
-            background: 'linear-gradient(to right, #3e80fe, #6f42c1)'
-          }}></div>
+      {/* ===== QUIÉNES SOMOS ===== */}
+      <section className="quienes">
+        <div className="quienes-img">
+          <img
+            src="https://ascenty.com/wp-content/uploads/2022/04/tecnologia-na-educa%C3%A7%C3%A3o-1920x1000-c-default.png"
+            alt="Transformación digital"
+          />
+        </div>
 
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-            <h2 style={{ 
-              fontSize: '2.5rem',
-              fontWeight: 700,
-              color: 'white',
-              marginBottom: '20px',
-              textShadow: '0 2px 10px rgba(0,0,0,0.2)'
-            }}>
-              ¿Quiénes Somos?
-            </h2>
-            <div style={{
-              width: '80px',
-              height: '3px',
-              background: 'linear-gradient(to right, #3e80fe, #6f42c1)',
-              margin: '0 auto',
-              borderRadius: '3px'
-            }}></div>
-          </div>
-          
-          <div style={{ 
-            textAlign: 'center', 
-            marginBottom: '40px',
-            padding: '20px 30px',
-            background: 'rgba(255, 255, 255, 0.05)',
-            borderRadius: '16px'
-          }}>
-            <p style={{ 
-              fontSize: '1.4rem',
-              fontStyle: 'italic',
-              color: '#b9d9ff',
-              lineHeight: 1.6,
-              fontWeight: 300
-            }}>
-              "Transformando el futuro digital de las empresas, un proyecto a la vez"
-            </p>
-          </div>
-          
-          <div style={{ 
-            maxWidth: '900px',
-            margin: '0 auto',
-            color: 'white',
-            fontSize: '1.1rem',
-            lineHeight: 1.8
-          }}>
-            <p style={{ marginBottom: '24px' }}>
-              Somos una empresa <span style={{ 
-                color: '#7cb4ff', 
-                fontWeight: 600
-              }}>líder en soluciones tecnológicas</span> con más de <span style={{ 
-                color: '#ffb14c', 
-                fontWeight: 600
-              }}>25 años de experiencia</span>, transformando la manera en que las empresas operan en el mundo digital.
-            </p>
-            
-            <p style={{ marginBottom: '24px' }}>
-              Nuestro <span style={{ 
-                color: '#d5b2ff', 
-                fontWeight: 600
-              }}>equipo multidisciplinario</span> está compuesto por visionarios, innovadores y expertos que viven y respiran tecnología. Creemos que cada línea de código y cada solución que desarrollamos tiene el poder de <span style={{ 
-                color: '#ff9c9c', 
-                fontWeight: 600
-              }}>revolucionar industrias enteras</span>.
-            </p>
-            
+        <div className="quienes-texto">
+          <h2>¿Quiénes Somos?</h2>
+          <p>
+            Somos una compañía líder en soluciones tecnológicas con más de 25 años de experiencia,
+            orientada a optimizar operaciones y acelerar la transformación digital de organizaciones
+            públicas y privadas.
+          </p>
+        </div>
+      </section>
+
+      {/* ===== MISIÓN / VISIÓN ===== */}
+      <section className="mision-vision">
+        <h2>Sobre Nosotros</h2>
+        <div className="linea mv"></div>
+
+        <div className="mv-container">
+          {/* MISIÓN */}
+          <div className="mv-card">
+            <div className="mv-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M14.5 3c-3.6 1.2-6.5 4.1-8 7.6l-3.2.9a1 1 0 0 0-.6 1.6l3.1 3.1a1 1 0 0 0 1.6-.6l.9-3.2C13 12 15.9 9.1 17.1 5.5c.2-.5-.4-1.1-.9-.9l-1.7.6zM7.5 16.5 6 18c-.6.6-.9 1.9-.9 1.9s1.3-.3 1.9-.9l1.5-1.5-1-1zM13.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"
+                  fill="#fff"
+                />
+              </svg>
+            </div>
+            <h3>MISIÓN</h3>
             <p>
-              Hemos sido el <span style={{ 
-                color: '#8cffbe', 
-                fontWeight: 600
-              }}>socio estratégico de confianza</span> de entidades del sector público y empresas del sector privado, conviertiendo visiones ambiciosas en realidades tecnológicas tangibles.
-            </p>
-          </div>
-        </div>
-
-        {/* Mission & Vision Cards */}
-        <div style={{ 
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '30px',
-          marginBottom: '60px'
-        }}>
-          {/* Misión Card */}
-          <div style={{
-            background: 'linear-gradient(135deg, rgba(62, 128, 254, 0.2), rgba(39, 103, 213, 0.1))',
-            borderRadius: '20px',
-            padding: '40px 30px',
-            textAlign: 'center',
-            border: '1px solid rgba(62, 128, 254, 0.3)',
-            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)',
-            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-            position: 'relative',
-            overflow: 'hidden'
-          }}>
-            <div style={{
-              width: '70px',
-              height: '70px',
-              background: 'linear-gradient(135deg, #3e80fe, #2767d5)',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '0 auto 25px',
-              boxShadow: '0 10px 20px rgba(62, 128, 254, 0.3)'
-            }}>
-              <span style={{ fontSize: '1.8rem' }}>🎯</span>
-            </div>
-            
-            <h3 style={{
-              fontSize: '1.8rem',
-              fontWeight: 700,
-              color: 'white',
-              marginBottom: '20px',
-              textShadow: '0 2px 8px rgba(0,0,0,0.2)'
-            }}>
-              Misión
-            </h3>
-            
-            <p style={{
-              color: '#e6f0ff',
-              fontSize: '1.1rem',
-              lineHeight: 1.6
-            }}>
-              Empoderar a las empresas mediante soluciones tecnológicas innovadoras que impulsen su crecimiento y las posicionen como líderes en la era digital.
+              Ofrecer soluciones tecnológicas innovadoras y personalizadas que respondan a las
+              necesidades de nuestros clientes, con énfasis en calidad, seguridad y excelencia en el servicio.
             </p>
           </div>
 
-          {/* Visión Card */}
-          <div style={{
-            background: 'linear-gradient(135deg, rgba(240, 133, 40, 0.2), rgba(217, 119, 6, 0.1))',
-            borderRadius: '20px',
-            padding: '40px 30px',
-            textAlign: 'center',
-            border: '1px solid rgba(240, 133, 40, 0.3)',
-            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)',
-            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-            position: 'relative',
-            overflow: 'hidden'
-          }}>
-            <div style={{
-              width: '70px',
-              height: '70px',
-              background: 'linear-gradient(135deg, #f08528, #d97706)',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '0 auto 25px',
-              boxShadow: '0 10px 20px rgba(240, 133, 40, 0.3)'
-            }}>
-              <span style={{ fontSize: '1.8rem' }}>🚀</span>
+          {/* VISIÓN */}
+          <div className="mv-card">
+            <div className="mv-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M9 21h6v-1H9v1zm3-19a7 7 0 0 0-4 12.8V17h8v-2.2A7 7 0 0 0 12 2zm0 2a5 5 0 0 1 3 9 1 1 0 0 0-.4.8V15H9v-1.2a1 1 0 0 0-.4-.8A5 5 0 0 1 12 4z"
+                  fill="#fff"
+                />
+              </svg>
             </div>
-            
-            <h3 style={{
-              fontSize: '1.8rem',
-              fontWeight: 700,
-              color: 'white',
-              marginBottom: '20px',
-              textShadow: '0 2px 8px rgba(0,0,0,0.2)'
-            }}>
-              Visión
-            </h3>
-            
-            <p style={{
-              color: '#fff8e6',
-              fontSize: '1.1rem',
-              lineHeight: 1.6
-            }}>
-              Ser la empresa de referencia en transformación digital, creando un ecosistema donde la tecnología y la innovación convergen para construir el futuro.
+            <h3>VISIÓN</h3>
+            <p>
+              Ser referentes regionales en transformación digital por la confiabilidad de nuestras soluciones
+              y la satisfacción sostenida de nuestros clientes.
             </p>
           </div>
         </div>
+      </section>
 
-        {/* CEO Message Section */}
-        <div style={{
-          background: 'linear-gradient(135deg, rgba(62, 71, 102, 0.3), rgba(41, 47, 69, 0.3))',
-          borderRadius: '24px',
-          padding: '50px 40px',
-          textAlign: 'center',
-          border: '1px solid rgba(255, 255, 255, 0.05)',
-          boxShadow: '0 30px 60px rgba(0, 0, 0, 0.25)',
-          position: 'relative',
-          overflow: 'hidden'
-        }}>
-          {/* Decorative elements */}
-          <div style={{
-            position: 'absolute',
-            top: '-50px',
-            right: '-50px',
-            width: '200px',
-            height: '200px',
-            background: 'radial-gradient(circle, rgba(240, 133, 40, 0.15) 0%, rgba(240, 133, 40, 0) 70%)',
-            borderRadius: '50%'
-          }}></div>
-          
-          <div style={{
-            position: 'absolute',
-            bottom: '-30px',
-            left: '-30px',
-            width: '150px',
-            height: '150px',
-            background: 'radial-gradient(circle, rgba(62, 128, 254, 0.15) 0%, rgba(62, 128, 254, 0) 70%)',
-            borderRadius: '50%'
-          }}></div>
-          
-          <div style={{ position: 'relative', zIndex: 2 }}>
-            <h3 style={{
-              fontSize: '2.2rem',
-              fontWeight: 700,
-              color: 'white',
-              marginBottom: '30px',
-              textShadow: '0 2px 10px rgba(0,0,0,0.2)'
-            }}>
-              Mensaje del CEO
-            </h3>
-            
-            <div style={{
-              maxWidth: '800px',
-              margin: '0 auto 40px',
-              padding: '30px',
-              background: 'rgba(255, 255, 255, 0.05)',
-              borderRadius: '16px',
-              border: '1px solid rgba(255, 255, 255, 0.1)'
-            }}>
-              <p style={{
-                color: '#f0f7ff',
-                fontSize: '1.1rem',
-                lineHeight: 1.8,
-                fontWeight: 400
-              }}>
-                En PRIMESYS, no solo construimos software; forjamos alianzas estratégicas que perduran en el tiempo. 
-                Cada proyecto es una oportunidad para demostrar nuestra excelencia técnica y nuestro compromiso 
-                con el éxito de nuestros clientes.
-              </p>
-            </div>
-            
-            <div style={{
-              borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-              paddingTop: '30px'
-            }}>
-              <p style={{
-                fontSize: '2rem',
-                fontWeight: 600,
-                color: 'white',
-                marginBottom: '5px',
-                fontFamily: "'Playfair Display', serif",
-                textShadow: '0 2px 8px rgba(0,0,0,0.2)'
-              }}>
-                Marcelo Rea Guamán
-              </p>
-              <p style={{
-                color: '#7cb4ff',
-                fontFamily: "'Playfair Display', serif",
-                fontSize: '1.1rem',
-                fontWeight: 500
-              }}>
-                CEO & Fundador
-              </p>
+      {/* ===== CEO ===== */}
+      <section className="ceo">
+        <div className="ceo-content">
+          <div className="ceo-info">
+            <div className="ceo-avatar">MR</div>
+            <div>
+              <h4>Marcelo Rea Guamán</h4>
+              <p>CEO & Fundador</p>
             </div>
           </div>
+          <blockquote>
+            “En PRIMESYS construimos relaciones de largo plazo y productos confiables. Nuestro compromiso
+            es que cada entrega sume valor real al negocio de nuestros clientes.”
+          </blockquote>
         </div>
-      </div>
-      
+      </section>
+
       <Footer />
+
+      {/* ===== ESTILOS ===== */}
+      <style>{`
+        :root {
+          --azul1: #0b1a2d;
+          --azul2: #0f2640;
+          --celeste: #00aaff;
+          --texto: #eaf2ff;
+          --grisfondo: #eaf1f6;
+        }
+
+        body, html {
+          margin: 0;
+          padding: 0;
+          font-family: 'Poppins', sans-serif;
+        }
+
+        .sobre {
+          background: var(--azul1);
+          color: var(--texto);
+        }
+
+        /* ENCABEZADO */
+        .encabezado {
+          background: linear-gradient(180deg, var(--azul2), var(--azul1));
+          text-align: center;
+          padding: 70px 0 60px;
+        }
+
+        .encabezado-contenido {
+          max-width: 800px;
+          margin: 0 auto;
+        }
+
+        .encabezado h1 {
+          margin: 0;
+          font-weight: 800;
+          letter-spacing: 3px;
+          font-size: 32px;
+        }
+
+        .encabezado p {
+          margin: 12px 0;
+          color: var(--texto);
+          font-size: 16px;
+        }
+
+        .linea {
+          width: 100px;
+          height: 3px;
+          background: var(--celeste);
+          margin: 10px auto 0;
+          border-radius: 3px;
+        }
+
+        /* QUIÉNES SOMOS */
+        .quienes {
+          display: flex;
+          justify-content: center;
+          align-items: stretch;
+          background: var(--azul1);
+        }
+
+        .quienes-img img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .quienes-img,
+        .quienes-texto {
+          flex: 1;
+        }
+
+        .quienes-texto {
+          background: radial-gradient(circle at top left, rgba(0,170,255,.2), transparent 70%);
+          padding: 60px 80px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .quienes-texto h2 {
+          font-size: 28px;
+          margin-bottom: 15px;
+          color: #aee7ff;
+        }
+
+        .quienes-texto p {
+          line-height: 1.8;
+          color: var(--texto);
+          max-width: 600px;
+        }
+
+        /* MISIÓN / VISIÓN */
+        .mision-vision {
+          background: var(--grisfondo);
+          color: #0b1a2d;
+          text-align: center;
+          padding: 70px 0;
+        }
+
+        .mision-vision h2 {
+          color: #0b1a2d;
+          font-weight: 700;
+          margin: 0;
+          font-size: 26px;
+        }
+
+        .linea.mv {
+          width: 80px;
+          height: 3px;
+          background: #0077b6;
+          margin: 10px auto 40px;
+        }
+
+        .mv-container {
+          display: flex;
+          justify-content: center;
+          gap: 80px;
+          flex-wrap: wrap;
+          max-width: 1000px;
+          margin: 0 auto;
+        }
+
+        .mv-card {
+          flex: 1;
+          max-width: 400px;
+          text-align: center;
+        }
+
+        .mv-icon {
+          background: radial-gradient(circle at top, #1aa6d6, #0a223a);
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 15px;
+          box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        .mv-icon svg {
+          width: 28px;
+          height: 28px;
+        }
+
+        .mv-card h3 {
+          color: #004777;
+          margin-bottom: 15px;
+        }
+
+        .mv-card p {
+          color: #003a5c;
+          line-height: 1.8;
+          font-size: 15px;
+        }
+
+        /* CEO */
+        .ceo {
+          background: linear-gradient(90deg, #0e2238, #0b1a2d);
+          padding: 50px 0;
+          color: #aee7ff;
+        }
+
+        .ceo-content {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          max-width: 1000px;
+          margin: 0 auto;
+          gap: 40px;
+          padding: 0 30px;
+        }
+
+        .ceo-info {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
+
+        .ceo-avatar {
+          background: radial-gradient(circle at top, #00aaff, #0a223a);
+          width: 65px;
+          height: 65px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 700;
+          font-size: 18px;
+        }
+
+        blockquote {
+          font-style: italic;
+          line-height: 1.8;
+          color: #bce7ff;
+          margin: 0;
+          max-width: 600px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+          .quienes {
+            flex-direction: column;
+          }
+
+          .quienes-texto {
+            padding: 40px;
+            text-align: center;
+          }
+
+          .ceo-content {
+            flex-direction: column;
+            text-align: center;
+          }
+        }
+      `}</style>
     </div>
   );
 }

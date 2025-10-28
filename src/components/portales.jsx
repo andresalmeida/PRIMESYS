@@ -20,7 +20,7 @@ export default function Portales() {
 
         <section className="description seccion-intro">
             <p>
-                El diseño de portales web consiste en la creación estructurada de sitios web que centralizan servicios, información o contenido. Sirve para mejorar la experiencia del usuario, fortalecer la presencia digital y facilitar el acceso a recursos clave.
+              Te ayudamos a crear portales web estructurados que centralizan tus servicios, información y contenido. Nuestro objetivo es mejorar la experiencia de tus usuarios, fortalecer tu presencia digital y facilitar el acceso a los recursos clave de tu empresa.            
             </p>
         </section>
       </div>

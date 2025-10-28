@@ -20,7 +20,7 @@ export default function Procesos() {
 
         <section className="description seccion-intro">
             <p>
-                La Gestión de Procesos Empresariales (BPM – Business Process Management) es una disciplina administrativa que se enfoca en analizar, diseñar, implementar, monitorear y optimizar los procesos de una organización.           
+              Te ayudamos a analizar, diseñar, implementar y optimizar los procesos de tu organización mediante metodologías de Gestión de Procesos Empresariales (BPM). Con este enfoque, fortaleces la eficiencia operativa y logras una mejor alineación entre tus recursos, estrategias y objetivos institucionales.            
             </p>
         </section>
       </div>

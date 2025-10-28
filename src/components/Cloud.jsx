@@ -19,9 +19,7 @@ export default function Cloud() {
 
         <section className="description seccion-intro">
             <p>
-                Es el uso de recursos informáticos (servidores, almacenamiento, redes y software) a través de Internet bajo
-                demanda. Sirve para que empresas y usuarios accedan a infraestructura y aplicaciones sin necesidad de
-                instalarlas o mantenerlas localmente.
+              Te ofrecemos servicios en la nube que te permiten acceder a servidores, almacenamiento, redes y software a través de Internet bajo demanda. Con esta solución, tu empresa puede utilizar infraestructura y aplicaciones sin necesidad de instalarlas o mantenerlas localmente, optimizando recursos y reduciendo costos operativos.
             </p>
         </section>
       </div>

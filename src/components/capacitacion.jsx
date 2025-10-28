@@ -15,8 +15,8 @@ export default function Capacitacion() {
           />
           <section className="description seccion-intro">
             <p>
-              Las capacitaciones en software son programas de formación diseñados para fortalecer las habilidades tecnológicas de los usuarios y equipos de trabajo. Permiten dominar herramientas informáticas, aplicaciones empresariales y soluciones digitales.
-            </p>
+              Te ofrecemos programas de formación diseñados para fortalecer tus habilidades tecnológicas y las de tu equipo de trabajo. Con nuestras capacitaciones podrás dominar herramientas informáticas, aplicaciones empresariales y soluciones digitales que impulsen el crecimiento y la eficiencia de tu organización.           
+           </p>
           </section>
         </div>
 

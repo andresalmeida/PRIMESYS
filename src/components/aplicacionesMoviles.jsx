@@ -21,9 +21,7 @@ export default function aplicacionesMoviles() {
 
         <section className="description seccion-intro">
           <p>
-                El desarrollo de aplicaciones móviles es el proceso de crear software diseñado para funcionar 
-                en celulares y tablets. Estas aplicaciones permiten a los usuarios acceder a servicios, productos
-                o información de manera rápida, cómoda y personalizada.
+            Te ofrecemos el desarrollo de aplicaciones móviles diseñadas para funcionar en celulares y tablets. Estas soluciones te permiten acercar tus servicios, productos e información a tus usuarios de forma rápida, cómoda y personalizada, fortaleciendo la conexión con tus clientes.
           </p>
         </section>
       </div>

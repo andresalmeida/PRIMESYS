@@ -19,10 +19,7 @@ export default function ArquitecturaEmpresarial() {
 
         <section className="description seccion-intro">
           <p>
-            La Arquitectura Empresarial es un enfoque estratégico para planificar, diseñar y
-            gobernar la infraestructura tecnológica de una organización. Permite alinear la
-            estrategia de negocio con las plataformas tecnológicas, modelos de datos, aplicaciones
-            y procesos.
+            Te ayudamos a implementar un enfoque estratégico para planificar, diseñar y gestionar la infraestructura tecnológica de tu organización. Con nuestra asesoría, alineas tu estrategia de negocio con las plataformas tecnológicas, modelos de datos, aplicaciones y procesos, garantizando eficiencia y coherencia en cada nivel de tu empresa.
           </p>
         </section>
       </div>

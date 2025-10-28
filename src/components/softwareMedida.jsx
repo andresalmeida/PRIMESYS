@@ -20,9 +20,7 @@ export default function Software() {
 
         <section className="description seccion-intro">
             <p>
-                El desarrollo de software a la medida consiste en crear soluciones digitales personalizadas que responden a necesidades
-                específicas de una empresa u organización. Este enfoque se adapta totalmente a los procesos internos del cliente,
-                optimizando su funcionamiento y productividad.
+              Te ofrecemos el desarrollo de soluciones digitales personalizadas que responden a las necesidades específicas de tu empresa u organización. Este enfoque se adapta completamente a tus procesos internos, optimizando su funcionamiento y aumentando la productividad.            
             </p>
         </section>
       </div>
