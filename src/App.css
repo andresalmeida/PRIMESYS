@@ -7,8 +7,21 @@
 }
 
 /* Scroll suave */
-html {
-  scroll-behavior: smooth;
+html, body {
+  overflow-x: hidden;
+}
+
+/* Reveal genérico */
+/* HOT-FIX: asegúrate de que nada quede invisible si falló la animación */
+.reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+
+.reveal.show {
+  opacity: 1;
+  transform: none;
 }
 
 

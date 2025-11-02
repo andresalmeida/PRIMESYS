@@ -37,10 +37,6 @@ export default function Ciberseguridad() {
         </ul>
       </section>
 
-      {/* Si usas React Router */}
-      <a href="/#services" className="back-link">
-        ← Volver a Servicios
-      </a>
     </div>
     <Footer />
      </div>

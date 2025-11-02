@@ -9,7 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Header from "./components/Header";
 import diegoImage from "./diego/diego.jpg";
 // 🚦 Router (BrowserRouter para CPanel)
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link,useLocation, useNavigate } from "react-router-dom";
 // ✅ subpágina
 import ArquitecturaEmpresarial from "./components/arquitecturaEmpresarial";
 import AplicacionesMoviles from "./components/aplicacionesMoviles";
@@ -62,43 +62,51 @@ const services = [
   { title: "Gestión de Procesos Empresariales", slug: "procesos" },
 ];
 
+function ScrollToTop() {
+  const location = useLocation();
 
-// function App() {
-//   const [formData, setFormData] = useState({
-//     name: "",
-//     email: "",
-//     message: "",
-//   });
+  useEffect(() => {
+    const wantsSection = location.state && location.state.scrollTo;
+    if (!wantsSection) {
+      // Subir al inicio
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }
+  }, [location.pathname]); // solo cuando cambia la ruta
 
-//   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-//   const toggleSidebar = () => {
-//     setSidebarOpen(!sidebarOpen);
-//   };
-
-//   const closeSidebar = () => {
-//     setSidebarOpen(false);
-//   };
-
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({
-//       ...formData,
-//       [name]: value,
-//     });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     console.log("Form submitted:", formData);
-//     setFormData({ name: "", email: "", message: "" });
-//   };
-
+  return null;
+}
 
 // ---------- HOME (tu página actual) ----------
 function Home() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [formStatus, setFormStatus] = useState("");
+
+  const location = useLocation();                              // 👈
+  const navigate = useNavigate();
+  const [contactReveal, setContactReveal] = useState(false);   // 👈
+  const [servicesReveal, setServicesReveal] = useState(false);
+  const [clientsReveal, setClientsReveal] = useState(false);
+
+  useEffect(() => {
+    const state = location.state;          // leemos una sola vez
+
+    if (!state?.scrollTo) return;          // nada que hacer si no llega scrollTo
+
+    // hacemos el scroll cuando llega desde otra ruta
+    requestAnimationFrame(() => {
+      document.getElementById(state.scrollTo)
+        ?.scrollIntoView({ behavior: "smooth" });
+    });
+
+    // activamos reveal según destino
+    if (state.scrollTo === "services") setServicesReveal(true);
+    if (state.scrollTo === "clients")  setClientsReveal(true);
+    if (state.scrollTo === "contact")  setContactReveal(true);
+
+    // limpiamos el state para que no se repita
+    navigate(location.pathname, { replace: true, state: null });
+  }, [location.state, location.pathname, navigate]);   
+
   
   // Añadir estilos de placeholders cuando se monte el componente
   useEffect(() => {
@@ -223,7 +231,7 @@ function Home() {
           </section>
 
           {/* Servicios */}
-          <section id="services" className="services">
+          <section id="services" className={`reveal ${servicesReveal ? "show" : ""}`}>
             <div className="services__head">
               <h2>Nuestros Servicios</h2>
               <div className="services__line"></div>
@@ -258,7 +266,7 @@ function Home() {
           </section>
 
           {/* Clientes */}
-          <section id="clients" style={{ backgroundColor: '#e9e9e9ff', color: '#212840' }}>
+          <section id="clients" className={`reveal ${clientsReveal ? "show" : ""}`} style={{ backgroundColor: '#e9e9e9ff', color: '#212840' }}>
             <h2 style={{ color: '#212840' }}>Clientes</h2>
             <div className="clients-slider">
               <div className="slider-track">
@@ -282,12 +290,12 @@ function Home() {
             </div>
           </section>
 
-          {/* Contacto – igual al mockup (texto izq + tarjeta con inputs claros a la der) */}
+          {/* Contacto –*/}
           <section
             id="contact"
+            className={`reveal ${contactReveal ? "show" : ""}`}   // 👈 agrega esto
             style={{
-              background:
-                "linear-gradient(90deg, #0b1a2d 0%, #10263a 45%, #2a4b60 100%)",
+              background: "linear-gradient(90deg, #0b1a2d 0%, #10263a 45%, #2a4b60 100%)",
               color: "#EAF2FF",
               padding: "72px 0",
               position: "relative",
@@ -296,6 +304,7 @@ function Home() {
           >
             {/* halos decorativos */}
             <div
+              className="halo-left"
               style={{
                 position: "absolute",
                 inset: "-120px auto auto -120px",
@@ -309,6 +318,7 @@ function Home() {
               }}
             />
             <div
+              className="halo-right"
               style={{
                 position: "absolute",
                 inset: "auto -140px -140px auto",
@@ -324,20 +334,17 @@ function Home() {
 
             {/* contenedor 2 columnas */}
             <div
+              className="contact-grid"
               style={{
                 maxWidth: 1080,
                 margin: "0 auto",
                 padding: "0 24px",
-                display: "grid",
-                gridTemplateColumns: "1.05fr .95fr",
-                gap: 36,
-                alignItems: "center",
                 position: "relative",
                 zIndex: 2,
               }}
             >
               {/* texto lateral */}
-              <div style={{ lineHeight: 1.75 }}>
+              <div className="contact-text" style={{ lineHeight: 1.75 }}>
                 <h2
                   style={{
                     margin: 0,
@@ -358,9 +365,10 @@ function Home() {
                 </p>
               </div>
 
-              {/* tarjeta de formulario (glass oscuro) */}
+              {/* formulario */}
               <form
                 onSubmit={handleSubmit}
+                className="contact-form"
                 style={{
                   background:
                     "linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.04))",
@@ -370,7 +378,8 @@ function Home() {
                   WebkitBackdropFilter: "blur(10px)",
                   borderRadius: 14,
                   padding: 28,
-                  width: "420px", // <-- más ancho (antes ~350px)
+                  width: "100%",
+                  maxWidth: 420,
                   display: "flex",
                   flexDirection: "column",
                   gap: 14,
@@ -392,6 +401,7 @@ function Home() {
                     padding: "12px 16px",
                     fontSize: "1em",
                     outline: "none",
+                    width: "100%",
                   }}
                 />
                 <input
@@ -410,6 +420,7 @@ function Home() {
                     padding: "12px 16px",
                     fontSize: "1em",
                     outline: "none",
+                    width: "100%",
                   }}
                 />
                 <textarea
@@ -429,6 +440,7 @@ function Home() {
                     resize: "vertical",
                     minHeight: 120,
                     outline: "none",
+                    width: "100%",
                   }}
                 />
                 <Button
@@ -444,6 +456,7 @@ function Home() {
                     cursor: "pointer",
                     boxShadow: "0 10px 22px rgba(62,128,254,.35)",
                     transition: "transform .2s ease, filter .2s ease",
+                    width: "100%",
                   }}
                   onMouseOver={(e) => (e.currentTarget.style.filter = "brightness(1.08)")}
                   onMouseOut={(e) => (e.currentTarget.style.filter = "none")}
@@ -456,28 +469,107 @@ function Home() {
                     style={{
                       margin: "8px 2px 0",
                       fontSize: "14px",
-                      color: formStatus.includes("correctamente") ? "#8cffbe" : "#ff9c9c",
+                      color: formStatus.includes("correctamente")
+                        ? "#8cffbe"
+                        : "#ff9c9c",
                     }}
                   >
                     {formStatus}
                   </p>
                 )}
               </form>
-
             </div>
 
-            {/* estilos para placeholder (no se pueden poner inline) */}
+            {/* estilos responsive */}
             <style>{`
               #contact input::placeholder,
-              #contact textarea::placeholder{
-                color: rgba(10,34,58,.55);
+              #contact textarea::placeholder {
+                color: rgba(10, 34, 58, 0.55);
               }
-              @media (max-width: 980px){
-                #contact > div{ grid-template-columns: 1fr; gap: 28px; }
+
+              /* 🖥️ Desktop (por defecto) */
+              #contact .contact-grid {
+                display: grid;
+                grid-template-columns: 1.05fr .95fr;
+                gap: 36px;
+                align-items: center;
+              }
+
+              /* 📱 Tablet */
+              @media (max-width: 980px) {
+                #contact {
+                  padding: 56px 0;
+                }
+
+                #contact .contact-grid {
+                  grid-template-columns: 1fr;  /* Cambia a una columna */
+                  gap: 32px;
+                  text-align: center;
+                  padding: 0 18px;
+                }
+
+                #contact .contact-text {
+                  order: 1;
+                }
+
+                #contact .contact-form {
+                  order: 2;
+                  max-width: 520px;
+                  margin: 0 auto;
+                }
+
+                #contact .halo-left {
+                  width: 240px;
+                  height: 240px;
+                  inset: -140px auto auto -140px;
+                  filter: blur(3px);
+                }
+
+                #contact .halo-right {
+                  width: 260px;
+                  height: 260px;
+                  inset: auto -120px -120px auto;
+                  filter: blur(3px);
+                }
+              }
+
+              /* 📱 Móvil */
+              @media (max-width: 600px) {
+                #contact {
+                  padding: 46px 0;
+                }
+
+                #contact .contact-grid {
+                  gap: 22px;
+                }
+
+                #contact .contact-text h2 {
+                  font-size: 24px !important;
+                }
+
+                #contact .contact-text p {
+                  font-size: 15px;
+                }
+
+                #contact .contact-form {
+                  max-width: 100%;
+                  padding: 22px;
+                }
+
+                #contact .halo-left {
+                  width: 200px;
+                  height: 200px;
+                  inset: -120px auto auto -120px;
+                }
+
+                #contact .halo-right {
+                  width: 200px;
+                  height: 200px;
+                  inset: auto -100px -100px auto;
+                }
               }
             `}</style>
           </section>
-
        </main>
 
   <Footer />
@@ -487,8 +579,15 @@ function Home() {
 
 // ---------- APP (Router + Rutas) ----------
 export default function App() {
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+  }, []);
+
   return (
     <BrowserRouter>
+      <ScrollToTop />   {/* ← aquí */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/arquitectura-empresarial" element={<ArquitecturaEmpresarial />} />

@@ -7,6 +7,7 @@ export default function Capacitacion() {
     <div>
       <Header />
       <div className="container">
+        <h1>Capacitaciones</h1>
         <div className="intro-grid">
           <img
             src={imagen3}
@@ -33,10 +34,6 @@ export default function Capacitacion() {
           </ul>
         </section>
 
-        {/* Si usas React Router */}
-        <a href="/#services" className="back-link">
-          ← Volver a Servicios
-        </a>
       </div>
       <Footer />
     </div>
