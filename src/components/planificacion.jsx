@@ -1,5 +1,4 @@
 import Header from "./Header";
-import "../Styles/servicios.css"; 
 import imagen4 from '../servicios/4.jpg';
 import Footer from "./Footer";
 export default function Planificacion() {

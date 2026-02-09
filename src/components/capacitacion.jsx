@@ -1,5 +1,4 @@
 import Header from "./Header";
-import "../Styles/servicios.css"; 
 import imagen3 from '../servicios/3.jpg';
 import Footer from "./Footer";
 export default function Capacitacion() {

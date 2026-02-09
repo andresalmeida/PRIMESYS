@@ -1,5 +1,4 @@
 import Header from "./Header";
-import "../Styles/servicios.css"; 
 import imagen9 from '../servicios/9.jpg';
 import Footer from "./Footer";
 export default function Procesos() {

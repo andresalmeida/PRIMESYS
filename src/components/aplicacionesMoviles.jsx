@@ -1,4 +1,3 @@
-import "../Styles/servicios.css"; 
 import imagen7 from '../servicios/7.jpg';
 import Footer from "./Footer";
 import Header from "./Header";

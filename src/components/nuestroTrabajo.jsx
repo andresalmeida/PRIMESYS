@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import { Atom, Code2, Database, Flame, Globe, MapPin, Server, Smartphone } from "lucide-react";
 import "../Styles/servicios.css";
 
 export default function NuestroTrabajo() {
@@ -32,6 +33,7 @@ export default function NuestroTrabajo() {
       desc:
         "Plataforma web para inventarios, facturación y control de clientes desarrollada a medida.",
       tech: ["React", "Node.js", "PostgreSQL"],
+      icon: Globe,
     },
     {
       id: 2,
@@ -39,8 +41,18 @@ export default function NuestroTrabajo() {
       desc:
         "Aplicación multiplataforma con geolocalización y sistema de reservas.",
       tech: ["React Native", "Firebase", "Google Maps API"],
+      icon: Smartphone,
     },
   ];
+
+  const techIcons = {
+    React: Atom,
+    "Node.js": Server,
+    PostgreSQL: Database,
+    "React Native": Smartphone,
+    Firebase: Flame,
+    "Google Maps API": MapPin,
+  };
 
   return (
     <div className="nt">
@@ -99,14 +111,23 @@ export default function NuestroTrabajo() {
           <div className="nt-grid">
             {proyectos.map((p) => (
               <div className="nt-item" key={p.id}>
-                <h4>{p.title}</h4>
+                <div className="nt-item__head">
+                  <div className="nt-item__icon">
+                    <p.icon size={22} />
+                  </div>
+                  <h4>{p.title}</h4>
+                </div>
                 <p>{p.desc}</p>
                 <div className="nt-pills">
-                  {p.tech.map((t) => (
-                    <span className="nt-pill" key={t}>
-                      {t}
-                    </span>
-                  ))}
+                  {p.tech.map((t) => {
+                    const TechIcon = techIcons[t] || Code2;
+                    return (
+                      <span className="nt-pill" key={t}>
+                        <TechIcon size={13} />
+                        {t}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             ))}

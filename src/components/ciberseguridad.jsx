@@ -1,5 +1,4 @@
 import Header from "./Header";
-import "../Styles/servicios.css"; 
 import imagen5 from '../servicios/5.jpg';
 import Footer from "./Footer";
 export default function Ciberseguridad() {

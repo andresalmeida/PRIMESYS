@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import { UserRound } from "lucide-react";
 
 export default function SobreNosotros() {
   return (
@@ -81,7 +82,9 @@ export default function SobreNosotros() {
       <section className="ceo">
         <div className="ceo-content">
           <div className="ceo-info">
-            <div className="ceo-avatar">MR</div>
+            <div className="ceo-avatar" aria-hidden>
+              <UserRound size={28} />
+            </div>
             <div>
               <h4>Marcelo Rea Guamán</h4>
               <p>CEO & Fundador</p>
@@ -285,8 +288,8 @@ export default function SobreNosotros() {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-weight: 700;
-          font-size: 18px;
+          color: #dff4ff;
+          box-shadow: 0 8px 18px rgba(0, 170, 255, 0.25);
         }
 
         blockquote {
