@@ -1,70 +1,174 @@
-# Getting Started with Create React App
+# PRIMESYS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![PRIMESYS Logo](public/logo.svg)
 
-## Available Scripts
+[![Deploy to GitHub Pages](https://github.com/andresalmeida/PRIMESYS/actions/workflows/nextjs.yml/badge.svg)](https://github.com/andresalmeida/PRIMESYS/actions/workflows/nextjs.yml)
 
-In the project directory, you can run:
+> Soluciones tecnológicas innovadoras con más de 25 años de experiencia
 
-### `npm start`
+🌐 **Sitio web**: [https://primesys.ec](https://primesys.ec)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🚀 Tecnologías
 
-### `npm test`
+- **Framework**: [Next.js 14](https://nextjs.org/)
+- **Estilos**: CSS Modules + Tailwind CSS
+- **Animaciones**: [Framer Motion](https://www.framer.com/motion/)
+- **UI Components**: [@nextui-org/react](https://nextui.org/)
+- **Iconos**: [Lucide React](https://lucide.dev/)
+- **Email**: [EmailJS](https://www.emailjs.com/)
+- **Deploy**: GitHub Pages
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## ✨ Características
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 🎨 **Diseño moderno** con animaciones fluidas
+- ✨ **Partículas animadas** en el hero
+- 🎊 **Confetti** al enviar formulario
+- 🔢 **Contadores animados** (25+ años, 150+ implementaciones)
+- 📊 **Scroll progress bar**
+- 🔒 **Validaciones de seguridad** en formularios
+- 📱 **100% Responsive**
+- ⚡ **Optimizado** para rendimiento
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🛠️ Desarrollo local
 
-### `npm run eject`
+### Prerrequisitos
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Node.js 18+
+- npm o yarn
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Instalación
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+# Clonar el repositorio
+git clone https://github.com/andresalmeida/PRIMESYS.git
+cd PRIMESYS
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# Instalar dependencias
+npm install
 
-## Learn More
+# Configurar variables de entorno
+cp .env.example .env.local
+# Editar .env.local con tus credenciales de EmailJS
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Iniciar servidor de desarrollo
+npm run dev
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📦 Build para producción
 
-### Analyzing the Bundle Size
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+El output estático se genera en la carpeta `dist/`.
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🔐 Configuración de EmailJS
 
-### Advanced Configuration
+Para que el formulario de contacto funcione, necesitas:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. Crear cuenta en [EmailJS](https://www.emailjs.com/)
+2. Crear un **Email Service** (Gmail, Outlook, etc.)
+3. Crear un **Email Template**
+4. Obtener tu **Public Key** de Account > General
+5. Configurar los secrets en GitHub (para deploy automático)
 
-### Deployment
+### Variables de entorno
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=tu_service_id
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=tu_template_id
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=tu_public_key
+```
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🚀 Deploy
+
+Este proyecto usa **GitHub Actions** para deploy automático a GitHub Pages.
+
+### Configuración de Secrets (GitHub)
+
+Ve a **Settings > Secrets and variables > Actions** y agrega:
+
+| Secret | Descripción |
+|--------|-------------|
+| `EMAILJS_SERVICE_ID` | Service ID de EmailJS |
+| `EMAILJS_TEMPLATE_ID` | Template ID de EmailJS |
+| `EMAILJS_PUBLIC_KEY` | Public Key de EmailJS |
+
+### Activar GitHub Pages
+
+1. Ve a **Settings > Pages**
+2. Source: **GitHub Actions**
+3. Listo! Cada push a `main` se deploya automáticamente
+
+---
+
+## 📁 Estructura del proyecto
+
+```
+PRIMESYS/
+├── .github/
+│   └── workflows/
+│       └── nextjs.yml          # GitHub Actions deploy
+├── pages/                       # Rutas de Next.js
+│   ├── index.js                # Homepage
+│   ├── sobre-nosotros.js
+│   ├── nuestro-trabajo.js
+│   └── ...
+├── src/
+│   ├── components/             # Componentes React
+│   │   ├── HomePage.js
+│   │   ├── Header.js
+│   │   ├── Footer.js
+│   │   └── ...
+│   ├── lib/                    # Utilidades
+│   │   └── images.js
+│   └── Styles/                 # CSS adicional
+├── public/                     # Assets estáticos
+├── .env.local                  # Variables locales (no subir)
+├── .env.example                # Ejemplo de variables
+└── next.config.mjs             # Configuración de Next.js
+```
+
+---
+
+## 🎨 Screenshots
+
+### Homepage
+![Homepage](https://via.placeholder.com/800x400/0b1a2d/ffffff?text=PRIMESYS+Homepage)
+
+### Servicios
+![Servicios](https://via.placeholder.com/800x400/0b1a2d/ffffff?text=Servicios)
+
+---
+
+## 👥 Créditos
+
+- **Diseño y desarrollo**: [Andres Almeida](https://github.com/andresalmeida)
+- **Empresa**: PRIMESYS
+- **Año**: 2024
+
+---
+
+## 📄 Licencia
+
+Este proyecto es propiedad de PRIMESYS. Todos los derechos reservados.
+
+---
+
+<p align="center">
+  <strong>PRIMESYS</strong> - Transformamos procesos en productos digitales de impacto
+</p>
