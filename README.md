@@ -159,7 +159,7 @@ PRIMESYS/
 
 - **Diseño y desarrollo**: [Andres Almeida](https://github.com/andresalmeida)
 - **Empresa**: PRIMESYS
-- **Año**: 2024
+- **Año**: 2026
 
 ---
 
