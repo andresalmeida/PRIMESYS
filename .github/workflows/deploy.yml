@@ -3,8 +3,6 @@ name: Deploy to GoDaddy
 on:
   push:
     branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
 
 jobs:
   build-and-deploy:
@@ -39,7 +37,3 @@ jobs:
         local-dir: ./dist/
         server-dir: /public_html/
         dangerous-clean-slate: false
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/**
