@@ -2,8 +2,6 @@
 
 ![PRIMESYS Logo](public/logo.svg)
 
-[![Deploy to GitHub Pages](https://github.com/andresalmeida/PRIMESYS/actions/workflows/nextjs.yml/badge.svg)](https://github.com/andresalmeida/PRIMESYS/actions/workflows/nextjs.yml)
-
 > Soluciones tecnológicas innovadoras con más de 25 años de experiencia
 
 🌐 **Sitio web**: [https://primesys.ec](https://primesys.ec)
