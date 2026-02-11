@@ -1,4 +1,4 @@
-import Cloud from "../src/components/cloud";
+import Cloud from "../src/components/Cloud";
 import SEO, { createServiceSchema } from "../src/components/SEO";
 
 export default function CloudPage() {
