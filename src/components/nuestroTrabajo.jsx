@@ -264,15 +264,7 @@ export default function NuestroTrabajo() {
           <p className="mx-auto mt-4 max-w-xl font-['Rubik'] text-lg text-white/90">
             Trabajemos juntos para hacerlo realidad. Contáctanos y conversemos sobre tu idea.
           </p>
-          <motion.a
-            href="/#contact"
-            className="group mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-['Rubik'] font-bold text-[#0b1a2d] shadow-xl transition-all hover:bg-gray-100"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Iniciar Proyecto
-            <ChevronRight size={20} className="transition-transform group-hover:translate-x-1" />
-          </motion.a>
+
         </motion.div>
       </section>
 
