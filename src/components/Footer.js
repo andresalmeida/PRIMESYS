@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -13,10 +13,7 @@ export default function Footer() {
           <h3>Transformamos procesos en productos digitales de impacto.</h3>
         </div>
 
-        <a className="ps-footer__cta" href="/#contact">
-          Iniciar proyecto
-          <ArrowUpRight size={16} />
-        </a>
+
       </div>
 
       <p className="ps-footer__copy">
