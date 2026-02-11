@@ -12,12 +12,12 @@ export default function Footer() {
           </p>
           <h3>Transformamos procesos en productos digitales de impacto.</h3>
           <p style={{ marginTop: '1rem', color: '#94a3b8', fontSize: '0.95rem' }}>
-            Quito, Ecuador · contacto@primesys.ec
+            Quito, Ecuador
           </p>
         </div>
       </div>
 
-      <p className="ps-footer__copy">
+      <p className="ps-footer__copy" style={{ textAlign: 'center' }}>
         © 2026 PRIMESYS. Soluciones tecnológicas para equipos que operan en serio.
       </p>
     </footer>
