@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   BadgeCheck,
@@ -18,12 +18,10 @@ import emailjs from "emailjs-com";
 import confetti from "canvas-confetti";
 import Header from "./Header";
 import Footer from "./Footer";
-import diegoImage from "../diego/diego.jpg";
 import { servicesImages, clientsImages, findImage } from "../lib/images";
-import ParticleBackground from "./ParticleBackground";
-import AnimatedCounter from "./AnimatedCounter";
 import ScrollProgress from "./ScrollProgress";
 import TextReveal from "./TextReveal";
+import HeroLovable from "./HeroLovable";
 
 const serviceIcons = [Layers, Cpu, BadgeCheck, Workflow, ShieldCheck, Cloud, Smartphone, Layers, Workflow];
 
@@ -50,7 +48,7 @@ const terminalSnippet = [
   "echo 'Release completed without incidents.'",
 ];
 
-// Variantes de animación para stagger
+// Variantes para animaciones
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -79,15 +77,6 @@ export default function HomePage() {
   const [formStatus, setFormStatus] = useState("");
   const [visibleTerminalLines, setVisibleTerminalLines] = useState(2);
   const terminalSectionRef = useRef(null);
-  const heroRef = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
 
   const clientLogos = useMemo(
     () => Array.from({ length: 8 }).map((_, index) => findImage(clientsImages, index + 1)).filter(Boolean),
@@ -330,83 +319,8 @@ export default function HomePage() {
       <Header />
 
       <main>
-        {/* ===== HERO SECTION CON PARALLAX Y PARTÍCULAS ===== */}
-        <motion.section 
-          ref={heroRef}
-          className="ps-hero" 
-          id="hero" 
-          style={{ 
-            "--hero-image": `url(${diegoImage.src || diegoImage})`,
-            opacity: heroOpacity,
-            scale: heroScale,
-          }}
-        >
-          <ParticleBackground />
-          <div className="ps-hero__fx ps-hero__fx--left" aria-hidden />
-          <div className="ps-hero__fx ps-hero__fx--right" aria-hidden />
-
-          <div className="ps-hero__layout">
-            <motion.div
-              className="ps-hero__content"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <motion.h1 variants={itemVariants}>
-                Soluciones Innovadoras para su Negocio
-              </motion.h1>
-              <motion.p className="ps-hero__description" variants={itemVariants}>
-                Más de 25 años de experiencia mejorando la operatividad y competitividad de nuestros clientes.
-              </motion.p>
-
-              <motion.div className="ps-hero__actions" variants={itemVariants}>
-                <motion.button
-                  type="button"
-                  className="ps-btn ps-btn--primary"
-                  onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Solicitar asesoría
-                  <ArrowRight size={16} />
-                </motion.button>
-                <motion.button
-                  type="button"
-                  className="ps-btn ps-btn--ghost"
-                  onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Ver servicios
-                </motion.button>
-              </motion.div>
-
-              <motion.div className="ps-stats" variants={itemVariants}>
-                <motion.article
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <strong><AnimatedCounter value={25} suffix="+" /></strong>
-                  <span>Años de experiencia</span>
-                </motion.article>
-                <motion.article
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <strong><AnimatedCounter value={150} suffix="+" /></strong>
-                  <span>Implementaciones</span>
-                </motion.article>
-                <motion.article
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <strong>99.9%</strong>
-                  <span>Disponibilidad objetivo</span>
-                </motion.article>
-              </motion.div>
-            </motion.div>
-          </div>
-        </motion.section>
+        {/* ===== HERO SECTION ESTILO LOVABLE ===== */}
+        <HeroLovable />
 
         {/* ===== TERMINAL SECTION ===== */}
         <section className="ps-code-flow" ref={terminalSectionRef}>

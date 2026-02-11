@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&family=Outfit:wght@700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&family=Outfit:wght@700;800;900&family=Rubik:wght@700;800;900&display=swap");
 
 :root {
   --ps-bg: #081220;
@@ -716,37 +716,32 @@ a {
 .ps-client-logo {
   position: relative;
   overflow: hidden;
-  min-width: 166px;
-  margin: 0 10px;
-  border: 1px solid rgba(22, 58, 99, 0.16);
-  border-radius: 14px;
-  background: linear-gradient(160deg, rgba(228, 242, 255, 0.92), rgba(242, 248, 255, 0.7));
+  min-width: 200px;
+  margin: 0 12px;
+  border: 1px solid rgba(22, 58, 99, 0.08);
+  border-radius: 16px;
+  background: linear-gradient(160deg, rgba(228, 242, 255, 0.95), rgba(242, 248, 255, 0.8));
   backdrop-filter: blur(6px);
-  padding: 16px;
+  padding: 20px;
   display: grid;
   place-items: center;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .ps-client-logo::before {
-  content: "";
-  position: absolute;
-  inset: auto -30% -45% -30%;
-  height: 90px;
-  background: radial-gradient(circle, rgba(71, 148, 255, 0.22), transparent 70%);
-  pointer-events: none;
+  display: none;
 }
 
 .ps-client-logo img {
   width: 100%;
-  max-width: 116px;
-  height: 78px;
+  max-width: 140px;
+  height: 90px;
   object-fit: contain;
   background: #ffffff;
-  border: 1px solid rgba(13, 37, 67, 0.1);
-  border-radius: 8px;
-  padding: 8px 10px;
-  box-shadow: 0 9px 18px rgba(10, 34, 61, 0.14);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 12px;
+  box-shadow: 0 4px 12px rgba(10, 34, 61, 0.08);
 }
 
 .ps-client-logo:hover {
@@ -1070,6 +1065,12 @@ a {
   }
 
   .ps-client-logo {
-    min-width: 136px;
+    min-width: 160px;
+    padding: 16px;
+  }
+  
+  .ps-client-logo img {
+    max-width: 120px;
+    height: 75px;
   }
 }

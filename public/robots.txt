@@ -1,3 +1,22 @@
 # https://www.robotstxt.org/robotstxt.html
+# Permitir todo el acceso a los robots
 User-agent: *
-Disallow:
+Allow: /
+
+# Sitemap
+Sitemap: https://primesys.ec/sitemap.xml
+
+# Crawl-delay para evitar sobrecarga
+Crawl-delay: 10
+
+# Reglas específicas para Google
+User-agent: Googlebot
+Allow: /
+
+# Reglas específicas para Bing
+User-agent: Bingbot
+Allow: /
+
+# Bloquear acceso a archivos no deseados (si los hay en el futuro)
+# Disallow: /admin/
+# Disallow: /private/

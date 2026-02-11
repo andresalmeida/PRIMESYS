@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fontsource/rubik": "^5.2.8",
     "@gsap/react": "^2.1.2",
     "@nextui-org/button": "^2.0.38",
     "@nextui-org/react": "^2.4.8",
@@ -10,7 +11,7 @@
     "@nextui-org/theme": "^2.2.11",
     "canvas-confetti": "^1.9.4",
     "emailjs-com": "^3.2.0",
-    "framer-motion": "^11.11.1",
+    "framer-motion": "^12.34.0",
     "gsap": "^3.14.2",
     "lucide-react": "^0.447.0",
     "next": "^14.2.14",
