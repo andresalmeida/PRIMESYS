@@ -41,3 +41,7 @@ next-env.d.ts
 # Claude Code / FleetView tooling
 .commandcode/
 .impeccable.md
+
+# Local agent context (not for repo)
+AGENTS.md
+CLAUDE.md
