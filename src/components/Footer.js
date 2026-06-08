@@ -39,10 +39,10 @@ export default function Footer() {
               <Link href="/privacidad" className="font-body-lg text-outline hover:text-white transition-colors !text-[16px]">PRIVACIDAD</Link>
               <Link href="/terminos"   className="font-body-lg text-outline hover:text-white transition-colors !text-[16px]">TÉRMINOS</Link>
               <a
-                href="mailto:contacto@primesys.ec"
+                href="mailto:contacto@primesys-ec.com"
                 className="font-body-lg text-outline hover:text-white transition-colors !text-[16px] mt-4"
               >
-                contacto@primesys.ec
+                contacto@primesys-ec.com
               </a>
             </div>
           </div>

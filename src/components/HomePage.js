@@ -182,7 +182,7 @@ export default function HomePage() {
         setStatus({ type: "error", message: "No pudimos enviar tu solicitud. Inténtalo de nuevo." });
       }
     } catch {
-      setStatus({ type: "error", message: "Error al enviar. Escríbenos a contacto@primesys.ec" });
+      setStatus({ type: "error", message: "Error al enviar. Escríbenos a contacto@primesys-ec.com" });
     }
   };
 
@@ -305,7 +305,7 @@ export default function HomePage() {
                 <dl className="flex flex-col gap-5">
                   <div>
                     <dt className="font-label-mono-sm text-label-mono-sm text-outline uppercase mb-1">CORREO</dt>
-                    <dd className="font-body-md text-body-md text-surface-container-lowest">contacto@primesys.ec</dd>
+                    <dd className="font-body-md text-body-md text-surface-container-lowest">contacto@primesys-ec.com</dd>
                   </div>
                   <div>
                     <dt className="font-label-mono-sm text-label-mono-sm text-outline uppercase mb-1">UBICACIÓN</dt>

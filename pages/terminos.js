@@ -46,10 +46,10 @@ export default function TerminosPage() {
                 <p className="font-body-lg text-body-lg text-outline">
                   Si necesitas una aclaración sobre el contenido, la mejor vía es escribirnos a{" "}
                   <a
-                    href="mailto:contacto@primesys.ec"
+                    href="mailto:contacto@primesys-ec.com"
                     className="text-secondary-container border-b border-secondary-container hover:opacity-70 transition-opacity"
                   >
-                    contacto@primesys.ec
+                    contacto@primesys-ec.com
                   </a>
                   .
                 </p>

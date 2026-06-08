@@ -55,7 +55,7 @@ const terminalSnippet = [
   "npx cypress run --spec critical-path.cy.ts",
   "terraform apply -var env=production",
   "kubectl rollout status deployment/primesys-web",
-  "curl -f https://api.primesys.ec/healthz",
+  "curl -f https://api.primesys-ec.com/healthz",
   "echo 'Release completed without incidents.'",
 ];
 

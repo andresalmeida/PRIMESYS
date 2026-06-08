@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 // Configuración base del sitio
 const siteConfig = {
   siteName: "PRIMESYS",
-  siteUrl: "https://primesys.ec",
+  siteUrl: "https://primesys-ec.com",
   defaultImage: "/android-chrome-512x512.png",
   twitterHandle: "@primesys",
   author: "PRIMESYS",
@@ -55,7 +55,7 @@ export default function SEO({
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "Ventas",
-      email: "contacto@primesys.ec",
+      email: "contacto@primesys-ec.com",
       availableLanguage: ["Spanish", "English"],
     },
     sameAs: [

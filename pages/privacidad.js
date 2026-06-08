@@ -43,10 +43,10 @@ export default function PrivacidadPage() {
                 <p className="font-body-lg text-body-lg text-outline">
                   No compartimos esta información con terceros ajenos a la operación del servicio ni la utilizamos para campañas no solicitadas. Si necesitas actualizar o eliminar la información que nos hayas enviado, puedes escribirnos a{" "}
                   <a
-                    href="mailto:contacto@primesys.ec"
+                    href="mailto:contacto@primesys-ec.com"
                     className="text-secondary-container border-b border-secondary-container hover:opacity-70 transition-opacity"
                   >
-                    contacto@primesys.ec
+                    contacto@primesys-ec.com
                   </a>
                   .
                 </p>
