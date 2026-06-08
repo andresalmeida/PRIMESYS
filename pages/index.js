@@ -3,18 +3,18 @@ import SEO, { createWebPageSchema } from "../src/components/SEO";
 
 export default function IndexPage() {
   const schema = createWebPageSchema({
-    title: "PRIMESYS - Soluciones Tecnológicas Innovadoras",
-    description: "Más de 25 años de experiencia en soluciones tecnológicas innovadoras. Desarrollo de software, ciberseguridad, cloud services, aplicaciones móviles y más.",
+    title: "PRIMESYS — Ingeniería de Software para Empresas Reales",
+    description: "Construimos software, integramos sistemas y sostenemos infraestructura para empresas en Ecuador. 25 años de entrega continua.",
     url: "/",
-    image: "/web-app-manifest-512x512.png",
+    image: "/android-chrome-512x512.png",
   });
 
   return (
     <>
       <SEO
-        title="Soluciones Tecnológicas Innovadoras"
-        description="Más de 25 años de experiencia en soluciones tecnológicas innovadoras. Desarrollo de software, ciberseguridad, cloud services, aplicaciones móviles y más. Transformamos procesos en productos digitales de impacto."
-        keywords="soluciones tecnológicas, desarrollo software, ciberseguridad, cloud services, aplicaciones móviles, Ecuador, Quito, PRIMESYS, transformación digital, arquitectura empresarial, portales web, capacitaciones tecnológicas"
+        title="Ingeniería de Software para Empresas Reales"
+        description="Construimos software, integramos sistemas y sostenemos infraestructura para empresas en Ecuador. 25 años de entrega continua, sin promesas vacías."
+        keywords="desarrollo de software, ingeniería de software, ciberseguridad, cloud, aplicaciones móviles, Ecuador, Quito, PRIMESYS, arquitectura empresarial, portales web, capacitaciones"
         schema={schema}
       />
       <HomePage />

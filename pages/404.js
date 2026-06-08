@@ -5,40 +5,37 @@ export default function Custom404() {
   return (
     <>
       <SEO
-        title="Página no encontrada - Error 404"
-        description="La página que buscas no existe o ha sido movida. Regresa a la página principal de PRIMESYS para encontrar lo que necesitas."
+        title="Página no encontrada — Error 404"
+        description="La página que buscas no existe o fue movida."
         noIndex={true}
       />
-      <div style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "linear-gradient(135deg, #0b1a2d 0%, #0f2744 100%)",
-        color: "#fff",
-        textAlign: "center",
-        padding: "2rem"
-      }}>
-        <h1 style={{ fontSize: "6rem", margin: "0", color: "#3b82f6" }}>404</h1>
-        <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Página no encontrada</h2>
-        <p style={{ color: "#94a3b8", maxWidth: "400px", marginBottom: "2rem" }}>
-          La página que buscas no existe o ha sido movida.
-        </p>
-        <Link 
-          href="/"
-          style={{
-            background: "#3b82f6",
-            color: "#fff",
-            padding: "0.75rem 1.5rem",
-            borderRadius: "0.5rem",
-            textDecoration: "none",
-            fontWeight: "500",
-            transition: "background 0.2s"
-          }}
-        >
-          Volver al inicio
-        </Link>
+      <div className="antialiased min-h-screen flex flex-col items-center justify-center bg-white bg-grid px-margin-mobile md:px-margin-desktop py-24 text-center">
+        <div className="max-w-2xl">
+          <p className="font-label-mono text-label-mono text-outline uppercase">
+            ERROR 404
+          </p>
+          <h1 className="mt-8 font-display-xl text-display-xl text-surface-container-lowest uppercase leading-[0.9] md:w-full">
+            RUTA NO<br />
+            <span className="text-surface-variant">ENCONTRADA.</span>
+          </h1>
+          <p className="mt-8 font-body-lg text-body-lg text-outline max-w-md mx-auto">
+            La página que buscas fue movida o eliminada. Regresa al inicio y navega desde las capacidades principales.
+          </p>
+          <div className="mt-12 flex flex-wrap justify-center gap-6">
+            <Link
+              href="/"
+              className="bg-secondary-container text-white px-8 py-4 font-label-mono text-label-mono uppercase tracking-widest hover:bg-on-secondary transition-colors"
+            >
+              VOLVER AL INICIO
+            </Link>
+            <Link
+              href="/#services"
+              className="border border-outline-variant text-surface-container-lowest px-8 py-4 font-label-mono text-label-mono uppercase tracking-widest hover:bg-gray-50 transition-colors"
+            >
+              VER CAPACIDADES
+            </Link>
+          </div>
+        </div>
       </div>
     </>
   );

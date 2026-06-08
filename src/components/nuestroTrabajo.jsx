@@ -1,281 +1,239 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Header from "./Header";
 import Footer from "./Footer";
 import Link from "next/link";
-import { BarChart3, Code2, Globe, Smartphone, ExternalLink, ChevronRight } from "lucide-react";
+
+const fadeUp = {
+  hidden:  { opacity: 0, y: 28 },
+  visible: (d = 0) => ({ opacity: 1, y: 0, transition: { delay: d * 0.1, duration: 0.65, ease: [0.22, 1, 0.36, 1] } }),
+};
+
+const dashboards = [
+  {
+    id: 1,
+    title: "Análisis de Importaciones Ecuador",
+    description: "Dashboard interactivo que analiza las importaciones bajo régimen general (2024–2025). Incluye métricas de valor CIF, países de origen y tendencias temporales.",
+    embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiODM0YThhMWMtYTdjMC00OWU1LWFiNDctZWUyMTBiMWE3Mjc5IiwidCI6ImFhZjAxNDIwLThmMzItNDllNS1iY2VmLTc5NTM0MGMxZjk2YSJ9&pageName=9853d6945e241505ddeb",
+  },
+  {
+    id: 2,
+    title: "Research Funding Global",
+    description: "Análisis académico sobre la financiación gubernamental destinada a investigación de ansiedad y depresión a nivel mundial y su priorización por país.",
+    embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiOTA5MDg4N2YtNDZmMC00MzI3LWE0ZTMtM2Q0YjkyZDg1Y2QzIiwidCI6ImFhZjAxNDIwLThmMzItNDllNS1iY2VmLTc5NTM0MGMxZjk2YSJ9",
+  },
+];
+
+const proyectos = [
+  { n: "01", title: "Análisis de Datos y Business Intelligence", desc: "Dashboards interactivos y modelos predictivos que transforman datos crudos en decisiones estratégicas de alto impacto.", sector: "MÚLTIPLES SECTORES" },
+  { n: "02", title: "ERP para Automatización de Tesorería",     desc: "Sistema integral para conjuntos residenciales que elimina la carga administrativa y centraliza la gestión financiera.", sector: "REAL ESTATE" },
+  { n: "03", title: "Gestión de Riesgos Sector Cooperativo",    desc: "Plataforma de cumplimiento normativo y evaluación de riesgos en tiempo real, diseñada para la solidez financiera.", sector: "SECTOR FINANCIERO" },
+];
 
 export default function NuestroTrabajo() {
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
-  };
+  const canvasRef = useRef(null);
 
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 }
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let raf;
+    let W = 0, H = 0, particles = [];
+    const ROWS = 14, COLS = 28, SX = 52, SY = 42;
+
+    function init() {
+      const rect = canvas.getBoundingClientRect();
+      W = canvas.width  = rect.width  || canvas.offsetWidth  || 1200;
+      H = canvas.height = rect.height || canvas.offsetHeight || 500;
+      particles = [];
+      for (let i = 0; i < ROWS; i++)
+        for (let j = 0; j < COLS; j++)
+          particles.push({ bx: j * SX, by: i * SY });
     }
-  };
 
-  const dashboards = [
-    {
-      id: 1,
-      title: "Análisis de Importaciones Ecuador",
-      description: "Dashboard interactivo que analiza las importaciones de Ecuador bajo régimen general durante el período 2024-2025. Incluye métricas de valor CIF, países de origen, productos principales y tendencias temporales.",
-      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiODM0YThhMWMtYTdjMC00OWU1LWFiNDctZWUyMTBiMWE3Mjc5IiwidCI6ImFhZjAxNDIwLThmMzItNDllNS1iY2VmLTc5NTM0MGMxZjk2YSJ9&pageName=9853d6945e241505ddeb",
-      icon: BarChart3,
-      tags: ["Power BI", "Análisis de Datos", "Business Intelligence"],
-      color: "from-blue-500 to-cyan-400"
-    },
-    {
-      id: 2,
-      title: "Research Funding Global",
-      description: "Análisis académico sobre la financiación gubernamental destinada a investigación de ansiedad y depresión a nivel mundial. Visualiza la prioridad que cada país otorga a la salud mental.",
-      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiOTA5MDg4N2YtNDZmMC00MzI3LWE0ZTMtM2Q0YjkyZDg1Y2QzIiwidCI6ImFhZjAxNDIwLThmMzItNDllNS1iY2VmLTc5NTM0MGMxZjk2YSJ9",
-      icon: Globe,
-      tags: ["Power BI", "Research", "Data Visualization"],
-      color: "from-purple-500 to-pink-400"
-    },
-  ];
+    let t = 0;
+    function draw() {
+      t++;
+      ctx.clearRect(0, 0, W, H);
+      const cx = W / 2, cy = H / 2;
+      const ox = (W - COLS * SX) / 2, oy = (H - ROWS * SY) / 2;
 
-  const proyectos = [
-    {
-      id: 1,
-      title: "Sistema ERP Empresarial",
-      desc: "Plataforma integral para gestión de inventarios, facturación electrónica y control de clientes desarrollada a medida.",
-      tech: ["React", "Node.js", "PostgreSQL"],
-      icon: Globe,
-      metric: "+40%",
-      metricLabel: "Eficiencia"
-    },
-    {
-      id: 2,
-      title: "App Móvil de Servicios",
-      desc: "Aplicación multiplataforma con geolocalización en tiempo real y sistema de reservas integrado.",
-      tech: ["React Native", "Firebase", "Google Maps"],
-      icon: Smartphone,
-      metric: "10K+",
-      metricLabel: "Descargas"
-    },
-    {
-      id: 3,
-      title: "Portal de Analytics",
-      desc: "Dashboard ejecutivo con KPIs en tiempo real para toma de decisiones empresariales.",
-      tech: ["Next.js", "GraphQL", "AWS"],
-      icon: BarChart3,
-      metric: "99.9%",
-      metricLabel: "Uptime"
-    },
-    {
-      id: 4,
-      title: "Sistema de Gestión",
-      desc: "Software de automatización de procesos empresariales con flujos de trabajo personalizados.",
-      tech: ["Vue.js", "Laravel", "MySQL"],
-      icon: Code2,
-      metric: "-60%",
-      metricLabel: "Tiempo"
-    },
-  ];
+      for (let i = 0; i < ROWS; i++) {
+        ctx.beginPath();
+        ctx.strokeStyle = "rgba(255,255,255,0.18)";
+        ctx.lineWidth = 0.6;
+        for (let j = 0; j < COLS; j++) {
+          const p    = particles[i * COLS + j];
+          const dist = Math.sqrt((p.bx - cx + ox) ** 2 + (p.by - cy + oy) ** 2);
+          const wave = Math.sin(dist * 0.011 - t * 0.0007) * 9;
+          const x    = p.bx + ox;
+          const y    = p.by + wave + oy;
+          j === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          if (Math.random() > 0.982) {
+            ctx.fillStyle = "rgba(46,46,190,0.45)";
+            ctx.fillRect(x - 1, y - 1, 2, 2);
+          }
+        }
+        ctx.stroke();
+      }
+      raf = requestAnimationFrame(draw);
+    }
+
+    requestAnimationFrame(() => { init(); draw(); });
+    window.addEventListener("resize", init);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", init); };
+  }, []);
 
   return (
-    <div className="min-h-screen bg-[#0b1a2d]">
+    <div className="antialiased min-h-screen flex flex-col bg-white bg-grid">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#0f2640] to-[#0b1a2d] px-4 pb-20 pt-32 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -left-20 top-20 h-96 w-96 rounded-full bg-blue-500/10 blur-[100px]" />
-          <div className="absolute -right-20 bottom-20 h-96 w-96 rounded-full bg-cyan-400/10 blur-[120px]" />
-        </div>
-        
-        <div className="relative mx-auto max-w-7xl text-center">
-          <motion.h1 
-            className="font-['Rubik'] text-4xl font-black uppercase tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+      {/* ── HERO ──────────────────────────────────────────── */}
+      <section className="w-full bg-surface-container-lowest overflow-hidden relative min-h-[68vh] flex items-center">
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 w-full h-full z-0"
+          style={{ background: "transparent" }}
+          aria-hidden="true"
+        />
+<div className="relative w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-padding-lg" style={{ zIndex: 2 }}>
+          <motion.h1
+            className="font-display-xl text-display-xl text-white uppercase leading-[0.9] md:w-[80%]"
+            initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            Nuestro Trabajo
+            CASOS REALES.<br />
+            <span className="text-surface-variant">RESULTADOS MEDIBLES.</span>
           </motion.h1>
-          <motion.p 
-            className="mx-auto mt-6 max-w-2xl font-['Rubik'] text-lg text-gray-300"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+          <motion.p
+            className="mt-8 max-w-xl font-body-lg text-body-lg text-on-surface-variant"
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25, duration: 0.6 }}
           >
-            Explora nuestros proyectos de análisis de datos, business intelligence y desarrollo de software
+            Ejemplos reales de los dashboards, software y sistemas que hemos construido para organizaciones en Ecuador.
           </motion.p>
-          <motion.div 
-            className="mx-auto mt-6 h-1 w-24 bg-gradient-to-r from-cyan-400 to-blue-500"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-          />
         </div>
       </section>
 
-      {/* Dashboards Section */}
-      <section className="px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <motion.div 
-            className="mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+      {/* ── DASHBOARDS ────────────────────────────────────── */}
+      <section className="w-full bg-white border-b border-outline-variant py-section-padding-md">
+        <div className="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+          <motion.div
+            className="mb-14 border-b border-outline-variant pb-8"
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
           >
-            <h2 className="font-['Rubik'] text-3xl font-bold text-white sm:text-4xl">
-              Dashboards de Business Intelligence
+            <p className="font-label-mono text-label-mono text-outline uppercase mb-6">
+              INTELIGENCIA DE NEGOCIO
+            </p>
+            <h2 className="font-headline-lg text-headline-lg text-surface-container-lowest uppercase">
+              DASHBOARDS<br />EN PRODUCCIÓN.
             </h2>
-            <div className="mt-4 h-1 w-20 bg-gradient-to-r from-cyan-400 to-blue-500" />
           </motion.div>
 
-          <div className="space-y-12">
-            {dashboards.map((dashboard, index) => (
-              <motion.div
-                key={dashboard.id}
-                className="grid gap-8 rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm lg:grid-cols-2"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
+          <div className="flex flex-col gap-20">
+            {dashboards.map((db, i) => (
+              <motion.article
+                key={db.id}
+                className="grid grid-cols-12 gap-gutter items-start border-b border-outline-variant pb-20"
+                initial="hidden" whileInView="visible" viewport={{ once: true }}
+                custom={i * 0.1} variants={fadeUp}
               >
-                <div className={`${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                  <div className="relative aspect-video overflow-hidden rounded-2xl bg-[#0f2640]">
+                {/* Description */}
+                <div className="col-span-12 md:col-span-4 flex flex-col gap-6">
+                  <span className="font-label-mono text-label-mono text-outline uppercase">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="font-headline-md text-headline-md text-surface-container-lowest uppercase">
+                    {db.title}
+                  </h3>
+                  <p className="font-body-md text-body-md text-outline max-w-sm">
+                    {db.description}
+                  </p>
+                  <a
+                    href={db.embedUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-block font-label-mono text-label-mono text-secondary-container uppercase border-b border-secondary-container pb-px hover:opacity-70 transition-opacity w-fit"
+                  >
+                    VER DASHBOARD
+                  </a>
+                </div>
+
+                {/* Embed */}
+                <div className="col-span-12 md:col-span-8 border border-outline-variant overflow-hidden">
+                  <div className="relative aspect-video bg-surface-container">
                     <iframe
-                      src={dashboard.embedUrl}
-                      title={dashboard.title}
+                      src={db.embedUrl}
+                      title={db.title}
                       className="absolute inset-0 h-full w-full"
                       allowFullScreen
+                      loading="lazy"
                     />
                   </div>
                 </div>
-                
-                <div className={`flex flex-col justify-center ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${dashboard.color} text-white`}>
-                    <dashboard.icon size={24} />
-                  </div>
-                  <h3 className="mt-4 font-['Rubik'] text-2xl font-bold text-white">
-                    {dashboard.title}
-                  </h3>
-                  <p className="mt-4 font-['Rubik'] text-gray-300 leading-relaxed">
-                    {dashboard.description}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {dashboard.tags.map((tag, i) => (
-                      <span key={i} className="rounded-full bg-white/10 px-3 py-1 font-['Rubik'] text-xs text-cyan-400">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <motion.a
-                    href={dashboard.embedUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group mt-6 inline-flex items-center gap-2 font-['Rubik'] font-semibold text-cyan-400 transition-colors hover:text-cyan-300"
-                    whileHover={{ x: 5 }}
-                  >
-                    Ver Dashboard Completo
-                    <ExternalLink size={16} className="transition-transform group-hover:scale-110" />
-                  </motion.a>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PROYECTOS ─────────────────────────────────────── */}
+      <section className="w-full bg-surface-container-lowest border-b border-outline-variant py-section-padding-md">
+        <div className="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+          <motion.div
+            className="mb-14 border-b border-outline-variant pb-8"
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
+          >
+            <p className="font-label-mono text-label-mono text-outline uppercase mb-6">
+              SOLUCIONES A MEDIDA
+            </p>
+            <h2 className="font-headline-lg text-headline-lg text-white uppercase">
+              PROYECTOS<br />DESTACADOS.
+            </h2>
+          </motion.div>
+
+          <div>
+            {proyectos.map((p, i) => (
+              <motion.div
+                key={p.n}
+                className="grid grid-cols-12 gap-gutter items-baseline border-b border-outline-variant py-10"
+                initial="hidden" whileInView="visible" viewport={{ once: true }}
+                custom={i * 0.09} variants={fadeUp}
+              >
+                <span className="col-span-1 font-label-mono text-label-mono text-outline uppercase">
+                  {p.n}
+                </span>
+                <div className="col-span-12 md:col-span-7 min-w-0">
+                  <h3 className="font-headline-md text-headline-md text-white uppercase">{p.title}</h3>
+                  <p className="mt-4 max-w-lg font-body-md text-body-md text-on-surface-variant">{p.desc}</p>
                 </div>
+                <span className="col-span-12 md:col-span-4 font-label-mono text-label-mono text-outline uppercase md:text-right">
+                  {p.sector}
+                </span>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Proyectos Destacados */}
-      <section className="bg-gradient-to-b from-gray-50 to-white px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <motion.div 
-            className="mb-12 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="font-['Rubik'] text-3xl font-bold text-[#0b1a2d] sm:text-4xl">
-              Proyectos Destacados
+      {/* ── CTA ───────────────────────────────────────────── */}
+      <section className="w-full bg-white border-b border-outline-variant py-section-padding-md">
+        <div className="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex flex-col sm:flex-row sm:items-end sm:justify-between gap-8">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+            <p className="font-label-mono text-label-mono text-outline uppercase mb-6">SIGUIENTE PASO</p>
+            <h2 className="font-headline-lg text-headline-lg text-surface-container-lowest uppercase">
+              ¿TIENES UN<br />PROYECTO EN MENTE?
             </h2>
-            <div className="mx-auto mt-4 h-1 w-20 bg-gradient-to-r from-cyan-500 to-blue-600" />
           </motion.div>
-
-          <motion.div 
-            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+          <Link
+            href="/#contact"
+            className="bg-secondary-container text-white px-8 py-4 font-label-mono text-label-mono uppercase tracking-widest hover:bg-on-secondary transition-colors self-start sm:self-end"
           >
-            {proyectos.map((proyecto) => (
-              <motion.div
-                key={proyecto.id}
-                className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-2xl"
-                variants={fadeInUp}
-                whileHover={{ y: -8 }}
-              >
-                <div className="absolute right-4 top-4 font-['Rubik'] text-3xl font-black text-gray-100 transition-colors group-hover:text-cyan-100">
-                  {proyecto.metric}
-                </div>
-                
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 text-white shadow-lg">
-                  <proyecto.icon size={24} />
-                </div>
-                
-                <h3 className="mt-4 font-['Rubik'] text-xl font-bold text-[#0b1a2d]">
-                  {proyecto.title}
-                </h3>
-                <p className="mt-2 font-['Rubik'] text-sm text-gray-600">
-                  {proyecto.desc}
-                </p>
-                
-                <div className="mt-4 flex flex-wrap gap-1">
-                  {proyecto.tech.map((tech, i) => (
-                    <span key={i} className="rounded bg-gray-100 px-2 py-1 font-['Rubik'] text-xs text-gray-600">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                
-                <div className="mt-4 border-t border-gray-100 pt-4">
-                  <span className="font-['Rubik'] text-2xl font-bold text-cyan-500">{proyecto.metric}</span>
-                  <span className="ml-2 font-['Rubik'] text-sm text-gray-500">{proyecto.metricLabel}</span>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="px-4 py-20 sm:px-6 lg:px-8">
-        <motion.div 
-          className="mx-auto max-w-4xl rounded-3xl bg-gradient-to-r from-cyan-500 to-blue-600 p-8 text-center sm:p-12"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="font-['Rubik'] text-3xl font-bold text-white sm:text-4xl">
-            ¿Tienes un proyecto en mente?
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl font-['Rubik'] text-lg text-white/90">
-            Trabajemos juntos para hacerlo realidad. Contáctanos y conversemos sobre tu idea.
-          </p>
-          <Link href="/#contact" passHref legacyBehavior>
-            <motion.a
-              className="group mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-['Rubik'] font-bold text-[#0b1a2d] shadow-xl transition-all hover:bg-gray-100"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Iniciar Proyecto
-              <ChevronRight size={20} className="transition-transform group-hover:translate-x-1" />
-            </motion.a>
+            INICIAR PROYECTO
           </Link>
-        </motion.div>
+        </div>
       </section>
 
       <Footer />

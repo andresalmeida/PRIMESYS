@@ -37,7 +37,7 @@ export default function TypewriterText({ text, speed = 50, delay = 0 }) {
       <style jsx>{`
         .cursor {
           animation: blink 1s infinite;
-          color: #33b8ff;
+          color: #FF4F46;
         }
         @keyframes blink {
           0%, 50% { opacity: 1; }

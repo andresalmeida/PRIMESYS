@@ -6,8 +6,11 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
+  background-color: #ffffff;
+  overscroll-behavior-y: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

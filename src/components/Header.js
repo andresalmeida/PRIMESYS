@@ -1,90 +1,123 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Menu, X } from "lucide-react";
 
-const navItems = [
-  { label: "Inicio", type: "route", to: "/" },
-  { label: "Servicios", type: "section", section: "services" },
-  { label: "Clientes", type: "section", section: "clients" },
-  { label: "Nuestro Trabajo", type: "route", to: "/nuestro-trabajo" },
-  { label: "Sobre Nosotros", type: "route", to: "/sobre-nosotros" },
-  { label: "Contacto", type: "section", section: "contact" },
+const navLinks = [
+  { label: "CAPACIDADES",    type: "section", section: "services" },
+  { label: "CLIENTES",       type: "section", section: "clients" },
+  { label: "NUESTRO TRABAJO", type: "route",   to: "/nuestro-trabajo" },
+  { label: "SOBRE NOSOTROS", type: "route",   to: "/sobre-nosotros" },
 ];
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const router = useRouter();
-  const location = router;
 
-  const closeMenu = () => setMenuOpen(false);
-
-  const goToSection = (section) => {
-    if (location.pathname === "/") {
-      document.getElementById(section)?.scrollIntoView({ behavior: "smooth" });
-      closeMenu();
-      return;
+  const goSection = (id) => {
+    setOpen(false);
+    if (router.pathname === "/") {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      router.push({ pathname: "/", query: { scrollTo: id } });
     }
-
-    router.push({
-      pathname: "/",
-      query: { scrollTo: section }
-    });
-    closeMenu();
   };
 
   return (
-    <header className="ps-header">
-      <div className="ps-header__noise" aria-hidden />
-      <div className="ps-header__inner">
-        <Link href="/" className="ps-header__brand" onClick={closeMenu}>
-          <span className="ps-header__brand-mark" aria-hidden>
-            {`</>`}
-          </span>
-          <span className="ps-header__brand-word">primesys</span>
+    <nav className="bg-white text-surface-container-lowest w-full top-0 sticky border-b border-outline-variant z-50">
+      <div className="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+
+        {/* Brand */}
+        <Link
+          href="/"
+          onClick={() => setOpen(false)}
+          className="font-display-xl font-extrabold uppercase tracking-tighter text-surface-container-lowest !text-[32px] md:!text-[40px] leading-none hover:opacity-80 transition-opacity"
+        >
+          PRIMESYS
         </Link>
 
-        <button
-          className="ps-header__toggle"
-          type="button"
-          onClick={() => setMenuOpen((prev) => !prev)}
-          aria-label="Abrir menú"
-          aria-expanded={menuOpen}
-        >
-          {menuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-
-        <nav className={`ps-header__nav ${menuOpen ? "is-open" : ""}`}>
-          {navItems.map((item) => {
-            const isRoute = item.type === "route";
-            const isActive = isRoute ? location.pathname === item.to : false;
-
-            if (!isRoute) {
-              return (
-                <button
-                  key={item.label}
-                  type="button"
-                  onClick={() => goToSection(item.section)}
-                  className="ps-header__link"
-                >
-                  {item.label}
-                </button>
-              );
-            }
-
-            return (
+        {/* Desktop nav */}
+        <div className="hidden md:flex items-center space-x-8">
+          {navLinks.map((item) =>
+            item.type === "section" ? (
+              <button
+                key={item.label}
+                type="button"
+                onClick={() => goSection(item.section)}
+                className="text-surface-variant hover:text-surface-container-lowest transition-colors font-label-mono text-label-mono tracking-widest bg-transparent border-none cursor-pointer"
+              >
+                {item.label}
+              </button>
+            ) : (
               <Link
                 key={item.label}
                 href={item.to}
-                onClick={closeMenu}
-                className={`ps-header__link ${isActive ? "is-active" : ""}`}
+                className="text-surface-variant hover:text-surface-container-lowest transition-colors font-label-mono text-label-mono tracking-widest"
               >
                 {item.label}
               </Link>
-            );
-          })}
-        </nav>
+            )
+          )}
+        </div>
+
+        {/* CTA */}
+        <div className="hidden md:block">
+          <Link
+            href="/#contact"
+            className="bg-secondary-container text-white px-6 py-3 font-label-mono text-label-mono uppercase tracking-widest hover:bg-on-secondary transition-colors"
+          >
+            AGENDAR
+          </Link>
+        </div>
+
+        {/* Mobile toggle */}
+        <button
+          type="button"
+          className="md:hidden text-surface-container-lowest p-2"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Abrir menú"
+          aria-expanded={open}
+        >
+          <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
+            <rect width="22" height="2" fill="currentColor" />
+            <rect y="7" width="22" height="2" fill="currentColor" />
+            <rect y="14" width="22" height="2" fill="currentColor" />
+          </svg>
+        </button>
       </div>
-    </header>
+
+      {/* Mobile menu */}
+      {open && (
+        <div className="md:hidden bg-white border-t border-outline-variant px-margin-mobile py-6 flex flex-col gap-5">
+          {navLinks.map((item) =>
+            item.type === "section" ? (
+              <button
+                key={item.label}
+                type="button"
+                onClick={() => goSection(item.section)}
+                className="text-left text-surface-container-lowest font-label-mono text-label-mono tracking-widest bg-transparent border-none cursor-pointer"
+              >
+                {item.label}
+              </button>
+            ) : (
+              <Link
+                key={item.label}
+                href={item.to}
+                onClick={() => setOpen(false)}
+                className="text-surface-container-lowest font-label-mono text-label-mono tracking-widest"
+              >
+                {item.label}
+              </Link>
+            )
+          )}
+          <Link
+            href="/#contact"
+            onClick={() => setOpen(false)}
+            className="mt-2 inline-block bg-secondary-container text-white px-6 py-3 font-label-mono text-label-mono uppercase tracking-widest text-center"
+          >
+            AGENDAR
+          </Link>
+        </div>
+      )}
+    </nav>
   );
 }

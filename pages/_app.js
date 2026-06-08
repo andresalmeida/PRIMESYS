@@ -2,33 +2,35 @@ import Head from "next/head";
 import "../src/index.css";
 import "../src/App.css";
 import "../src/Styles/servicios.css";
+import "../src/Styles/redesign.css";
 
 export default function PrimesysApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        {/* Metadatos base que se aplican a todas las páginas */}
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        
-        {/* Tema y color */}
-        <meta name="theme-color" content="#0b1a2d" />
-        <meta name="msapplication-TileColor" content="#0b1a2d" />
-        
-        {/* Favicons base */}
-        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="theme-color" content="#0b0f10" />
+        <meta name="msapplication-TileColor" content="#0b0f10" />
+
         <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        
-        {/* Manifest */}
         <link rel="manifest" href="/site.webmanifest" />
-        
-        {/* Preconnect para mejorar performance */}
+
+        {/* Stitch font stack */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        />
       </Head>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-secondary-container focus:px-4 focus:py-2 focus:text-white">
+        Ir al contenido
+      </a>
       <Component {...pageProps} />
     </>
   );

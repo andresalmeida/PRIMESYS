@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 const siteConfig = {
   siteName: "PRIMESYS",
   siteUrl: "https://primesys.ec",
-  defaultImage: "/web-app-manifest-512x512.png",
+  defaultImage: "/android-chrome-512x512.png",
   twitterHandle: "@primesys",
   author: "PRIMESYS",
   locale: "es_EC",
@@ -46,7 +46,7 @@ export default function SEO({
     name: "PRIMESYS",
     url: siteConfig.siteUrl,
     logo: `${siteConfig.siteUrl}/logo.svg`,
-    description: "Soluciones tecnológicas innovadoras con más de 25 años de experiencia",
+    description: "Ingeniería de software para empresas reales. 25 años de entrega continua en Ecuador.",
     address: {
       "@type": "PostalAddress",
       addressCountry: "EC",
@@ -55,7 +55,7 @@ export default function SEO({
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "Ventas",
-      email: "almeidaandres@proton.me",
+      email: "contacto@primesys.ec",
       availableLanguage: ["Spanish", "English"],
     },
     sameAs: [
@@ -100,13 +100,7 @@ export default function SEO({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
       
-      {/* Favicons */}
-      <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-      <link rel="shortcut icon" href="/favicon.ico" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-      <meta name="apple-mobile-web-app-title" content="PRIMESYS" />
-      <link rel="manifest" href="/site.webmanifest" />
+      {/* Favicons are handled in _app.js with correct basePath prefix */}
       
       {/* Schema.org JSON-LD */}
       <script

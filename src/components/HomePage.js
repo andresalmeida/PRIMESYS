@@ -1,592 +1,395 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  BadgeCheck,
-  Cloud,
-  Cpu,
-  Layers,
-  ShieldCheck,
-  Smartphone,
-  Terminal,
-  Workflow,
-} from "lucide-react";
-import emailjs from "emailjs-com";
-import confetti from "canvas-confetti";
+import { useRouter } from "next/router";
+import emailjs from "@emailjs/browser";
 import Header from "./Header";
 import Footer from "./Footer";
-import { servicesImages, clientsImages, findImage } from "../lib/images";
-import ScrollProgress from "./ScrollProgress";
-import TextReveal from "./TextReveal";
-import HeroLovable from "./HeroLovable";
+import { clientLogos as clientLogosImport } from "../lib/images";
 
-const serviceIcons = [Layers, Cpu, BadgeCheck, Workflow, ShieldCheck, Cloud, Smartphone, Layers, Workflow];
-
+/* ── PRIMESYS services data ─────────────────────────────────────── */
 const services = [
-  { title: "Diseño de portales web", slug: "portales" },
-  { title: "Desarrollo de software a la medida", slug: "software-medida" },
-  { title: "Capacitaciones", slug: "capacitaciones" },
-  { title: "Planificación estratégica", slug: "planificacion" },
-  { title: "Ciberseguridad", slug: "ciberseguridad" },
-  { title: "Arquitectura empresarial", slug: "arquitectura-empresarial" },
-  { title: "Aplicaciones móviles", slug: "moviles" },
-  { title: "Cloud services", slug: "cloud" },
-  { title: "Gestión de procesos empresariales", slug: "procesos" },
+  {
+    num: "01", title: "Portales Web",         href: "/portales",
+    body: "Portales institucionales y corporativos que organizan información crítica, conectan servicios y sostienen experiencias claras para usuarios con alta exigencia operativa.",
+    stats: [{ label: "Tiempo de carga", value: "< 1.5S" }, { label: "Disponibilidad", value: "99.9%" }],
+  },
+  {
+    num: "02", title: "Software a la Medida", href: "/software-medida",
+    body: "Plataformas construidas sobre la lógica real del negocio. Sin plantillas. Automatización de decisiones, trazabilidad total y escalabilidad real.",
+    stats: [{ label: "Deuda técnica", value: "CERO" }, { label: "Ciclo de build", value: "CONTINUO" }],
+  },
+  {
+    num: "03", title: "Capacitaciones",       href: "/capacitaciones",
+    body: "Programas aplicados para que nuevas herramientas y procesos sí se adopten. Transferencia de conocimiento sin dependencia externa.",
+    stats: [{ label: "Retención", value: "+85%" }, { label: "Adopción", value: "SOSTENIDA" }],
+  },
+  {
+    num: "04", title: "Planificación TI",     href: "/planificacion",
+    body: "Hoja de ruta tecnológica conectada con ejecución operativa real. Prioridades técnicas alineadas al ciclo del negocio.",
+    stats: [{ label: "Horizonte", value: "PLURIANUAL" }, { label: "Decisiones", value: "PRIORIZADAS" }],
+  },
+  {
+    num: "05", title: "Ciberseguridad",       href: "/ciberseguridad",
+    body: "Riesgo, exposición y remediación con criterio técnico y económico. Seguridad diseñada desde el inicio, no añadida como capa tardía.",
+    stats: [{ label: "Nivel de riesgo", value: "CONTROLADO" }, { label: "Respuesta", value: "< 4H" }],
+  },
+  {
+    num: "06", title: "Arquitectura Empresarial", href: "/arquitectura-empresarial",
+    body: "Procesos, datos y aplicaciones alineados para decidir con coherencia. Sistemas que escalan sin fragmentar la operación.",
+    stats: [{ label: "Cobertura", value: "FULL STACK" }, { label: "Integración", value: "NATIVA" }],
+  },
+  {
+    num: "07", title: "Apps Móviles",         href: "/moviles",
+    body: "Experiencias móviles para servicio, velocidad de uso y continuidad del producto. iOS y Android desde una sola base de código.",
+    stats: [{ label: "Plataformas", value: "iOS + ANDROID" }, { label: "Modo offline", value: "HABILITADO" }],
+  },
+  {
+    num: "08", title: "Cloud",                href: "/cloud",
+    body: "Infraestructura y operación cloud con mejor lectura de capacidad, costo y gobierno. Escalado controlado sin sorpresas.",
+    stats: [{ label: "Escalado", value: "AUTOMÁTICO" }, { label: "Optimización", value: "CONTINUA" }],
+  },
+  {
+    num: "09", title: "Procesos",             href: "/procesos",
+    body: "Procesos mejorados y digitalizados para reducir cuellos de botella y tareas repetitivas. Fricción operativa eliminada.",
+    stats: [{ label: "Fricción ops", value: "REDUCIDA" }, { label: "Automatización", value: "ACTIVA" }],
+  },
 ];
 
-const terminalSnippet = [
-  "git checkout -b launch/primesys-enterprise",
-  "pnpm install --frozen-lockfile",
-  "pnpm run lint && pnpm run test",
-  "docker compose up -d api dashboard postgres",
-  "npx prisma migrate deploy",
-  "terraform apply -var env=production",
-  "kubectl rollout status deployment/primesys-web",
-  "echo 'Release completed without incidents.'",
-];
-
-// Variantes para animaciones
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
+/* ── Form validation ────────────────────────────────────────────── */
+const validateName  = (v) => /^[A-Za-záéíóúÁÉÍÓÚñÑüÜ\s'-]{2,50}$/.test(v.trim());
+const validateEmail = (v) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v) && v.length <= 254;
+const validateMsg   = (v) => v.trim().length >= 10 && v.length <= 1000;
+const sanitize      = (v) => typeof v === "string" ? v.replace(/[<>]/g, "").replace(/&/g, "&amp;").trim() : "";
 
 export default function HomePage() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [formStatus, setFormStatus] = useState("");
-  const [visibleTerminalLines, setVisibleTerminalLines] = useState(2);
-  const terminalSectionRef = useRef(null);
+  const router        = useRouter();
+  const canvasRef     = useRef(null);
+  const scrollRef     = useRef(null);
+  const isPausedRef   = useRef(false);
+  const rafRef        = useRef(null);
+  const [form, setForm]     = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState({ type: "idle", message: "" });
 
-  const clientLogos = useMemo(
-    () => Array.from({ length: 8 }).map((_, index) => findImage(clientsImages, index + 1)).filter(Boolean),
-    []
-  );
+  const clientLogos = clientLogosImport;
 
-  const serviceCards = useMemo(
-    () =>
-      services.map((service, index) => ({
-        ...service,
-        image: findImage(servicesImages, index + 1),
-        Icon: serviceIcons[index] || Layers,
-      })),
-    []
-  );
-
+  /* scroll-to handler */
   useEffect(() => {
-    let frame = 0;
+    const target = router.query.scrollTo;
+    if (typeof target !== "string") return;
+    const id = requestAnimationFrame(() =>
+      document.getElementById(target)?.scrollIntoView({ behavior: "smooth", block: "start" })
+    );
+    return () => cancelAnimationFrame(id);
+  }, [router.query.scrollTo]);
 
-    const handleScroll = () => {
-      if (frame) cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const section = terminalSectionRef.current;
-        if (!section) return;
+  /* canvas wave animation — port of Stitch's brutalist-waves */
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let raf;
+    let particles = [];
+    let W = 0, H = 0;
+    const ROWS = 20, COLS = 40, SX = 40, SY = 30;
 
-        const rect = section.getBoundingClientRect();
-        const viewport = window.innerHeight;
-        const start = viewport * 0.85;
-        const end = -rect.height * 0.25;
-        const progressRaw = (start - rect.top) / (start - end);
-        const progress = Math.max(0, Math.min(1, progressRaw));
-        const linesToShow = Math.max(1, Math.min(terminalSnippet.length, Math.floor(progress * terminalSnippet.length) + 1));
+    function init() {
+      W = canvas.width  = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+      particles = [];
+      for (let i = 0; i < ROWS; i++)
+        for (let j = 0; j < COLS; j++)
+          particles.push({ bx: j * SX, by: i * SY });
+    }
 
-        setVisibleTerminalLines((prev) => (prev === linesToShow ? prev : linesToShow));
-      });
-    };
+    let t = 0;
+    function draw() {
+      t++;
+      ctx.clearRect(0, 0, W, H);
+      const cx = W / 2, cy = H / 2;
+      const ox = (W - COLS * SX) / 2, oy = (H - ROWS * SY) / 2;
 
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
+      for (let i = 0; i < ROWS; i++) {
+        ctx.beginPath();
+        ctx.strokeStyle = "#1a1a1a";
+        ctx.lineWidth   = 0.5;
+        for (let j = 0; j < COLS; j++) {
+          const p    = particles[i * COLS + j];
+          const dist = Math.sqrt((p.bx - cx + ox) ** 2 + (p.by - cy + oy) ** 2);
+          const wave = Math.sin(dist * 0.01 - t * 0.002) * 20;
+          const x    = p.bx + ox;
+          const y    = p.by + wave + oy;
+          j === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          ctx.fillStyle = "#2e2ebe";
+          if (Math.random() > 0.90) ctx.fillStyle = "#ffb4ab";
+          ctx.fillRect(x - 1, y - 1, 3, 3);
+        }
+        ctx.stroke();
+      }
+      raf = requestAnimationFrame(draw);
+    }
 
-    return () => {
-      if (frame) cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
+    init();
+    draw();
+    window.addEventListener("resize", init);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", init); };
   }, []);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    if (name === "name") {
-      const regex = /^[A-Za-záéíóúÁÉÍÓÚñÑ ]*$/;
-      if (!regex.test(value)) return;
-    }
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  // ============ VALIDACIONES Y SANITIZACIÓN ============
-  
-  // Sanitizar input - eliminar caracteres peligrosos
-  const sanitizeInput = (input) => {
-    if (typeof input !== 'string') return '';
-    return input
-      .replace(/[<>]/g, '') // Eliminar < y > para prevenir XSS
-      .replace(/&/g, '&amp;') // Escapar &
-      .replace(/"/g, '&quot;') // Escapar comillas
-      .replace(/'/g, '&#x27;') // Escapar comillas simples
-      .trim(); // Eliminar espacios al inicio y final
-  };
-
-  // Validar nombre - solo letras, espacios y acentos
-  const validateName = (name) => {
-    const nameRegex = /^[A-Za-záéíóúÁÉÍÓÚñÑüÜ\s'-]{2,50}$/;
-    if (!nameRegex.test(name)) {
-      return { valid: false, error: "Nombre inválido. Solo letras, espacios y acentos permitidos (2-50 caracteres)." };
-    }
-    // Verificar que no sea solo espacios
-    if (name.trim().length < 2) {
-      return { valid: false, error: "El nombre debe tener al menos 2 caracteres." };
-    }
-    return { valid: true };
-  };
-
-  // Validar email - formato estricto y dominios válidos
-  const validateEmail = (email) => {
-    // Formato básico
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(email)) {
-      return { valid: false, error: "Formato de correo electrónico inválido." };
-    }
-    
-    // Verificar longitud
-    if (email.length > 254) {
-      return { valid: false, error: "El correo es demasiado largo." };
-    }
-    
-    // Verificar dominios temporales/desechables comunes
-    const disposableDomains = [
-      'tempmail.com', 'mailinator.com', 'guerrillamail.com', 
-      '10minutemail.com', 'yopmail.com', 'throwawaymail.com'
-    ];
-    const domain = email.split('@')[1].toLowerCase();
-    if (disposableDomains.includes(domain)) {
-      return { valid: false, error: "Por favor usa un correo válido (no temporal)." };
-    }
-    
-    // Verificar que no tenga caracteres sospechosos múltiples
-    if ((email.match(/@/g) || []).length > 1) {
-      return { valid: false, error: "Correo inválido (múltiples @)." };
-    }
-    
-    return { valid: true };
-  };
-
-  // Validar mensaje
-  const validateMessage = (message) => {
-    if (!message || message.trim().length < 10) {
-      return { valid: false, error: "El mensaje debe tener al menos 10 caracteres." };
-    }
-    if (message.length > 1000) {
-      return { valid: false, error: "El mensaje es demasiado largo (máximo 1000 caracteres)." };
-    }
-    // Verificar patrones sospechosos
-    const suspiciousPatterns = [
-      /<script/i, /javascript:/i, /on\w+=/i, /data:/i,
-      /SELECT\s+.*\s+FROM/i, /INSERT\s+INTO/i, /DELETE\s+FROM/i
-    ];
-    for (const pattern of suspiciousPatterns) {
-      if (pattern.test(message)) {
-        return { valid: false, error: "El mensaje contiene caracteres no permitidos." };
+  /* cards auto-scroll — pauses when a card is hovered */
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    function step() {
+      if (!isPausedRef.current) {
+        el.scrollLeft += 0.7;
+        if (el.scrollLeft >= el.scrollWidth / 2) el.scrollLeft = 0;
       }
+      rafRef.current = requestAnimationFrame(step);
     }
-    return { valid: true };
+    rafRef.current = requestAnimationFrame(step);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, []);
+
+  /* form handlers */
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "name" && !/^[A-Za-záéíóúÁÉÍÓÚñÑüÜ\s'-]*$/.test(value)) return;
+    setForm((p) => ({ ...p, [name]: value }));
   };
 
-  // Efecto confetti
-  const triggerConfetti = () => {
-    const duration = 3000;
-    const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const s = { name: sanitize(form.name), email: sanitize(form.email).toLowerCase(), message: sanitize(form.message) };
 
-    const randomInRange = (min, max) => Math.random() * (max - min) + min;
+    if (!validateName(s.name))  return setStatus({ type: "error", message: "Nombre inválido. Usa entre 2 y 50 caracteres." });
+    if (!validateEmail(s.email)) return setStatus({ type: "error", message: "Ingresa un correo electrónico válido." });
+    if (!validateMsg(s.message)) return setStatus({ type: "error", message: "El mensaje debe tener al menos 10 caracteres." });
 
-    const interval = setInterval(function() {
-      const timeLeft = animationEnd - Date.now();
+    const svcId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const tplId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const key   = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+    if (!svcId || !tplId || !key || svcId === "your_service_id_here")
+      return setStatus({ type: "error", message: "El canal de contacto no está configurado aún." });
 
-      if (timeLeft <= 0) {
-        return clearInterval(interval);
-      }
-
-      const particleCount = 50 * (timeLeft / duration);
-      
-      confetti({
-        ...defaults, 
-        particleCount,
-        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
-      });
-      confetti({
-        ...defaults, 
-        particleCount,
-        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
-      });
-    }, 250);
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    
-    // 1. Sanitizar inputs
-    const sanitizedData = {
-      name: sanitizeInput(formData.name),
-      email: sanitizeInput(formData.email).toLowerCase(),
-      message: sanitizeInput(formData.message)
-    };
-
-    // 2. Validaciones
-    const nameValidation = validateName(sanitizedData.name);
-    if (!nameValidation.valid) {
-      setFormStatus(nameValidation.error);
-      return;
-    }
-
-    const emailValidation = validateEmail(sanitizedData.email);
-    if (!emailValidation.valid) {
-      setFormStatus(emailValidation.error);
-      return;
-    }
-
-    const messageValidation = validateMessage(sanitizedData.message);
-    if (!messageValidation.valid) {
-      setFormStatus(messageValidation.error);
-      return;
-    }
-
-    // 3. Verificar credenciales EmailJS
-    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-
-    if (!serviceId || !templateId || !publicKey || 
-        serviceId === 'your_service_id_here' || 
-        templateId === 'your_template_id_here' || 
-        publicKey === 'your_public_key_here') {
-      setFormStatus("Error: EmailJS no está configurado.");
-      console.error("EmailJS credentials missing");
-      return;
-    }
-
-    setFormStatus("Enviando...");
-
+    setStatus({ type: "sending", message: "" });
     try {
-      const result = await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          from_name: sanitizedData.name,
-          from_email: sanitizedData.email,
-          message: sanitizedData.message,
-          to_email: "almeidaandres@proton.me",
-        },
-        publicKey
-      );
-      
-      if (result.status === 200) {
-        setFormStatus("¡Mensaje enviado correctamente! Te contactaremos pronto.");
-        setFormData({ name: "", email: "", message: "" });
-        triggerConfetti(); // 🎊 ¡Confetti!
+      const res = await emailjs.send(svcId, tplId, { from_name: s.name, from_email: s.email, message: s.message, to_email: "almeidaandres@proton.me" }, key);
+      if (res.status === 200) {
+        setStatus({ type: "success", message: "Recibimos tu mensaje. Te responderemos en menos de 24 horas." });
+        setForm({ name: "", email: "", message: "" });
       } else {
-        setFormStatus("Error al enviar. Por favor intenta de nuevo.");
+        setStatus({ type: "error", message: "No pudimos enviar tu solicitud. Inténtalo de nuevo." });
       }
-    } catch (error) {
-      console.error("EmailJS error:", error);
-      setFormStatus(`Error: ${error.text || "No se pudo enviar el mensaje"}`);
+    } catch {
+      setStatus({ type: "error", message: "Error al enviar. Escríbenos a contacto@primesys.ec" });
     }
   };
 
   return (
-    <div className="ps-page">
-      <ScrollProgress />
+    <div className="antialiased min-h-screen flex flex-col bg-grid">
       <Header />
 
-      <main>
-        {/* ===== HERO SECTION ESTILO LOVABLE ===== */}
-        <HeroLovable />
+      <main id="main-content" className="flex-grow flex flex-col mx-auto w-full">
 
-        {/* ===== TERMINAL SECTION ===== */}
-        <section className="ps-code-flow" ref={terminalSectionRef}>
-          <div className="ps-code-flow__sticky">
-            <TextReveal>
-              <div className="ps-code-flow__copy">
-                <p className="ps-chip ps-chip--dark">Execution Layer</p>
-                <h2>Ingeniería visible, trazable y lista para escalar.</h2>
-                <p>
-                  Implementamos prácticas de producto, seguridad y DevOps para que cada entrega tenga evidencia técnica
-                  y continuidad operativa.
-                </p>
-              </div>
-            </TextReveal>
-
-            <motion.article 
-              className="ps-terminal" 
-              aria-label="Terminal de despliegue de ejemplo"
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="ps-terminal__head">
-                <div className="ps-terminal__lights" aria-hidden>
-                  <span />
-                  <span />
-                  <span />
-                </div>
-                <div className="ps-terminal__title">
-                  <Terminal size={13} />
-                  primesys-enterprise-shell
-                </div>
-              </div>
-              <div className="ps-terminal__body">
-                {terminalSnippet.map((line, index) => (
-                  <div
-                    key={line}
-                    className={`ps-terminal__line ${index < visibleTerminalLines ? "is-visible" : "is-hidden"}`}
+        {/* ── HERO ─────────────────────────────────────────────── */}
+        <section className="w-full relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-white">
+          <canvas
+            ref={canvasRef}
+            className="absolute inset-0 w-full h-full z-0"
+            aria-hidden="true"
+          />
+          <div className="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-padding-lg grid grid-cols-12 gap-gutter relative z-10 pointer-events-none">
+            <div className="col-span-12 md:col-span-10 md:col-start-2 flex flex-col items-start gap-16 pointer-events-auto">
+              <h1 className="font-display-xl text-display-xl text-surface-container-lowest md:w-[90%] leading-[0.9] uppercase pointer-events-none">
+                INGENIERÍA DE SOFTWARE<br />
+                <span className="text-surface-variant">PARA EMPRESAS REALES.</span>
+              </h1>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter w-full">
+                <div className="col-span-1">
+                  <p
+                    className="font-body-lg text-body-lg text-surface-container-highest max-w-md font-medium"
+                    style={{
+                      background: "linear-gradient(to right, rgba(255,255,255,0.96) 60%, transparent 100%)",
+                      padding: "10px 32px 10px 0",
+                    }}
                   >
-                    <span className="ps-terminal__prompt">$</span>
-                    {line}
-                  </div>
-                ))}
-              </div>
-            </motion.article>
-          </div>
-        </section>
-
-        {/* ===== SECCIÓN MISIÓN / VISIÓN ===== */}
-        <section className="ps-mision-vision" id="mision-vision">
-          <div className="ps-mv-container">
-            <motion.div
-              className="ps-mv-card"
-              initial={{ opacity: 0, y: 40, rotateX: -10 }}
-              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.12)" }}
-            >
-              <h3>Misión</h3>
-              <div className="ps-mv-line" />
-              <p>
-                Ofrecer soluciones tecnológicas innovadoras y personalizadas para satisfacer 
-                las necesidades específicas de nuestros clientes, con un enfoque en la calidad 
-                del servicio y la atención al cliente.
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="ps-mv-card"
-              initial={{ opacity: 0, y: 40, rotateX: -10 }}
-              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.12)" }}
-            >
-              <h3>Visión</h3>
-              <div className="ps-mv-line" />
-              <p>
-                Ser líderes en el mercado de servicios computacionales, reconocidos por nuestra 
-                excelencia en la calidad del servicio, la innovación tecnológica y la satisfacción 
-                del cliente. Queremos ser la empresa a la que acuden los clientes para obtener 
-                soluciones tecnológicas confiables y eficientes.
-              </p>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ===== CLIENTS SECTION ===== */}
-        <section className="ps-clients" id="clients">
-          <TextReveal>
-            <div className="ps-section-head ps-section-head--compact">
-              <h2>Empresas que han trabajado con Primesys</h2>
-            </div>
-          </TextReveal>
-
-          <div className="ps-marquee">
-            <div className="ps-marquee__track">
-              {[...clientLogos, ...clientLogos].map((logo, index) => (
-                <div className="ps-client-logo" key={`client-${index}`}>
-                  <img src={logo.src || logo} alt={`Cliente Primesys ${index + 1}`} loading="lazy" />
+                    Construimos software, integramos sistemas y sostenemos infraestructura para empresas en Ecuador. 25 años de entrega continua, sin promesas vacías.
+                  </p>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ===== SERVICES SECTION CON CARDS 3D ===== */}
-        <section className="ps-services" id="services">
-          <TextReveal>
-            <div className="ps-section-head">
-              <h2>Nuestros Servicios</h2>
-              <p>Soluciones que combinan estrategia, diseño y tecnología para impulsar su negocio.</p>
-            </div>
-          </TextReveal>
-
-          <motion.div 
-            className="ps-services__grid"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-          >
-            {serviceCards.map(({ title, slug, image, Icon }, index) => (
-              <motion.article
-                key={slug}
-                className="ps-service-card"
-                style={{ "--service-image": image ? `url(${image.src || image})` : "none" }}
-                variants={itemVariants}
-                whileHover={{ 
-                  y: -12, 
-                  scale: 1.02,
-                  transition: { duration: 0.3 }
-                }}
-              >
-                <div className="ps-service-card__top">
-                  <motion.div 
-                    className="ps-service-card__icon"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.5 }}
+                <div className="col-span-1 flex items-end md:justify-end mt-8 md:mt-0">
+                  <Link
+                    href="/#contact"
+                    className="bg-secondary-container text-white px-8 py-4 font-label-mono text-label-mono uppercase tracking-widest hover:bg-on-secondary transition-colors flex items-center space-x-4"
                   >
-                    <Icon size={18} />
-                  </motion.div>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
+                    <span>CONTACTAR AL EQUIPO</span>
+                    <span aria-hidden="true">→</span>
+                  </Link>
                 </div>
-                <h3>{title}</h3>
-                <Link href={`/${slug}`} className="ps-service-card__link">
-                  Explorar
-                  <ArrowRight size={14} />
-                </Link>
-              </motion.article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── CLIENT MARQUEE ───────────────────────────────────── */}
+        <section
+          id="clients"
+          className="w-full border-y border-outline-variant bg-primary-fixed overflow-hidden py-10"
+          style={{
+            WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+            maskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+          }}
+        >
+          <div className="flex w-max animate-marquee">
+            {[...clientLogos, ...clientLogos].map((logo, i) => (
+              <div key={i} className="inline-flex items-center justify-center px-14 flex-shrink-0">
+                <img
+                  src={typeof logo === "string" ? logo : logo?.src}
+                  alt=""
+                  loading="eager"
+                  className="h-14 w-auto max-w-[180px] object-contain"
+                  style={{ filter: "grayscale(1)", opacity: 0.6 }}
+                  onError={(e) => { e.currentTarget.parentElement.style.display = "none"; }}
+                />
+              </div>
             ))}
-          </motion.div>
-        </section>
-
-        {/* ===== CONTACT SECTION ===== */}
-        <section className="ps-contact" id="contact">
-          <div className="ps-contact__orb ps-contact__orb--one" aria-hidden />
-          <div className="ps-contact__orb ps-contact__orb--two" aria-hidden />
-
-          <div className="ps-contact__grid">
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <p className="ps-chip">Contacto estratégico</p>
-              <h2>Conversemos sobre tu próximo sistema, dashboard o arquitectura digital.</h2>
-              <p>
-                Cuéntanos qué estás construyendo y te proponemos un enfoque técnico claro, con alcance, stack sugerido
-                y una ruta realista de implementación.
-              </p>
-
-              <div className="ps-contact__points">
-                <div>
-                  <BadgeCheck size={16} />
-                  Respuesta inicial en menos de 24 horas hábiles
-                </div>
-                <div>
-                  <BadgeCheck size={16} />
-                  Enfoque de producto, seguridad y escalabilidad
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.form
-              onSubmit={handleSubmit}
-              className="ps-contact__form"
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <div className="ps-form-field">
-                <label htmlFor="name">
-                  Nombre <span className="ps-required">*</span>
-                  <small className="ps-char-count">{formData.name.length}/50</small>
-                </label>
-                <input 
-                  id="name" 
-                  name="name" 
-                  value={formData.name} 
-                  onChange={handleInputChange} 
-                  required 
-                  maxLength={50}
-                  placeholder="Tu nombre completo"
-                  pattern="[A-Za-záéíóúÁÉÍÓÚñÑüÜ\s'-]+"
-                  title="Solo letras, espacios y acentos permitidos"
-                />
-              </div>
-
-              <div className="ps-form-field">
-                <label htmlFor="email">
-                  Correo electrónico <span className="ps-required">*</span>
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  maxLength={254}
-                  placeholder="tu@email.com"
-                  autoComplete="email"
-                />
-              </div>
-
-              <div className="ps-form-field">
-                <label htmlFor="message">
-                  Mensaje <span className="ps-required">*</span>
-                  <small className="ps-char-count">{formData.message.length}/1000</small>
-                </label>
-                <textarea 
-                  id="message" 
-                  name="message" 
-                  rows={5} 
-                  value={formData.message} 
-                  onChange={handleInputChange} 
-                  required 
-                  maxLength={1000}
-                  placeholder="Cuéntanos sobre tu proyecto..."
-                />
-              </div>
-
-              <motion.button 
-                type="submit" 
-                className="ps-btn ps-btn--primary"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                disabled={formStatus === "Enviando..."}
-              >
-                {formStatus === "Enviando..." ? "Enviando..." : "Enviar mensaje"}
-                <ArrowRight size={16} />
-              </motion.button>
-
-              {formStatus ? (
-                <p className={`ps-contact__status ${formStatus.includes("correctamente") ? "ok" : formStatus.includes("Enviando") ? "sending" : "error"}`}>
-                  {formStatus}
-                </p>
-              ) : null}
-            </motion.form>
           </div>
         </section>
+
+        {/* ── SYSTEM CAPABILITIES ──────────────────────────────── */}
+        <section id="services" className="w-full bg-surface-container-lowest border-b border-outline-variant py-section-padding-md overflow-hidden relative">
+          <div className="px-margin-mobile md:px-margin-desktop mb-16 max-w-container-max mx-auto w-full">
+            <h2 className="font-display-xl text-display-xl text-white uppercase border-b border-outline-variant pb-8 font-extrabold tracking-tighter w-full">
+              CAPACIDADES DEL SISTEMA
+            </h2>
+            <p className="font-body-lg text-body-lg text-on-surface-variant mt-8 font-medium w-full max-w-4xl">
+              Nueve disciplinas técnicas bajo un solo equipo. Software, infraestructura, datos, seguridad y procesos — todo lo que una empresa necesita para construir y sostener su tecnología.
+            </p>
+          </div>
+
+          <div
+            ref={scrollRef}
+            className="flex overflow-x-auto hide-scrollbar pl-margin-mobile md:pl-margin-desktop pb-12 gap-6 w-full"
+          >
+            {[...services, ...services].map((svc, idx) => (
+              <div
+                key={`${svc.num}-${idx}`}
+                onMouseEnter={() => { isPausedRef.current = true; }}
+                onMouseLeave={() => { isPausedRef.current = false; }}
+                className="shrink-0 w-[85vw] md:w-[560px] border border-outline-variant bg-surface-container flex flex-col group hover:bg-surface-container-highest hover:border-secondary-container transition-colors duration-200 cursor-default select-none"
+              >
+                <div className="p-8 border-b border-outline-variant flex justify-between items-baseline group-hover:border-secondary-container transition-colors">
+                  <h3 className="font-headline-md text-headline-md text-white uppercase font-bold tracking-tight">
+                    {svc.title}
+                  </h3>
+                  <span className="font-label-mono text-label-mono text-outline">{svc.num}</span>
+                </div>
+                <div className="p-8">
+                  <p className="font-body-md text-body-md text-on-surface-variant">{svc.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── CONTACT FORM ─────────────────────────────────────── */}
+        <section id="contact" className="w-full bg-primary-fixed border-t border-surface-container-lowest">
+          <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-padding-md">
+            <div className="grid grid-cols-12 gap-gutter items-start">
+
+              {/* Left — title + contact info */}
+              <div className="col-span-12 md:col-span-4 flex flex-col gap-10 mb-16 md:mb-0">
+                <h2 className="font-headline-lg text-headline-lg text-surface-container-lowest uppercase">
+                  CUÉNTANOS<br />TU RETO.
+                </h2>
+                <dl className="flex flex-col gap-5">
+                  <div>
+                    <dt className="font-label-mono-sm text-label-mono-sm text-outline uppercase mb-1">CORREO</dt>
+                    <dd className="font-body-md text-body-md text-surface-container-lowest">contacto@primesys.ec</dd>
+                  </div>
+                  <div>
+                    <dt className="font-label-mono-sm text-label-mono-sm text-outline uppercase mb-1">UBICACIÓN</dt>
+                    <dd className="font-body-md text-body-md text-surface-container-lowest">Quito, Ecuador</dd>
+                  </div>
+                  <div>
+                    <dt className="font-label-mono-sm text-label-mono-sm text-outline uppercase mb-1">DISPONIBILIDAD</dt>
+                    <dd className="font-body-md text-body-md text-surface-container-lowest">Lun–Vie · 09:00–18:00 ECT</dd>
+                  </div>
+                </dl>
+              </div>
+
+              {/* Right — three fields stacked + button */}
+              <div className="col-span-12 md:col-span-7 md:col-start-6">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+
+                  <div className="flex flex-col gap-2">
+                    <label className="font-label-mono text-label-mono text-outline-variant uppercase">NOMBRE</label>
+                    <input
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
+                      required
+                      maxLength={50}
+                      placeholder="APELLIDO, NOMBRE"
+                      className="w-full border border-surface-container-lowest bg-transparent px-4 py-3 font-body-md text-surface-container-lowest focus:outline-none focus:ring-1 focus:ring-secondary-container placeholder:text-outline"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <label className="font-label-mono text-label-mono text-outline-variant uppercase">CORREO</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      required
+                      maxLength={254}
+                      placeholder="DEPT@EMPRESA.COM"
+                      className="w-full border border-surface-container-lowest bg-transparent px-4 py-3 font-body-md text-surface-container-lowest focus:outline-none focus:ring-1 focus:ring-secondary-container placeholder:text-outline"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <label className="font-label-mono text-label-mono text-outline-variant uppercase">DESCRIPCIÓN DEL PROYECTO</label>
+                    <textarea
+                      name="message"
+                      value={form.message}
+                      onChange={handleChange}
+                      required
+                      maxLength={1000}
+                      rows={5}
+                      placeholder="DESCRIBE EL PROYECTO O PROBLEMA QUE ENFRENTAS..."
+                      className="w-full border border-surface-container-lowest bg-transparent px-4 py-3 font-body-md text-surface-container-lowest focus:outline-none focus:ring-1 focus:ring-secondary-container placeholder:text-outline resize-none"
+                    />
+                    <span className="self-end font-label-mono-sm text-label-mono-sm text-outline">
+                      {form.message.length}/1000
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col gap-4 pt-2">
+                    <button
+                      type="submit"
+                      disabled={status.type === "sending"}
+                      className="w-full bg-secondary-container text-white py-4 font-label-mono text-label-mono uppercase tracking-widest hover:bg-on-secondary transition-colors disabled:opacity-60"
+                    >
+                      {status.type === "sending" ? "ENVIANDO..." : "ENVIAR SOLICITUD"}
+                    </button>
+                    {status.type !== "idle" && status.type !== "sending" && (
+                      <p
+                        role="alert"
+                        className={`font-body-md text-body-md ${status.type === "success" ? "text-surface-container-lowest" : "text-red-700"}`}
+                      >
+                        {status.message}
+                      </p>
+                    )}
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
       </main>
 
       <Footer />

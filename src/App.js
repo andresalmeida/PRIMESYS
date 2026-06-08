@@ -12,7 +12,7 @@ import {
   Terminal,
   Workflow,
 } from "lucide-react";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";

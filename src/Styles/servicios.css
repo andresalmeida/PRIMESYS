@@ -1,18 +1,18 @@
 /* ==== Variables y tipografía (igual criterio que ‘Sobre Nosotros’, pero Arial) ==== */
 :root{
-  --azul1:#06111d;
-  --azul2:#0f2640;
-  --celeste:#00aaff;
-  --texto:#eaf2ff;
-  --grisfondo:#eaf1f6;
+  --azul1: #212954; /* Brand Dark Navy */
+  --azul2: #2a3366; /* Brand Soft Navy */
+  --celeste: #FF4F46; /* Brand Accent (Red) */
+  --texto: #FFFFFF;
+  --grisfondo: #F8FAFC;
 
-  --violeta1:#6a7dff; /* botón */
-  --violeta2:#6a42ff;
+  --violeta1: #FF4F46; /* Brand Accent */
+  --violeta2: #ff7a73; /* Brand Accent Light */
 }
 
-html,body,.nt{
+.nt{
   margin:0; padding:0;
-  font-family: Arial, sans-serif;
+  font-family: "Sora", sans-serif;
   color: var(--texto);
   background: var(--azul1);
 }
